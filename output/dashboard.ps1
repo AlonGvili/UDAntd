@@ -15,20 +15,20 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 New-UDAntdMenuItem -Title Components -Content {
         
                     New-UDAntdIcon -Icon LayoutOutline -Size 2x 
-        
-                } -Style @{display = 'flex'; alignItems = 'center' }
+                    "Components"
+                } 
 
                 New-UDAntdMenuItem -Title Test -Content {
         
                     New-UDAntdIcon -Icon GithubOutline -Size 2x 
-        
-                } -Style @{display = 'flex'; alignItems = 'center' }
+                    "Github"
+                } 
 
                 New-UDAntdMenuItem -Title Test1 -Content {
         
                     New-UDAntdIcon -Icon GitlabOutline -Size 2x 
-        
-                } -Style @{display = 'flex'; alignItems = 'center' }
+                    "Gitlab"
+                } 
             
             } -Style @{height = 64} -Mode horizontal
         
