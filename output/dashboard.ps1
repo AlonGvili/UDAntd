@@ -10,7 +10,6 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # site header
         New-UDAntdHeader -Content {
 
-            New-UDHeading -Text UDAntd -Size 3 -Color '#1A90FF'
             New-UDAntdMenu -Content {
 
                 New-UDAntdMenuItem -Title Components -Content {
