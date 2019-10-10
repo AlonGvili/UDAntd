@@ -9,9 +9,19 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     $content_style = @{padding = 50; margin = '128px 50px 50px 50px'; height = '100vh'; backgroundColor = '#fff' }
     $navbar_style = @{height = 64; display = 'flex'; boxShadow ='unset' } 
     $navbar_item_style = @{display = 'flex'; alignItems = 'center'}
-    $header_style = @{marginBottom = 50; position = 'fixed'; padding = 0; width = '100%'; zIndex = 1; alignItems = 'center'; display = 'flex'; justifyContent = 'space-between' }
+    $header_style = @{
+        marginBottom = 50; 
+        position = 'fixed';  
+        width = '100%'; 
+        backgroundColor = '#ffffff'
+        zIndex = 1; 
+        alignItems = 'center'; 
+        display = 'flex'; 
+        justifyContent = 'space-between' 
+        boxShadow = '0 2px 8px rgba(0, 0, 0, 0.15)'
+    }
     $layout_style = @{backgroundColor = '#1A90FF' }
-    $logo_style = @{marginRight = '0px 32px'}
+    # $logo_style = @{marginRight = '0px 32px'}
 
     # web app reused components
     New-UDAntdDrawer -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable -Id 'reused_drawer_right'
@@ -23,7 +33,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # web app top header
         New-UDAntdHeader -Id 'mainHeader' -Style $header_style -Content {
 
-            New-UDAntdIcon -Icon BugFill -Color '#1A90FF' -Size 3x -Style $logo_style
+            New-UDAntdIcon -Icon BugFill -Color '#1A90FF' -Size 3x 
             # web app top navbar
             New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
 
