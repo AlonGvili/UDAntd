@@ -56,6 +56,24 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # web app content
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
 
+            New-UDAntdButton -Label 'add tml' -OnClick {
+                Add-UDElement -ParentId 'test' -Content {
+                    New-UDAntdTimeLineItem -Content { 'let'} -Position left -Dot -Color 'red'
+                }
+            }
+            
+            New-UDAntdButton -Label 'add tmr' -OnClick {
+                Add-UDElement -ParentId 'test' -Content {
+                    New-UDAntdTimeLineItem -Content { 'right'} -Position right -Dot -Color 'blue'
+                }
+            }
+
+            New-UDAntdTimeLine -Mode alternate -IsEndpoint -Id 'test' -Content {
+
+                New-UDAntdTimeLineItem -Color 'blue' -Dot -Content { 'right' } -Position right
+                New-UDAntdTimeLineItem -Color 'red' -Dot -Content { 'left' } -Position left
+                New-UDAntdTimeLineItem -Color 'blue' -Dot -Content { 'right' } -Position right
+            }
         } 
 
     }
