@@ -7,8 +7,9 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
     # web app styles
     $content_style = @{padding = 50; margin = '128px 50px 50px 50px'; height = '100vh'; backgroundColor = '#fff' }
-    $navbar_style = @{height = 64; display = 'flex' } 
-    $header_style = @{marginBottom = 50; position = 'fixed'; padding = 0; width = '100%'; zIndex = 1 }
+    $navbar_style = @{height = 64; display = 'flex'; boxShadow ='unset' } 
+    $navbar_item_style = @{display = 'flex'; alignItems = 'center'}
+    $header_style = @{marginBottom = 50; position = 'fixed'; padding = 0; width = '100%'; zIndex = 1; alignItems = 'center'; display = 'flex'; justifyContent = 'space-between' }
     $layout_style = @{backgroundColor = '#1A90FF' }
     $logo_style = @{marginRight = 16}
 
@@ -26,15 +27,15 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             # web app top navbar
             New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
 
-                New-UDAntdMenuItem -Title Components -Content {
+                New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreFill -Size 2x 
                 } 
 
-                New-UDAntdMenuItem -Title Test -Content {
+                New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
                     New-UDAntdIcon -Icon GithubFill -Size 2x
                 } 
 
-                New-UDAntdMenuItem -Title Test1 -Content {
+                New-UDAntdMenuItem -Style $navbar_item_style -Title Test1 -Content {
                     New-UDAntdIcon -Icon CodeFill -Size 2x
                 } 
             
