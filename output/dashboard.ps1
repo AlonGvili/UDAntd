@@ -14,61 +14,30 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
                 New-UDAntdMenuItem -Title Components -Content {
         
-                    New-UDAntdIcon -Icon LayoutOutline -Size 2x 
+                    New-UDAntdIcon -Icon LayoutOutline -Size sm 
                     "Components"
                 } 
 
                 New-UDAntdMenuItem -Title Test -Content {
         
-                    New-UDAntdIcon -Icon GithubOutline -Size 2x 
+                    New-UDAntdIcon -Icon GithubOutline -Size sm 
                     "Github"
                 } 
 
                 New-UDAntdMenuItem -Title Test1 -Content {
         
-                    New-UDAntdIcon -Icon GitlabOutline -Size 2x 
+                    New-UDAntdIcon -Icon GitlabOutline -Size sm
                     "Gitlab"
                 } 
             
-            } -Style @{height = 64} -Mode horizontal
+            } -Style @{height = 64; display = 'flex'} 
         
-        } -Style @{marginBottom = 50; position = 'fixed'; padding = 0; width = '100%'; zIndex = 1 }
+        } -Style @{marginBottom = 50; position = 'fixed'; padding = 0; width = '100%'; zIndex = 1 } 
 
         New-UDAntdContent -Content {
 
-            New-UDAntdButton -Label "OPEN DRAWER" -OnClick {
-                Set-UDElement -Id 'mainDrawer' -Attributes @{visible = $true}
-            }
-
-            New-UDAntdButton -Label "Change TimeLine Mode" -OnClick {
-                Set-UDElement -Id 'timeline' -Attributes @{mode = 'left'}
-            }
-
-            New-UDAntdButton -Label "Change TimeLine Mode To Alternate" -OnClick {
-                Set-UDElement -Id 'timeline' -Attributes @{mode = 'alternate' }
-            }
-
-            New-UDAntdButton -Label "ADD TO TIMELINE" -OnClick {
-                Add-UDElement -ParentId 'timeline' -Content {
-                    New-UDAntdTimeLineItem -Content {
-                        "New item were crated"
-                    } -Color 'green'
-
-                }
-            }
-    
-            New-UDAntdTimeLine -Id 'timeline' -Content {
-                New-UDAntdTimeLineItem -Content {
-                    "Computers were crated"
-                } -Color 'pink'
-                New-UDAntdTimeLineItem -Content {
-                    "PowerShell was created"
-                } -Color 'blue'
-                New-UDAntdTimeLineItem -Content {
-                    "Universal Dashboard was created"
-                } -Color 'red'
-            } -Mode alternate
-        } -Style @{padding = 50; marginTop = 128; marginBottom = 50; marginLeft = 50; marginRight = 50;  height = '100vh'; backgroundColor = '#fff'}
+        } -Style @{padding = 50; margin = '128px 50px 50px 50px'; height = '100vh'; backgroundColor = '#fff'}
+        
     } -Style @{backgroundColor = '#1A90FF'}
     
 } -Theme $Theme
