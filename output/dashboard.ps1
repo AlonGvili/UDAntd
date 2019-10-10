@@ -71,10 +71,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             New-UDAntdTimeLine -Mode alternate -IsEndpoint -Id 'test' -Content {
 
                 New-UDAntdTimeLineItem -Color 'blue' -Content { 
-                    New-UDAntdCard -Content { 'right' } -Borderd
+                    New-UDAntdCard -Content { 'right' } -Bordered
                  } -Position right
                 New-UDAntdTimeLineItem -Color 'red' -Content { 
-                    New-UDAntdCard -Content { 'left' } -Borderd
+                    New-UDAntdCard -Content { 'left' } -Bordered
                  } -Position left
                 New-UDAntdTimeLineItem -Color 'blue' -Content { 'right' } -Position right
             }
