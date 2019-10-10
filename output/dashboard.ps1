@@ -68,8 +68,8 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     "Universal Dashboard was created"
                 } -Color 'red'
             } -Mode alternate
-        } -Style @{padding = 50; marginTop = 128; height = '100vh'}
-    }
+        } -Style @{padding = 50; marginTop = 128; marginBottom = 50; marginLeft = 50; marginRight = 50;  height = '100vh'; backgroundColor = '#fff'}
+    } -Style @{backgroundColor = '#1A90FF'}
     
 } -Theme $Theme
 
