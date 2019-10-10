@@ -30,7 +30,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         
                 } -Style @{display = 'flex'; alignItems = 'center' }
             
-            } -Style @{height = 64; display = 'flex'}
+            } -Style @{height = 64} -Mode horizontal
         
         } -Style @{marginBottom = 50; position = 'fixed'; padding = 0; width = '100%'; zIndex = 1 }
 
