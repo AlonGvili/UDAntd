@@ -38,3 +38,9 @@ steps:
     slotName: 'production'
     package: '$(Build.ArtifactStagingDirectory)/UDAntd.zip'
     deploymentMethod: 'auto'
+
+- task: AzureAppServiceManage@0
+  inputs:
+    azureSubscription: 'alongviliud - Azure'
+    Action: 'Start Azure App Service'
+    WebAppName: 'alongviliud'
