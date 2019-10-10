@@ -13,8 +13,8 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
     # web app reused components
     New-UDAntdDrawer -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable -Id 'reused_drawer_right'
-    New-UDAntdPopover -Title AntdPopover -Placement top -Content {} -Children {} -Id 'reused_popover_top'
-    
+    New-UDAntdPopover -Title {'AntdPopover'} -Placement top -Content {} -Children {} -Id 'reused_popover_top'
+
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
 
