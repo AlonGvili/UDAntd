@@ -21,6 +21,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         boxShadow = '0 2px 8px rgba(0, 0, 0, 0.15)'
     }
     $layout_style = @{backgroundColor = '#1A90FF' }
+    $code_style = @{backgroundColor = '#2196F3'; border = '1px solid #18639f'; color = '#ffffff'; justifyContent = 'center'; alignItems = 'center'}
     # $logo_style = @{marginRight = '0px 32px'}
 
     # web app reused components
@@ -56,28 +57,23 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # web app content
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
 
-            New-UDAntdButton -Label 'add tml' -OnClick {
-                Add-UDElement -ParentId 'test' -Content {
-                    New-UDAntdTimeLineItem -Content { 'let'} -Position left -Color 'red'
-                }
-            }
-            
-            New-UDAntdButton -Label 'add tmr' -OnClick {
-                Add-UDElement -ParentId 'test' -Content {
-                    New-UDAntdTimeLineItem -Content { 'right'} -Position right -Color 'blue'
-                }
-            }
+            New-UDAntdCard  -Style $code_style -Bordered -Content {
+                "New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
 
-            New-UDAntdTimeLine -Mode alternate -IsEndpoint -Id 'test' -Content {
-
-                New-UDAntdTimeLineItem -Color 'blue' -Content { 
-                    New-UDAntdCard -Content { 'right' } -Bordered
-                 } -Position right
-                New-UDAntdTimeLineItem -Color 'red' -Content { 
-                    New-UDAntdCard -Content { 'left' } -Bordered
-                 } -Position left
-                New-UDAntdTimeLineItem -Color 'blue' -Content { 'right' } -Position right
-            }
+                    New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
+                        New-UDAntdIcon -Icon AppstoreFill -Size 2x 
+                    } 
+    
+                    New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
+                        New-UDAntdIcon -Icon GithubFill -Size 2x
+                    } 
+    
+                    New-UDAntdMenuItem -Style $navbar_item_style -Title Test1 -Content {
+                        New-UDAntdIcon -Icon CodeFill -Size 2x
+                    } 
+                
+                }"
+            }  
         } 
 
     }
