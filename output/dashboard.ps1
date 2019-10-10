@@ -1,44 +1,51 @@
 Import-Module $PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1 -Force
 
 $Theme = Get-UDTheme -Name Default
-$Theme.Definition['main'] = @{padding = 'unset'}
+$Theme.Definition['main'] = @{padding = 'unset' }
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
-    New-UDAntdDrawer -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable -Id 'mainDrawer'
-    New-UDAntdLayout -Content {
 
-        # site header
-        New-UDAntdHeader -Content {
+    # web app styles
+    $content_style = @{padding = 50; margin = '128px 50px 50px 50px'; height = '100vh'; backgroundColor = '#fff' }
+    $navbar_style = @{height = 64; display = 'flex' } 
+    $header_style = @{marginBottom = 50; position = 'fixed'; padding = 0; width = '100%'; zIndex = 1 }
+    $layout_style = @{backgroundColor = '#1A90FF' }
 
-            New-UDAntdMenu -Content {
+    # web app reused components
+    New-UDAntdDrawer -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable -Id 'reused_drawer_right'
+    New-UDAntdPopover -Title AntdPopover -Placement top -Content {} -Children {} -Id 'reused_popover_top'
+    
+    # web app main layout
+    New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
+
+        # web app top header
+        New-UDAntdHeader -Id 'mainHeader' -Style $header_style -Content {
+
+            # web app top navbar
+            New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
 
                 New-UDAntdMenuItem -Title Components -Content {
-        
-                    New-UDAntdIcon -Icon LayoutOutline -Size sm 
-                    "Components"
+                    New-UDAntdIcon -Icon AppstoreFill -Size sm 
                 } 
 
                 New-UDAntdMenuItem -Title Test -Content {
-        
-                    New-UDAntdIcon -Icon GithubOutline -Size sm 
-                    "Github"
+                    New-UDAntdIcon -Icon GithubFill -Size sm 
                 } 
 
                 New-UDAntdMenuItem -Title Test1 -Content {
-        
-                    New-UDAntdIcon -Icon GitlabOutline -Size sm
-                    "Gitlab"
+                    New-UDAntdIcon -Icon CodeFill -Size sm
                 } 
             
-            } -Style @{height = 64; display = 'flex'} 
+            } 
         
-        } -Style @{marginBottom = 50; position = 'fixed'; padding = 0; width = '100%'; zIndex = 1 } 
+        }  
 
-        New-UDAntdContent -Content {
+        # web app content
+        New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
 
-        } -Style @{padding = 50; margin = '128px 50px 50px 50px'; height = '100vh'; backgroundColor = '#fff'}
-        
-    } -Style @{backgroundColor = '#1A90FF'}
+        } 
+
+    }
     
 } -Theme $Theme
 
