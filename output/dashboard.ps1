@@ -1,5 +1,14 @@
 Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force
 Import-Module "$PSScriptRoot\UniversalDashboard.SyntaxHighlighter\1.0.0\UniversalDashboard.SyntaxHighlighter.psd1" -Force
+
+# Download & Install external modules
+if(-Not(Get-Module -Name UniversalDashboard.Markdown -ListAvailable)){
+    Install-Module -Name UniversalDashboard.Markdown -Force -Scope CurrentUser
+}
+
+# Import UniversalDashboard Markdown module
+Import-Module -Name UniversalDashboard.Markdown -Force
+
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\webappStyles.ps1
 
@@ -58,7 +67,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Menu' -Content {"Menu"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Menu Info" }}
                     } 
                     New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
-                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { 
+                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'nestedContent' -Attributes @{style = @{backgroundClor = '#fff'}} -Content { 
                             New-UDAntdRadioGroup -Content {
                                 New-UDAntdRadio -Content {"Ant-design"} -Value "antd"
                                 New-UDAntdRadio -Content {"Material-ui"} -Value "mui"
@@ -77,7 +86,18 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             New-UDAntdLayout -Id 'componentInfo' -Content {
                 New-UDAntdContent -Id 'nestedContent' -Content {
                     # $Card
-
+                    New-UDAntdButtonGroup -Content {
+                        New-UDAntdButton -Label docs -Size large -Shape round -OnClick {
+                            Set-UDElement -Id 'nestedContent' -Content { 
+                                New-UDMarkdown -Markdown "# Command Name"
+                             }
+                        }
+                        New-UDAntdButton -Label docs -Size large -Shape round -OnClick {
+                            Set-UDElement -Id 'nestedContent' -Content { 
+                                New-UDSyntaxHighlighter -Language powershell -Code 'Get-Process -Name Powershell' -Style github
+                             }
+                        }
+                    }
                 }
             }
         } 
