@@ -62,7 +62,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Radio Group' -Content {"Radio Group"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Button Info" }}
                         New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Switch" }}
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Box" }}
-                        New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Area" }
+                        New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Area" }}
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Password Box" }}
                     } 
                 }
