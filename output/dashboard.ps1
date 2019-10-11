@@ -49,7 +49,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Card' -Content {"Card"} -OnClick { Set-UDElement -Id 'demoCard' -Content { New-UDParagraph -Text "Card Info" }}
                         New-UDAntdMenuItem -Title 'Button' -Content {"Button"} -OnClick { Set-UDElement -Id 'demoCard' -Content { New-UDParagraph -Text "Button Info" }}
                         New-UDAntdMenuItem -Title 'Button Group' -Content {"Button Group"}
-                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Add-UDElement -ParentId 'demoCard' -Content { New-UDParagraph -Text "Radio Info" }}
+                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'demoCard' -Attributes @{ title = "Radio Info" }}
                         New-UDAntdMenuItem -Title 'Radio Group' -Content {"Radio Group"}
                         New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"}
                     } 
@@ -65,7 +65,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
             New-UDAntdLayout -Id 'componentInfo' -Content {
                 New-UDAntdContent -Id 'nestedContent' -Content {
-                    New-UDAntdCard -Id 'demoCard' -Content {}
+                    New-UDAntdCard -Id 'demoCard' -Content {} -Bordered -Title 'empty' -Style @{height = 150}
                 }
             }
         } 
