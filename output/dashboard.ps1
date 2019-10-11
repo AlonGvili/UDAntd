@@ -46,10 +46,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250} -Content {
                 New-UDAntdSubMenu -Title { "Basic Components" } -OnTitleClick {} -Content {
                     New-UDAntdMenuItemGroup -Title Basic -Content {
-                        New-UDAntdMenuItem -Title 'Card' -Content {"Card"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Card Info" }}
-                        New-UDAntdMenuItem -Title 'Button' -Content {"Button"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Button Info" }}
+                        New-UDAntdMenuItem -Title 'Card' -Content {"Card"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { New-UDParagraph -Text "Card Info" }}
+                        New-UDAntdMenuItem -Title 'Button' -Content {"Button"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { New-UDParagraph -Text "Button Info" }}
                         New-UDAntdMenuItem -Title 'Button Group' -Content {"Button Group"}
-                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Radio Info" }}
+                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { New-UDParagraph -Text "Radio Info" }}
                         New-UDAntdMenuItem -Title 'Radio Group' -Content {"Radio Group"}
                         New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"}
                     } 

@@ -3,6 +3,7 @@ $content_style = @{
     margin          = '128px 50px 50px 50px'; 
     height          = '100vh'; 
     backgroundColor = '#fff' 
+    display = 'flex'
 }
 
 $navbar_style = @{
