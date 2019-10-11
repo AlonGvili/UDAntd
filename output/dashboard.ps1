@@ -20,23 +20,23 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # web app top header
         New-UDAntdHeader -Id 'mainHeader' -Style $header_style -Content {
 
-            New-UDAntdIcon -Icon BugFill -Color '#1A90FF' -Size 3x 
-            # web app top navbar
-            New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
+            # New-UDAntdIcon -Icon BugFill -Color '#1A90FF' -Size 3x 
+            # # web app top navbar
+            # New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
 
-                New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
-                    New-UDAntdIcon -Icon AppstoreFill -Size 2x 
-                } 
+            #     New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
+            #         New-UDAntdIcon -Icon AppstoreFill -Size 2x 
+            #     } 
 
-                New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
-                    New-UDAntdIcon -Icon GithubFill -Size 2x
-                } 
+            #     New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
+            #         New-UDAntdIcon -Icon GithubFill -Size 2x
+            #     } 
 
-                New-UDAntdMenuItem -Style $navbar_item_style -Title Test1 -Content {
-                    New-UDAntdIcon -Icon CodeFill -Size 2x
-                } 
+            #     New-UDAntdMenuItem -Style $navbar_item_style -Title Test1 -Content {
+            #         New-UDAntdIcon -Icon CodeFill -Size 2x
+            #     } 
             
-            } 
+            # } 
         
         }  
 
