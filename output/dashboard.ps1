@@ -1,13 +1,6 @@
 Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force
-Import-Module "$PSScriptRoot\UniversalDashboard.SyntaxHighlighter\1.0.0\UniversalDashboard.SyntaxHighlighter.psd1" -Force
-
-# Download & Install external modules
-if(-Not(Get-Module -Name UniversalDashboard.Markdown -ListAvailable)){
-    Install-Module -Name UniversalDashboard.Markdown -Force -Scope CurrentUser
-}
-
-# Import UniversalDashboard Markdown module
-Import-Module -Name UniversalDashboard.Markdown -Force
+Import-Module "$PSScriptRoot\UniversalDashboard.SyntaxHighlighter\UniversalDashboard.SyntaxHighlighter.psd1" -Force
+Import-Module "$PSScriptRoot\UniversalDashboard.Markdown\UniversalDashboard.Markdown.psd1" -Force
 
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\webappStyles.ps1
