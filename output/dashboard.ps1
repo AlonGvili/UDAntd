@@ -42,7 +42,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
         # web app content
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
-            New-UDAntdCard -Id 'demoCard1' -Content {} -Bordered -Title 'empty' -Style @{height = 150}
+            New-UDAntdCard -Id 'demoCard1' -Content {} -Bordered -Title 'empty' -Style @{height = 150} -IsEndpoint -Variant inner
             New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250} -Content {
                 New-UDAntdSubMenu -Title { "Basic Components" } -OnTitleClick {} -Content {
                     New-UDAntdMenuItemGroup -Title Basic -Content {
@@ -62,6 +62,9 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     } 
                 }
             }
+
+            New-UDAntdButton -OnClick {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'gvili'}}
+            New-UDAntdButton -OnClick {Set-UDElement -Id 'demoCard1' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'gvili'}}
 
             New-UDAntdLayout -Id 'componentInfo' -Content {
                 New-UDAntdContent -Id 'nestedContent' -Content {
