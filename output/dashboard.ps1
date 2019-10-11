@@ -12,9 +12,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     # web app reused components
     New-UDAntdDrawer -Id 'reused_drawer_right' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
-    $CodeBox = New-UDAntdCard -Id 'codeBox' -Style $code_style -Title 'command name example' -HeadStyle $code_header_style -Bordered -Content {
-        New-UDSyntaxHighlighter -Language PowerShell -Style vs -Code ""
-     } 
+
 
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
