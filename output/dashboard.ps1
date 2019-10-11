@@ -39,7 +39,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # web app content
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
             New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250} -Content {
-                New-UDAntdSubMenu -Title { "Basic Components" } -Content {
+                New-UDAntdSubMenu -Title { "Components" } -Content {
                     New-UDAntdMenuItemGroup -Title 'General' -Content {
                         New-UDAntdMenuItem -Title 'Icon' -Content {"Icon"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Icon Info" }}
                         New-UDAntdMenuItem -Title 'Button' -Content {"Button"} -OnClick { Set-UDElement -Id 'demoCard' -Attributes @{title = 'title was update'} -Content { "Button Info" }}
@@ -69,7 +69,9 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             }
 
             New-UDAntdLayout -Id 'componentInfo' -Content {
-                New-UDAntdContent -Id 'nestedContent' -Content {$Card}
+                New-UDAntdContent -Id 'nestedContent' -Content {
+                    $Card
+                }
             }
         } 
 
