@@ -20,23 +20,23 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # web app top header
         New-UDAntdHeader -Id 'mainHeader' -Style $header_style -Content {
 
-            # New-UDAntdIcon -Icon BugFill -Color '#1A90FF' -Size 3x 
-            # # web app top navbar
-            # New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
+            New-UDAntdIcon -Icon BugFill -Color '#1A90FF' -Size 3x 
+            # web app top navbar
+            New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
 
-            #     New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
-            #         New-UDAntdIcon -Icon AppstoreFill -Size 2x 
-            #     } 
+                New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
+                    New-UDAntdIcon -Icon AppstoreFill -Size 2x 
+                } 
 
-            #     New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
-            #         New-UDAntdIcon -Icon GithubFill -Size 2x
-            #     } 
+                New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
+                    New-UDAntdIcon -Icon GithubFill -Size 2x
+                } 
 
-            #     New-UDAntdMenuItem -Style $navbar_item_style -Title Test1 -Content {
-            #         New-UDAntdIcon -Icon CodeFill -Size 2x
-            #     } 
+                New-UDAntdMenuItem -Style $navbar_item_style -Title Test1 -Content {
+                    New-UDAntdIcon -Icon CodeFill -Size 2x
+                } 
             
-            # } 
+            } 
         
         }  
 
@@ -45,27 +45,25 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250} -Content {
                 New-UDAntdSubMenu -Title { "Basic Components" } -Content {
                     New-UDAntdMenuItemGroup -Title Basic -Content {
-                        New-UDAntdMenuItem -Title 'Card' -Icon (New-UDAntdIcon -Icon MailOutline -Size lg ) -OnClick { Set-UDElement -Id 'demoCard' -Content { "Card Info" } -Attributes @{style = @{backgroundColor = 'blue'; color = '#ffffff'}}}
-                        New-UDAntdMenuItem -Title 'Button' -Icon (New-UDAntdIcon -Icon AmazonCircleFill -Size lg ) -OnClick { Set-UDElement -Id 'demoCard1' -Content { "Button Info" }}
-                        # New-UDAntdMenuItem -Title 'Button Group' -Content {"Button Group"}
-                        # New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'demoCard1' -Attributes @{ title = "Radio Info" }}
-                        # New-UDAntdMenuItem -Title 'Radio Group' -Content {"Radio Group"}
-                        # New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"} -OnClick { Set-UDElement -Id 'demoCard' -Attributes @{ title = 'alon'} -Content {'gvili'}}
+                        New-UDAntdMenuItem -Title 'Card' -Content {"Card"} -OnClick { Set-UDElement -Id 'demoCard' -Content { "Card Info" } -Attributes @{style = @{backgroundColor = 'blue'; color = '#ffffff'}}}
+                        New-UDAntdMenuItem -Title 'Button' -Content {"Button"} -OnClick { Set-UDElement -Id 'demoCard1' -Content { "Button Info" }}
+                        New-UDAntdMenuItem -Title 'Button Group' -Content {"Button Group"}
+                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'demoCard1' -Attributes @{ title = "Radio Info" }}
+                        New-UDAntdMenuItem -Title 'Radio Group' -Content {"Radio Group"}
+                        New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"} -OnClick { Set-UDElement -Id 'demoCard' -Attributes @{ title = 'alon'} -Content {'gvili'}}
                     } 
                 }
-                # New-UDAntdSubMenu -Title { "Input Components" } -Content {
-                #     New-UDAntdMenuItemGroup -Title Input -Content {
-                #         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content {"Text Box"}}
-                #         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'Noi'}}
-                #         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content {"Password Box"}}
-                #     } 
-                # }
+                New-UDAntdSubMenu -Title { "Input Components" } -Content {
+                    New-UDAntdMenuItemGroup -Title Input -Content {
+                        New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content {"Text Box"}}
+                        New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'Noi'}}
+                        New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content {"Password Box"}}
+                    } 
+                }
             }
 
             New-UDAntdLayout -Id 'componentInfo' -Content {
-                New-UDAntdContent -Id 'nestedContent' -Content {
-                    $Card
-                }
+                New-UDAntdContent -Id 'nestedContent' -Content {}
             }
         } 
 
