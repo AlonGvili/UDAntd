@@ -44,7 +44,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
 
             New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250} -Content {
-                New-UDAntdSubMenu -Title { New-UDAntdIcon -Icon AppstoreOutline -Size 2x; "Basic Components" } -Content {
+                New-UDAntdSubMenu -Title { "Basic Components" } -Content {
                     New-UDAntdMenuItemGroup -Title Basic -Content {
                         New-UDAntdMenuItem -Title 'Card' -Content {"Card"}
                         New-UDAntdMenuItem -Title 'Button' -Content {"Button"}
@@ -54,7 +54,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"}
                     } 
                 }
-                New-UDAntdSubMenu -Title { New-UDAntdIcon -Icon ApiOutline -Size 2x; "Input Components" } -Content {
+                New-UDAntdSubMenu -Title { "Input Components" } -Content {
                     New-UDAntdMenuItemGroup -Title Input -Content {
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"}
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"}
