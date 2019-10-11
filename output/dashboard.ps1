@@ -81,7 +81,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     # $Card
                     New-UDAntdButtonGroup -Content {
                         New-UDAntdButton -Label docs -Size large -Shape round -OnClick {
-                            Set-UDElement -Id 'nestedContent' -Content { 
+                            Add-UDElement -ParentId 'nestedContent' -Content { 
                                 New-UDMarkdown -Markdown "# Command Name"
                              }
                         }
