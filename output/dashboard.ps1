@@ -12,7 +12,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     # web app reused components
     New-UDAntdDrawer -Id 'reused_drawer_right' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
-    $Card = New-UDAntdCard -Id 'demoCard' -Content {} -Bordered -Title 'empty' -Style @{height = 150}
+    $Card = New-UDAntdCard -Id 'demoCard' -Content {} -Bordered -Title 'demoCard' -Style @{height = 150}
 
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
@@ -42,11 +42,11 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
         # web app content
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
-            New-UDAntdCard -Id 'demoCard1' -Content {} -Bordered -Title 'empty' -Style @{height = 150} -IsEndpoint -Variant inner
+            New-UDAntdCard -Id 'demoCard1' -Content {} -Bordered -Title 'demoCard1' -Style @{height = 150} -IsEndpoint -Variant inner
             New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250} -Content {
-                New-UDAntdSubMenu -Title { "Basic Components" } -OnTitleClick {} -Content {
+                New-UDAntdSubMenu -Title { "Basic Components" } -Content {
                     New-UDAntdMenuItemGroup -Title Basic -Content {
-                        New-UDAntdMenuItem -Title 'Card' -Content {"Card"} -OnClick { Set-UDElement -Id 'demoCard' -Content { "Card Info" }}
+                        New-UDAntdMenuItem -Title 'Card' -Content {"Card"} -OnClick { Set-UDElement -Id 'demoCard' -Content { "Card Info" } -Attributes @{style = @{backgroundColor = 'blue'; color = '#ffffff'}}}
                         New-UDAntdMenuItem -Title 'Button' -Content {"Button"} -OnClick { Set-UDElement -Id 'demoCard1' -Content { "Button Info" }}
                         New-UDAntdMenuItem -Title 'Button Group' -Content {"Button Group"}
                         New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'demoCard1' -Attributes @{ title = "Radio Info" }}
@@ -54,7 +54,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"} -OnClick { Set-UDElement -Id 'demoCard' -Attributes @{ title = 'alon'} -Content {'gvili'}}
                     } 
                 }
-                New-UDAntdSubMenu -Title { "Input Components" } -OnTitleClick {} -Content {
+                New-UDAntdSubMenu -Title { "Input Components" } -Content {
                     New-UDAntdMenuItemGroup -Title Input -Content {
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"}
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"}
@@ -63,8 +63,8 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 }
             }
 
-            New-UDAntdButton -OnClick {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'gvili'}}
-            New-UDAntdButton -OnClick {Set-UDElement -Id 'demoCard1' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'gvili'}}
+            New-UDAntdButton -Id 'firstBtn' -OnClick {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'itay'}}
+            New-UDAntdButton -Id 'secBtn' -OnClick {Set-UDElement -Id 'demoCard1' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'gvili'}}
 
             New-UDAntdLayout -Id 'componentInfo' -Content {
                 New-UDAntdContent -Id 'nestedContent' -Content {
