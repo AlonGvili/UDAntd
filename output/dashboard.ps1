@@ -42,7 +42,6 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
         # web app content
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
-            New-UDAntdCard -Id 'demoCard1' -Content {} -Bordered -Title 'demoCard1' -Style @{height = 150} -IsEndpoint -Variant inner
             New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250} -Content {
                 New-UDAntdSubMenu -Title { "Basic Components" } -Content {
                     New-UDAntdMenuItemGroup -Title Basic -Content {
@@ -56,19 +55,12 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 }
                 New-UDAntdSubMenu -Title { "Input Components" } -Content {
                     New-UDAntdMenuItemGroup -Title Input -Content {
-                        New-UDAntdMenuItem -Title 'Text Box' -Content {
-                            New-UDAntdButton -ButtonType link -OnClick {
-                                Set-UDElement -Id 'demoCard' -Attributes @{ title = 'alon'} -Content {New-UDParagraph -Text 'gvili'}
-                            }
-                        }
+                        New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content {"tEXT bOX"}}
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'Noi'}}
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"}
                     } 
                 }
             }
-
-            New-UDAntdButton -Id 'firstBtn' -OnClick {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'itay'}}
-            New-UDAntdButton -Id 'secBtn' -OnClick {Set-UDElement -Id 'demoCard1' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'gvili'}}
 
             New-UDAntdLayout -Id 'componentInfo' -Content {
                 New-UDAntdContent -Id 'nestedContent' -Content {
