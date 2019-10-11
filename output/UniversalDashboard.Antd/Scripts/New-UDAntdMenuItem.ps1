@@ -16,8 +16,8 @@ function New-UDAntdMenuItem {
         [scriptblock]$Content,
         [Parameter()]
         [object]$OnClick,
-        [Parameter()]
-        [object]$OnSelect,
+        # [Parameter()]
+        # [object]$OnSelect,
         [Parameter()]
         [hashtable]$Style
     )
@@ -33,14 +33,14 @@ function New-UDAntdMenuItem {
             }
         }
 
-        if ($null -ne $OnSelect) {
-            if ($OnSelect -is [scriptblock]) {
-                $OnSelectEvent = New-UDEndpoint -Endpoint $OnSelect -Id ($Id + "onSelect")
-            }
-            elseif ($OnSelect -isnot [UniversalDashboard.Models.Endpoint]) {
-                throw "OnSelect must be a script block or UDEndpoint"
-            }
-        }
+        # if ($null -ne $OnSelect) {
+        #     if ($OnSelect -is [scriptblock]) {
+        #         $OnSelectEvent = New-UDEndpoint -Endpoint $OnSelect -Id ($Id + "onSelect")
+        #     }
+        #     elseif ($OnSelect -isnot [UniversalDashboard.Models.Endpoint]) {
+        #         throw "OnSelect must be a script block or UDEndpoint"
+        #     }
+        # }
 
         if($null -eq $Key){
             $Key = $Id

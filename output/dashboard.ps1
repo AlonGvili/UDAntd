@@ -61,7 +61,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                                 Set-UDElement -Id 'demoCard' -Attributes @{ title = 'alon'} -Content {New-UDParagraph -Text 'gvili'}
                             }
                         }
-                        New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnSelect {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'Noi'}}
+                        New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'Noi'}}
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"}
                     } 
                 }
