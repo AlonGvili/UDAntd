@@ -1,7 +1,7 @@
 Import-Module $PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1 -Force
 
 # import webapp styles variables
-. .\$PSScriptRoot\webappStyles.ps1
+Import-Module .\$PSScriptRoot\webappStyles.ps1
 
 # remove some ud theme settings
 $Theme = Get-UDTheme -Name Default
@@ -13,7 +13,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     New-UDAntdDrawer -Id 'reused_drawer_right' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
     New-UDAntdCard -Id 'codeBox' -Style $code_style -Bordered -Content { } -Title 'command name example' -HeadStyle $code_header_style
-    
+
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
 
