@@ -26,15 +26,11 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreFill -Size 2x 
-                } 
+                } -OnClick {'#'}
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
                     New-UDAntdIcon -Icon GithubFill -Size 2x
-                } 
-
-                New-UDAntdMenuItem -Style $navbar_item_style -Title Test1 -Content {
-                    New-UDAntdIcon -Icon CodeFill -Size 2x
-                } 
+                } -OnClick { Invoke-UDRedirect -Url https://github.com/AlonGvili/UDAntd}
             
             } 
         
@@ -44,20 +40,30 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
             New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250} -Content {
                 New-UDAntdSubMenu -Title { "Basic Components" } -Content {
-                    New-UDAntdMenuItemGroup -Title Basic -Content {
-                        New-UDAntdMenuItem -Title 'Card' -Content {"Card"} -OnClick { Set-UDElement -Id 'demoCard' -Content { "Card Info" } -Attributes @{style = @{backgroundColor = 'blue'; color = '#ffffff'}}}
-                        New-UDAntdMenuItem -Title 'Button' -Content {"Button"} -OnClick { Set-UDElement -Id 'demoCard1' -Content { "Button Info" }}
-                        New-UDAntdMenuItem -Title 'Button Group' -Content {"Button Group"}
-                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'demoCard1' -Attributes @{ title = "Radio Info" }}
-                        New-UDAntdMenuItem -Title 'Radio Group' -Content {"Radio Group"}
-                        New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"} -OnClick { Set-UDElement -Id 'demoCard' -Attributes @{ title = 'alon'} -Content {'gvili'}}
+                    New-UDAntdMenuItemGroup -Title 'General' -Content {
+                        New-UDAntdMenuItem -Title 'Icon' -Content {"Icon"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Icon Info" }}
+                        New-UDAntdMenuItem -Title 'Button' -Content {"Button"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Button Info" }}
+                        New-UDAntdMenuItem -Title 'Button Group' -Content {"Button Group"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Button Info" }}
                     } 
-                }
-                New-UDAntdSubMenu -Title { "Input Components" } -Content {
-                    New-UDAntdMenuItemGroup -Title Input -Content {
-                        New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content {"Text Box"}}
-                        New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'demoCard' -Content {New-UDParagraph -Text 'alon' -Color 'red'} -Attributes @{title = 'Noi'}}
-                        New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content {"Password Box"}}
+                    New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
+                        New-UDAntdMenuItem -Title 'Badge' -Content {"Badge"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Badge Info" }}
+                        New-UDAntdMenuItem -Title 'Card' -Content {"Card"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Card Info" }}
+                        New-UDAntdMenuItem -Title 'Carousel' -Content {"Carousel"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Carousel Info" }}
+                        New-UDAntdMenuItem -Title 'Description List' -Content {"Description List"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Description List Info" }}
+                        New-UDAntdMenuItem -Title 'Popover' -Content {"Popover"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Popover Info" }}
+                        New-UDAntdMenuItem -Title 'Statistic' -Content {"Statistic"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Statistic Info" }}
+                    } 
+                    New-UDAntdMenuItemGroup -Title 'Navigation' -Content {
+                        New-UDAntdMenuItem -Title 'Dropdown' -Content {"Dropdown"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Dropdown Info" }}
+                        New-UDAntdMenuItem -Title 'Menu' -Content {"Menu"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Menu Info" }}
+                    } 
+                    New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
+                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Radio" }}
+                        New-UDAntdMenuItem -Title 'Radio Group' -Content {"Radio Group"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Button Info" }}
+                        New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Switch" }}
+                        New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Box" }}
+                        New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Area" }
+                        New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Password Box" }}
                     } 
                 }
             }
