@@ -58,7 +58,13 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Menu' -Content {"Menu"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Menu Info" }}
                     } 
                     New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
-                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Radio" }}
+                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { 
+                            New-UDAntdRadioGroup -Content {
+                                New-UDAntdRadio -Content {"Ant-design"} -Value "antd"
+                                New-UDAntdRadio -Content {"Material-ui"} -Value "mui"
+                                New-UDAntdRadio -Content {"MaterializeCss"} -Value "mcss"
+                            } -DefaultValue "antd" -OnChange { Show-UDToast -Message "$EventData was selected!"}
+                         }}
                         New-UDAntdMenuItem -Title 'Radio Group' -Content {"Radio Group"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Button Info" }}
                         New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Switch" }}
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Box" }}
@@ -70,7 +76,8 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
             New-UDAntdLayout -Id 'componentInfo' -Content {
                 New-UDAntdContent -Id 'nestedContent' -Content {
-                    $Card
+                    # $Card
+
                 }
             }
         } 
