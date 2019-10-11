@@ -56,7 +56,11 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 }
                 New-UDAntdSubMenu -Title { "Input Components" } -Content {
                     New-UDAntdMenuItemGroup -Title Input -Content {
-                        New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"}
+                        New-UDAntdMenuItem -Title 'Text Box' -Content {
+                            New-UDAntdButton -ButtonType link -OnClick {
+                                Set-UDElement -Id 'demoCard' -Attributes @{ title = 'alon'} -Content {New-UDParagraph -Text 'gvili'}
+                            }
+                        }
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"}
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"}
                     } 
