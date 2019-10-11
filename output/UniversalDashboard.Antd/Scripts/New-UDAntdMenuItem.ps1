@@ -44,6 +44,7 @@ function New-UDAntdMenuItem {
             disabled = $Disabled.IsPresent
             title = $Title
             key = $key
+            icon = $Icon
             style = $Style
             # content = $Content.Invoke()
         }
