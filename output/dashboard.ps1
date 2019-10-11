@@ -44,17 +44,17 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
 
             New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250} -Content {
-                New-UDAntdSubMenu -Title { "Basic Components" } -Content {
+                New-UDAntdSubMenu -Title { "Basic Components" } -OnTitleClick {} -Content {
                     New-UDAntdMenuItemGroup -Title Basic -Content {
-                        New-UDAntdMenuItem -Title 'Card' -Content {"Card"}
-                        New-UDAntdMenuItem -Title 'Button' -Content {"Button"}
+                        New-UDAntdMenuItem -Title 'Card' -Content {"Card"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Card Info" }}
+                        New-UDAntdMenuItem -Title 'Button' -Content {"Button"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Button Info" }}
                         New-UDAntdMenuItem -Title 'Button Group' -Content {"Button Group"}
-                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"}
+                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Radio Info" }}
                         New-UDAntdMenuItem -Title 'Radio Group' -Content {"Radio Group"}
                         New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"}
                     } 
                 }
-                New-UDAntdSubMenu -Title { "Input Components" } -Content {
+                New-UDAntdSubMenu -Title { "Input Components" } -OnTitleClick {} -Content {
                     New-UDAntdMenuItemGroup -Title Input -Content {
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"}
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"}
@@ -63,6 +63,9 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 }
             }
 
+            New-UDAntdLayout -Id 'componentInfo' -Content {
+                New-UDAntdContent -Id 'nestedContent' -Content {}
+            }
         } 
 
     }
