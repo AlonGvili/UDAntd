@@ -1,7 +1,7 @@
 Import-Module $PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1 -Force
 
 # import webapp styles variables
-Import-Module .\$PSScriptRoot\webappStyles.ps1
+Import-Module -Variable * $PSScriptRoot\webappStyles.ps1
 
 # remove some ud theme settings
 $Theme = Get-UDTheme -Name Default
