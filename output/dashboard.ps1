@@ -40,10 +40,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
     
     $component_info_header = New-UDAntdHeader -Style $header_componentInfo_style -Content {
-        New-UDAntdRadioGroup -Size small -ButtonStyle solid -Value "showDoc" -Content {
+        New-UDAntdRadioGroup -Size small -ButtonStyle outline -Value "showDoc" -Content {
             Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
-            New-UDAntdRadioButton -Content { "Doc" } -Value "showDoc" 
-            New-UDAntdRadioButton -Content { "Example" } -Value "showExample" 
+            New-UDAntdRadioButton -Content { "Get-Help" } -Value "showDoc" 
+            New-UDAntdRadioButton -Content { "Show-Preview" } -Value "showExample" 
         } -OnChange {
             Set-Item -Path "Cache:ContentToDisplay" -Value $EventData
             $WhatToShow = Get-Item -Path "Cache:ContentToDisplay"
@@ -89,7 +89,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
         # web app content
         New-UDAntdContent -Style $content_style -Content {
-            New-UDAntdMenu -Mode inline -Style @{width = 256 } -Content {
+            New-UDAntdMenu -Mode inline -Style @{width = 256; minWidth = 256 } -Content {
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
                     New-UDAntdMenuItem -Title 'Icon' -Style @{paddingLeft = 48}  -Content { "Icon" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdIcon.md" -Example (

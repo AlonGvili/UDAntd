@@ -1,7 +1,7 @@
 $content_style = @{
     margin          = '128px 50px 50px 50px'; 
     backgroundColor = '#fff' 
-    display = 'flex'
+    display         = 'flex'
 }
 
 $component_content_style = @{
@@ -33,6 +33,7 @@ $header_style = @{
 
 $header_componentInfo_style = @{
     marginBottom    = 50; 
+    padding         = 0
     width           = '100%'; 
     backgroundColor = 'transparent'
     alignItems      = 'center'; 
