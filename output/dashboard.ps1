@@ -18,9 +18,9 @@ function Update-ComponentContentSection {
     $MarkdownDoc = Invoke-RestMethod "https://alongviliud.azurewebsites.net/AntdDocs/$Doc"
     $MDoc = New-UDMarkdown -Markdown $MarkdownDoc
     # $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
-    $CmdExample = $Example
+    # $CmdExample = $Example
     Set-Item -Path "Cache:CommandDoc" -Value $MDoc
-    Set-Item -Path "Cache:CommandExample" -Value $CmdExample
+    Set-Item -Path "Cache:CommandExample" -Value {$Example}.Invoke()
 
     $WhatToShow = Get-Item "Cache:ContentToDisplay"
     Set-UDElement -Id 'componentInfoContent' -Content { 
@@ -28,7 +28,7 @@ function Update-ComponentContentSection {
             $MDoc
         }
         else {
-            & $CmdExample
+            {$Example}.Invoke()
         }
     }
 }
@@ -54,7 +54,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             }
             elseif ($WhatToShow -eq "showExample") {
                 $Example = Get-Item -Path "Cache:CommandExample"
-                Set-UDElement -Id 'componentInfoContent' -Content { & $Example }
+                Set-UDElement -Id 'componentInfoContent' -Content { $Example }
             }
         } 
     }
