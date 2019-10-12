@@ -90,24 +90,24 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         New-UDAntdContent -Style $content_style -Content {
             New-UDAntdMenu -Mode inline -Style @{width = 250 } -Content {
                 New-UDAntdMenuItemGroup -Title 'General'  -Content {
-                    New-UDAntdMenuItem -Title 'Icon' { "Icon" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Button' { "Button" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Button Group' { "Button Group" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Icon'  -Content { "Icon" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Display'  -Content {
-                    New-UDAntdMenuItem -Title 'Badge' { "Badge" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Card' { "Card" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Carousel' { "Carousel" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Description List' { "Description List" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Popover' { "Popover" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Statistic' { "Statistic" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Badge'  -Content { "Badge" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Card'  -Content { "Card" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Carousel'  -Content { "Carousel" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Description List'  -Content { "Description List" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Popover'  -Content { "Popover" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Statistic'  -Content { "Statistic" } -OnClick { }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Navigation'  -Content {
-                    New-UDAntdMenuItem -Title 'Dropdown' { "Dropdown" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Menu' { "Menu" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Dropdown'  -Content { "Dropdown" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Menu'  -Content { "Menu" } -OnClick { }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Entry'  -Content {
-                    New-UDAntdMenuItem -Title 'Radio' { "Radio" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Radio'  -Content { "Radio" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdRadio.md" -Example '
                             New-UDAntdRadioGroup -Content {
                                 New-UDAntdRadio -Content { "Ant-design" } -Value "antd"
@@ -116,19 +116,19 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             } -DefaultValue "antd" -OnChange { Show-UDToast -Message "$EventData was selected!" }
                             ' 
                     } 
-                    New-UDAntdMenuItem -Title 'Radio Group' { "Radio Group" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Switch' { "Switch" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Radio Group'  -Content { "Radio Group" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Switch'  -Content { "Switch" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example '
                             New-UDAntdSwitch -checkedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -unCheckedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -size default
                         ' 
                     }
-                    New-UDAntdMenuItem -Title 'Text Box' { "Text Box" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Text Box'  -Content { "Text Box" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example 'New-UDAntdInput -Placeholder "user name"' 
                     }
-                    New-UDAntdMenuItem -Title 'Text Area' { "Text Area" } -OnClick {
+                    New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick {
                         Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
                     }
-                    New-UDAntdMenuItem -Title 'Password Box' { "Password Box" } -OnClick {
+                    New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick {
                         Update-ComponentContentSection -Doc "New-UDAntdInputPassword.md" -Example 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                     }
                 } 
