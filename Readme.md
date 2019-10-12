@@ -1,5 +1,5 @@
 # UDAntd Demo Site
-
+[![Build Status](https://dev.azure.com/alon-gvili/UDAntd/_apis/build/status/AlonGvili.UDAntd?branchName=master)](https://dev.azure.com/alon-gvili/UDAntd/_build/latest?definitionId=12&branchName=master)
 ## Build the site
 
 -   clone the universal dashboard repo
