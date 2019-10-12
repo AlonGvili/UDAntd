@@ -59,7 +59,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         } 
     }
 
-    $component_info_content = New-UDAntdContent -Id 'componentInfoContent' -Content {} -Style @{ paddingBotom = 50 } 
+    $component_info_content = New-UDAntdContent -Id 'componentInfoContent' -Content {} -Style @{ paddingBottom = 50 } 
 
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
