@@ -28,7 +28,7 @@ function Update-ComponentContentSection {
             $MDoc
         }
         else {
-            {$Example}.Invoke()
+            & {$Example}
         }
     }
 }
@@ -54,7 +54,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             }
             elseif ($WhatToShow -eq "showExample") {
                 $Example = Get-Item -Path "Cache:CommandExample"
-                Set-UDElement -Id 'componentInfoContent' -Content { $Example }
+                Set-UDElement -Id 'componentInfoContent' -Content { {$Example}.Invoke() }
             }
         } 
     }
