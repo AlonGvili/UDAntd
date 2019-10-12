@@ -89,25 +89,25 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # web app content
         New-UDAntdContent -Style $content_style -Content {
             New-UDAntdMenu -Mode inline -Style @{width = 250 } -Content {
-                New-UDAntdMenuItemGroup -Title 'General' -Content {
-                    New-UDAntdMenuItem -Title 'Icon' -Content { "Icon" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Button' -Content { "Button" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Button Group' -Content { "Button Group" } -OnClick { }
+                New-UDAntdMenuItemGroup -Title 'General' -Style $component_menu_group_style -Content {
+                    New-UDAntdMenuItem -Title 'Icon' -Style $component_menu_item_style -Content { "Icon" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Button' -Style $component_menu_item_style -Content { "Button" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Button Group' -Style $component_menu_item_style -Content { "Button Group" } -OnClick { }
                 } 
-                New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
-                    New-UDAntdMenuItem -Title 'Badge' -Content { "Badge" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Card' -Content { "Card" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Carousel' -Content { "Carousel" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Description List' -Content { "Description List" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Popover' -Content { "Popover" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Statistic' -Content { "Statistic" } -OnClick { }
+                New-UDAntdMenuItemGroup -Title 'Data Display' -Style $component_menu_group_style -Content {
+                    New-UDAntdMenuItem -Title 'Badge' -Style $component_menu_item_style -Content { "Badge" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Card' -Style $component_menu_item_style -Content { "Card" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Carousel' -Style $component_menu_item_style -Content { "Carousel" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Description List' -Style $component_menu_item_style -Content { "Description List" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Popover' -Style $component_menu_item_style -Content { "Popover" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Statistic' -Style $component_menu_item_style -Content { "Statistic" } -OnClick { }
                 } 
-                New-UDAntdMenuItemGroup -Title 'Navigation' -Content {
-                    New-UDAntdMenuItem -Title 'Dropdown' -Content { "Dropdown" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Menu' -Content { "Menu" } -OnClick { }
+                New-UDAntdMenuItemGroup -Title 'Navigation' -Style $component_menu_group_style -Content {
+                    New-UDAntdMenuItem -Title 'Dropdown' -Style $component_menu_item_style -Content { "Dropdown" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Menu' -Style $component_menu_item_style -Content { "Menu" } -OnClick { }
                 } 
-                New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
-                    New-UDAntdMenuItem -Title 'Radio' -Content { "Radio" } -OnClick { 
+                New-UDAntdMenuItemGroup -Title 'Data Entry' -Style $component_menu_group_style -Content {
+                    New-UDAntdMenuItem -Title 'Radio' -Style $component_menu_item_style -Content { "Radio" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdRadio.md" -Example '
                             New-UDAntdRadioGroup -Content {
                                 New-UDAntdRadio -Content { "Ant-design" } -Value "antd"
@@ -116,19 +116,19 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             } -DefaultValue "antd" -OnChange { Show-UDToast -Message "$EventData was selected!" }
                             ' 
                     } 
-                    New-UDAntdMenuItem -Title 'Radio Group' -Content { "Radio Group" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Switch' -Content { "Switch" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Radio Group' -Style $component_menu_item_style -Content { "Radio Group" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Switch' -Style $component_menu_item_style -Content { "Switch" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example '
                             New-UDAntdSwitch -checkedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -unCheckedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -size default
                         ' 
                     }
-                    New-UDAntdMenuItem -Title 'Text Box' -Content { "Text Box" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Text Box' -Style $component_menu_item_style -Content { "Text Box" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example 'New-UDAntdInput -Placeholder "user name"' 
                     }
-                    New-UDAntdMenuItem -Title 'Text Area' -Content { "Text Area" } -OnClick {
+                    New-UDAntdMenuItem -Title 'Text Area' -Style $component_menu_item_style -Content { "Text Area" } -OnClick {
                         Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
                     }
-                    New-UDAntdMenuItem -Title 'Password Box' -Content { "Password Box" } -OnClick {
+                    New-UDAntdMenuItem -Title 'Password Box' -Style $component_menu_item_style -Content { "Password Box" } -OnClick {
                         Update-ComponentContentSection -Doc "New-UDAntdInputPassword.md" -Example 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                     }
                 } 

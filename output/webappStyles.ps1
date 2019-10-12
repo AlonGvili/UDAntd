@@ -57,3 +57,11 @@ $code_header_style = @{
     justifyContent = 'center'; 
     alignItems     = 'center' 
 }
+
+$component_menu_item_style = @{
+    paddingLeft = 48
+}
+
+$component_menu_group_style = @{
+    paddingLeft = 24
+}
