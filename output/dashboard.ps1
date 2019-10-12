@@ -94,7 +94,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     New-UDAntdMenuItem -Title 'Icon' -Style @{paddingLeft = 48}  -Content { "Icon" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdIcon.md" -Example (
                             (gcm New-UDAntdIcon).Parameters['Icon'].Attributes.ValidValues | ForEach-Object {
-                                New-UDAntdIcon -Icon $_ -Size 2x
+                                New-UDAntdIcon -Icon $_ -Size 4x -Color '#1a90ff' -Style @{ margin = 8}
                             } 
                         )
                     }
