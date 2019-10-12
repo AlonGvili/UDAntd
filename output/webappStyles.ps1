@@ -1,5 +1,5 @@
 $content_style = @{
-    # padding         = 50; 
+    padding         = 50; 
     margin          = '128px 50px 50px 50px'; 
     height          = '100vh'; 
     backgroundColor = '#fff' 

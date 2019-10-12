@@ -16,6 +16,12 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
     $Card = New-UDAntdCard -Id 'demoCard' -Content {} -Bordered -Title 'demoCard' -Style @{height = 150}
 
+    $Cache:CommandDoc = ''
+    $Cache:CommandExample = ''
+    
+    # $Session:CommandDoc = ''
+    # $Session:CommandExample = ''
+
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
 
@@ -71,25 +77,34 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Switch" }}
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Box" }}
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Area" }}
-                        New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Password Box" }}
+                        New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {
+                            $Cache:CommandDoc = "Password Box"
+                            $Cache:CommandExample = 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
+                        }
                     } 
                 }
             }
 
             New-UDAntdLayout -Id 'componentInfo' -Content {
-                New-UDAntdContent -Id 'nestedContent' -Content {
-                    # $Card
-                    New-UDAntdButtonGroup -Content {
-                        New-UDAntdButton -Label docs -Size large -Shape round -OnClick {
-                            Add-UDElement -ParentId 'nestedContent' -Content { 
-                                New-UDMarkdown -Markdown "# Command Name"
-                             }
+                New-UDAntdContent -Id 'nestedContent' -Style @{padding = '0px 50px 0px 50px'} -Content {
+                    New-UDAntdLayout -Content {
+                        New-UDAntdHeader -Style $header_componentInfo_style -Content {
+                            New-UDAntdRadioGroup -Content {
+                                New-UDAntdRadioButton -Content {"Doc"} -Value "showDoc" 
+                                New-UDAntdRadioButton -Content {"Example"} -Value "showExample" 
+                            } -OnChange {
+                                $Cache:ContentToDisplay = $EventData
+                            } -Size large -ButtonStyle solid -DefaultValue "showDoc"
                         }
-                        New-UDAntdButton -Label docs -Size large -Shape round -OnClick {
-                            Add-UDElement -ParentId 'nestedContent' -Content { 
-                                New-UDSyntaxHighlighter -Language powershell -Code 'Get-Process -Name Powershell' -Style github
-                             }
-                        }
+
+                        New-UDAntdContent -Id 'componentInfoContent' -Content {
+                            if($Cache:ContentToDisplay -eq "showDoc"){
+                                New-UDMarkdown -Markdown "Showing doc for $Cache:CommandDoc"
+                            }
+                            elseif($Cache:ContentToDisplay -eq "showExample"){
+                                New-UDSyntaxHighlighter -Language powershell -Style github -Code $Cache:CommandExample
+                            }
+                        } 
                     }
                 }
             }
