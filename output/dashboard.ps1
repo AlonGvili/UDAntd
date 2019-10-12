@@ -55,7 +55,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
         # web app content
         New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
-            New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250 } -DefaultOpenKeys components -Content {
+            New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250 } -DefaultOpenKeys @("components") -Content {
                 New-UDAntdSubMenu -Title { "Components" } -Key components -Content {
                     New-UDAntdMenuItemGroup -Title 'General' -Content {
                         New-UDAntdMenuItem -Title 'Icon' -Content { "Icon" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Icon Info" } }
