@@ -20,7 +20,7 @@ function Update-ComponentContentSection {
     # $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
     # $CmdExample = $Example
     Set-Item -Path "Cache:CommandDoc" -Value $MDoc
-    Set-Item -Path "Cache:CommandExample" -Value {$Example}.Invoke()
+    Set-Item -Path "Cache:CommandExample" -Value $Example
 
     $WhatToShow = Get-Item "Cache:ContentToDisplay"
     Set-UDElement -Id 'componentInfoContent' -Content { 
@@ -28,7 +28,7 @@ function Update-ComponentContentSection {
             $MDoc
         }
         else {
-            & {$Example}
+            $Example
         }
     }
 }
@@ -54,7 +54,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             }
             elseif ($WhatToShow -eq "showExample") {
                 $Example = Get-Item -Path "Cache:CommandExample"
-                Set-UDElement -Id 'componentInfoContent' -Content { {$Example}.Invoke() }
+                Set-UDElement -Id 'componentInfoContent' -Content { $Example }
             }
         } 
     }
@@ -124,10 +124,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         ' 
                     }
                     New-UDAntdMenuItem -Title 'Text Box'  -Content { "Text Box" } -OnClick { 
-                        Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example 'New-UDAntdInput -Placeholder "user name"' 
+                        Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example (New-UDAntdInput -Placeholder "user name") 
                     }
                     New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick {
-                        Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
+                        Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example (New-UDAntdInputTextArea -OnPressEnter {} -Autosize)
                     }
                     New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick {
                         Update-ComponentContentSection -Doc "New-UDAntdInputPassword.md" -Example 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
