@@ -18,7 +18,7 @@ function Update-ComponentContentSection {
     Set-Item -Path "Cache:CommandDoc" -Value $Doc
     Set-Item -Path "Cache:CommandExample" -Value $Example
     Set-UDElement -Id 'componentInfoContent' -Content { 
-        $MarkdownDoc = Get-Content -Path "/AntdDocs/$Doc" -Raw
+        $MarkdownDoc = Invoke-RestMethod "https://alongviliud.azurewebsites.net/AntdDocs/$Doc"
         New-UDMarkdown -Markdown $MarkdownDoc 
     }
 }
