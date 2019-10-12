@@ -18,7 +18,7 @@ function Update-ComponentContentSection {
     Set-Item -Path "Cache:CommandDoc" -Value $Doc
     Set-Item -Path "Cache:CommandExample" -Value $Example
     Set-UDElement -Id 'componentInfoContent' -Content { 
-        $MarkdownDoc = Get-Content -Path "$PSScriptRoot\UniversalDashboard.Antd\Docs\$Doc" -Raw
+        $MarkdownDoc = Get-Content -Path "/Docs/$Doc" -Raw
         New-UDMarkdown -Markdown $MarkdownDoc 
     }
 }
