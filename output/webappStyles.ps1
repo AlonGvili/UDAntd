@@ -1,9 +1,11 @@
 $content_style = @{
-    # padding         = 50; 
     margin          = '128px 50px 50px 50px'; 
-    # height          = '100vh'; 
     backgroundColor = '#fff' 
     display = 'flex'
+}
+
+$component_content_style = @{
+    padding = '0px 50px 0px 50px' 
 }
 
 $navbar_style = @{
@@ -22,7 +24,7 @@ $header_style = @{
     position        = 'fixed';  
     width           = '100%'; 
     backgroundColor = '#ffffff'
-    zIndex          = 1; 
+    zIndex          = 9999; 
     alignItems      = 'center'; 
     display         = 'flex'; 
     justifyContent  = 'space-between' 
@@ -31,14 +33,11 @@ $header_style = @{
 
 $header_componentInfo_style = @{
     marginBottom    = 50; 
-    # position        = 'fixed';  
     width           = '100%'; 
     backgroundColor = 'transparent'
-    # zIndex          = 1; 
     alignItems      = 'center'; 
     display         = 'flex'; 
     justifyContent  = 'flex-end' 
-    # boxShadow       = '0 2px 8px rgba(0, 0, 0, 0.15)'
 }
 
 $layout_style = @{
