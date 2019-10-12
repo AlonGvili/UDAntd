@@ -15,10 +15,10 @@ function Update-ComponentContentSection {
         $Doc,
         $Example
     )
-    Set-Item -Path "Cache:CommandDoc" -Value $Doc
+    $MarkdownDoc = Invoke-RestMethod "https://alongviliud.azurewebsites.net/AntdDocs/$Doc"
+    Set-Item -Path "Cache:CommandDoc" -Value $MarkdownDoc
     Set-Item -Path "Cache:CommandExample" -Value $Example
     Set-UDElement -Id 'componentInfoContent' -Content { 
-        $MarkdownDoc = Invoke-RestMethod "https://alongviliud.azurewebsites.net/AntdDocs/$Doc"
         New-UDMarkdown -Markdown $MarkdownDoc 
     }
 }
@@ -73,7 +73,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     } 
                     New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
                         New-UDAntdMenuItem -Title 'Radio' -Content { "Radio" } -OnClick { 
-                            Update-ComponentContentSection -Doc "Radio" -Example '
+                            Update-ComponentContentSection -Doc "New-UDAntdRadio.md" -Example '
                             New-UDAntdRadioGroup -Content {
                                 New-UDAntdRadio -Content { "Ant-design" } -Value "antd"
                                 New-UDAntdRadio -Content { "Material-ui" } -Value "mui"
@@ -81,9 +81,11 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             } -DefaultValue "antd" -OnChange { Show-UDToast -Message "$EventData was selected!" }
                             ' 
                         } 
-                        New-UDAntdMenuItem -Title 'Radio Group' -Content { "Radio Group" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Button Info" } }
-                        New-UDAntdMenuItem -Title 'Switch' -Content { "Switch" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Switch" } }
-                        New-UDAntdMenuItem -Title 'Text Box' -Content { "Text Box" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Text Box" } }
+                        New-UDAntdMenuItem -Title 'Radio Group' -Content { "Radio Group" } -OnClick {  }
+                        New-UDAntdMenuItem -Title 'Switch' -Content { "Switch" } -OnClick { }
+                        New-UDAntdMenuItem -Title 'Text Box' -Content { "Text Box" } -OnClick { 
+                            Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example 'New-UDAntdInput -Placeholder "user name"' 
+                         }
                         New-UDAntdMenuItem -Title 'Text Area' -Content { "Text Area" } -OnClick {
                             Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
                         }
@@ -93,7 +95,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     } 
             }
 
-            New-UDAntdLayout -Content {
+            New-UDAntdLayout -Style @{height = '100%'} -Content {
                 New-UDAntdContent -Style @{padding = '0px 50px 0px 50px' } -Content {
                     New-UDAntdLayout -Content {
                         New-UDAntdHeader -Style $header_componentInfo_style -Content {
@@ -106,7 +108,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             
                                 if ($WhatToShow -eq "showDoc") {
                                     $Doc = Get-Item -Path "Cache:CommandDoc"
-                                    Set-UDElement -Id 'componentInfoContent' -Content { New-UDMarkdown -Markdown "Showing doc for $Doc" }
+                                    Set-UDElement -Id 'componentInfoContent' -Content { New-UDMarkdown -Markdown $Doc }
                                 }
                                 elseif ($WhatToShow -eq "showExample") {
                                     $Example = Get-Item -Path "Cache:CommandExample"
