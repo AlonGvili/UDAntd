@@ -91,8 +91,16 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         New-UDAntdContent -Style $content_style -Content {
             New-UDAntdMenu -Mode inline -Style @{width = 256 } -Content {
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
-                    New-UDAntdMenuItem -Title 'Icon' -Style @{paddingLeft = 48}  -Content { "Icon" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Button' -Style @{paddingLeft = 48}  -Content { "Button" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Icon' -Style @{paddingLeft = 48}  -Content { "Icon" } -OnClick { 
+                        Update-ComponentContentSection -Doc "New-UDAntdIcon.md" -Example (
+                            New-UDAntdIcon -Icon WindowsOutline -Size 2x
+                        )
+                    }
+                    New-UDAntdMenuItem -Title 'Button' -Style @{paddingLeft = 48}  -Content { "Button" } -OnClick { 
+                        Update-ComponentContentSection -Doc "New-UDAntdButton.md" -Example (
+                            New-UDAntdButton -Label SUBMIT -Size large -OnClick {} 
+                        )
+                    }
                     New-UDAntdMenuItem -Title 'Button Group' -Style @{paddingLeft = 48}  -Content { "Button Group" } -OnClick { }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
@@ -109,28 +117,28 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
                     New-UDAntdMenuItem -Title 'Radio'  -Content { "Radio" } -OnClick { 
-                        Update-ComponentContentSection -Doc "New-UDAntdRadio.md" -Example '
+                        Update-ComponentContentSection -Doc "New-UDAntdRadio.md" -Example (
                             New-UDAntdRadioGroup -Content {
                                 New-UDAntdRadio -Content { "Ant-design" } -Value "antd"
                                 New-UDAntdRadio -Content { "Material-ui" } -Value "mui"
                                 New-UDAntdRadio -Content { "MaterializeCss" } -Value "mcss"
                             } -DefaultValue "antd" -OnChange { Show-UDToast -Message "$EventData was selected!" }
-                            ' 
+                        )
                     } 
                     New-UDAntdMenuItem -Title 'Radio Group'  -Content { "Radio Group" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Switch'  -Content { "Switch" } -OnClick { 
-                        Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example '
+                        Update-ComponentContentSection -Doc "New-UDAntdSwitch.md" -Example (
                             New-UDAntdSwitch -checkedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -unCheckedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -size default
-                        ' 
+                        )
                     }
-                    New-UDAntdMenuItem -Title 'Text Box'  -Content { "Text Box" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Input'  -Content { "Input" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example (New-UDAntdInput -Placeholder "user name") 
                     }
                     New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick {
                         Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example (New-UDAntdInputTextArea -OnPressEnter {} -Autosize)
                     }
                     New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick {
-                        Update-ComponentContentSection -Doc "New-UDAntdInputPassword.md" -Example 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
+                        Update-ComponentContentSection -Doc "New-UDAntdInputPassword.md" -Example (New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle)
                     }
                 } 
             }
