@@ -84,7 +84,8 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             Set-Item -Path "Cache:CommandDoc" -Value "Password Box"
                             Set-Item -Path "Cache:CommandExample" -Value 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                             Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
-                            Set-UDElement -Id 'contentSwitcher' -Attributes @{value = "showDoc"}
+                            $switcher = Get-UDElement -Id 'contentSwitcher'
+                            Set-UDElement -Id 'contentSwitcher' -Attributes @{value = "showDoc"} -Content {$switcher.content}
                         }
                     } 
                 }
