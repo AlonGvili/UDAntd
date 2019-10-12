@@ -1,0 +1,71 @@
+New-UDPage -Name Components -Content {
+
+        # web app content
+        New-UDAntdContent -Style $content_style -Content {
+            New-UDAntdMenu -Mode inline -Style @{width = 256; minWidth = 256 } -Content {
+                New-UDAntdMenuItemGroup -Title 'General' -Content {
+                    New-UDAntdMenuItem -Title 'Icon' -Content { "Icon" } -OnClick { 
+                        Update-ComponentContentSection -Doc "New-UDAntdIcon.md" -Example (
+                            (Get-Command New-UDAntdIcon).Parameters['Icon'].Attributes.ValidValues | ForEach-Object {
+                                New-UDAntdIcon -Icon $_ -Size 4x -Color '#1a90ff' -Style @{ margin = 8 }
+                            } 
+                        )
+                    }
+                    New-UDAntdMenuItem -Title 'Button' -Content { "Button" } -OnClick { 
+                        Update-ComponentContentSection -Doc "New-UDAntdButton.md" -Example (
+                            New-UDAntdButton -Label SUBMIT -Size large -OnClick { } 
+                        )
+                    }
+                    New-UDAntdMenuItem -Title 'Button Group' -Content { "Button Group" } -OnClick { }
+                } 
+                New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
+                    New-UDAntdMenuItem -Title 'Badge' -Content { "Badge" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Card' -Content { "Card" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Carousel'  -Content { "Carousel" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Description List' -Content { "Description List" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Popover' -Content { "Popover" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Statistic'  Content { "Statistic" } -OnClick { }
+                } 
+                New-UDAntdMenuItemGroup -Title 'Navigation' -Content {
+                    New-UDAntdMenuItem -Title 'Dropdown'  -Content { "Dropdown" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Menu'  -Content { "Menu" } -OnClick { }
+                } 
+                New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
+                    New-UDAntdMenuItem -Title 'Radio'  -Content { "Radio" } -OnClick { 
+                        Update-ComponentContentSection -Doc "New-UDAntdRadio.md" -Example (
+                            New-UDAntdRadioGroup -Content {
+                                New-UDAntdRadio -Content { "Ant-design" } -Value "antd"
+                                New-UDAntdRadio -Content { "Material-ui" } -Value "mui"
+                                New-UDAntdRadio -Content { "MaterializeCss" } -Value "mcss"
+                            } -DefaultValue "antd" -OnChange { Show-UDToast -Message "$EventData was selected!" }
+                        )
+                    } 
+                    New-UDAntdMenuItem -Title 'Radio Group'  -Content { "Radio Group" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Switch'  -Content { "Switch" } -OnClick { 
+                        Update-ComponentContentSection -Doc "New-UDAntdSwitch.md" -Example (
+                            New-UDAntdSwitch -checkedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -unCheckedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -size default
+                        )
+                    }
+                    New-UDAntdMenuItem -Title 'Input'  -Content { "Input" } -OnClick { 
+                        Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example (New-UDAntdInput -Placeholder "user name") 
+                    }
+                    New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick {
+                        Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example (New-UDAntdInputTextArea -OnPressEnter { } -Autosize)
+                    }
+                    New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick {
+                        Update-ComponentContentSection -Doc "New-UDAntdInputPassword.md" -Example (New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle)
+                    }
+                } 
+            }
+
+            # The section for displaying the command markdown file and the live examples.
+            New-UDAntdLayout -Content {
+                New-UDAntdContent -Style $component_content_style -Content {
+                    New-UDAntdLayout -Content {
+                        $component_info_header
+                        $component_info_content
+                    }
+                }
+            }
+        } 
+} 
