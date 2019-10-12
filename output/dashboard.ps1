@@ -88,25 +88,25 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
         # web app content
         New-UDAntdContent -Style $content_style -Content {
-            New-UDAntdMenu -Mode inline -Style @{width = 250 } -Content {
-                New-UDAntdMenuItemGroup -Title 'General'  -Content {
-                    New-UDAntdMenuItem -Title 'Icon'  -Content { "Icon" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { }
+            New-UDAntdMenu -Mode inline -Style @{width = 256 } -Content {
+                New-UDAntdMenuItemGroup -Title 'General' -Content {
+                    New-UDAntdMenuItem -Title 'Icon' -Style @{paddingLeft = 48}  -Content { "Icon" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Button' -Style @{paddingLeft = 48}  -Content { "Button" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Button Group' -Style @{paddingLeft = 48}  -Content { "Button Group" } -OnClick { }
                 } 
-                New-UDAntdMenuItemGroup -Title 'Data Display'  -Content {
-                    New-UDAntdMenuItem -Title 'Badge'  -Content { "Badge" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Card'  -Content { "Card" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Carousel'  -Content { "Carousel" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Description List'  -Content { "Description List" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Popover'  -Content { "Popover" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Statistic'  -Content { "Statistic" } -OnClick { }
+                New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
+                    New-UDAntdMenuItem -Title 'Badge' -Style @{paddingLeft = 48}  -Content { "Badge" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Card' -Style @{paddingLeft = 48}  -Content { "Card" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Carousel' -Style @{paddingLeft = 48}   -Content { "Carousel" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Description List' -Style @{paddingLeft = 48}  -Content { "Description List" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Popover' -Style @{paddingLeft = 48}  -Content { "Popover" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Statistic'  -Style @{paddingLeft = 48} -Content { "Statistic" } -OnClick { }
                 } 
-                New-UDAntdMenuItemGroup -Title 'Navigation'  -Content {
+                New-UDAntdMenuItemGroup -Title 'Navigation' -Content {
                     New-UDAntdMenuItem -Title 'Dropdown'  -Content { "Dropdown" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Menu'  -Content { "Menu" } -OnClick { }
                 } 
-                New-UDAntdMenuItemGroup -Title 'Data Entry'  -Content {
+                New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
                     New-UDAntdMenuItem -Title 'Radio'  -Content { "Radio" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdRadio.md" -Example '
                             New-UDAntdRadioGroup -Content {
