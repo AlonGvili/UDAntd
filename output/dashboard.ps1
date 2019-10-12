@@ -92,21 +92,20 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             } -OnChange {
                                 # Set-Item -Path cache:ContentToDisplay = $EventData
                                 Set-Item -Path "Cache:ContentToDisplay" -Value $EventData
+                                $WhatToShow = Get-Item -Path "Cache:ContentToDisplay"
+                            
+                                if($WhatToShow -eq "showDoc"){
+                                    $Doc = Get-Item -Path "Cache:CommandDoc"
+                                    Set-UDElement -Id 'componentInfoContent' -Content {New-UDMarkdown -Markdown "Showing doc for $Doc"}
+                                }
+                                elseif($WhatToShow -eq "showExample"){
+                                    $Example = Get-Item -Path "Cache:CommandExample"
+                                    Set-UDElement -Id 'componentInfoContent' -Content {New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)"}
+                                }
                             } -Size large -ButtonStyle solid -DefaultValue "showDoc"
                         }
 
-                        New-UDAntdContent -Id 'componentInfoContent' -Content {
-                            $WhatToShow = Get-Item -Path "Cache:ContentToDisplay"
-                            
-                            if($WhatToShow -eq "showDoc"){
-                                $Doc = Get-Item -Path "Cache:CommandDoc"
-                                New-UDMarkdown -Markdown "Showing doc for $Doc"
-                            }
-                            elseif($WhatToShow -eq "showExample"){
-                                $Example = Get-Item -Path "Cache:CommandExample"
-                                New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)"
-                            }
-                        } 
+                        New-UDAntdContent -Id 'componentInfoContent' -Content {} 
                     }
                 }
             }
