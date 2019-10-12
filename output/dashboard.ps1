@@ -18,7 +18,6 @@ function Update-ComponentContentSection {
     Set-Item -Path "Cache:CommandDoc" -Value $Doc
     Set-Item -Path "Cache:CommandExample" -Value $Example
     Set-UDElement -Id 'componentInfoContent' -Content { New-UDMarkdown -Markdown "Showing doc for $Doc" }
-    # Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
 }
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
@@ -26,11 +25,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     # web app reused components
     New-UDAntdDrawer -Id 'reused_drawer_right' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
-    $Card = New-UDAntdCard -Id 'demoCard' -Content { } -Bordered -Title 'demoCard' -Style @{height = 150 }
     
-    # $Session:CommandDoc = ''
-    # $Session:CommandExample = ''
-
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
 
@@ -47,16 +42,15 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
                     New-UDAntdIcon -Icon GithubFill -Size 2x
-                } -OnClick { Invoke-UDRedirect -Url https://github.com/AlonGvili/UDAntd }
+                } -OnClick { Invoke-UDRedirect -Url https://github.com/AlonGvili/UDAntd -OpenInNewWindow}
             
             } 
         
         }  
 
         # web app content
-        New-UDAntdContent -Id 'mainContent' -Style $content_style -Content {
-            New-UDAntdMenu -Id 'componentsMenu' -Mode inline -Style @{width = 250 } -DefaultOpenKeys @("components") -Content {
-                New-UDAntdSubMenu -Title { "Components" } -Key components -Content {
+        New-UDAntdContent -Style $content_style -Content {
+            New-UDAntdMenu -Mode inline -Style @{width = 250 } -Content {
                     New-UDAntdMenuItemGroup -Title 'General' -Content {
                         New-UDAntdMenuItem -Title 'Icon' -Content { "Icon" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Icon Info" } }
                         New-UDAntdMenuItem -Title 'Button' -Content { "Button" } -OnClick { Set-UDElement -Id 'demoCard' -Attributes @{title = 'title was update' } -Content { "Button Info" } }
@@ -75,13 +69,15 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Menu' -Content { "Menu" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Menu Info" } }
                     } 
                     New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
-                        New-UDAntdMenuItem -Title 'Radio' -Content { "Radio" } -OnClick { Set-UDElement -Id 'nestedContent' -Attributes @{style = @{backgroundClor = '#fff' } } -Content { 
-                                New-UDAntdRadioGroup -Content {
-                                    New-UDAntdRadio -Content { "Ant-design" } -Value "antd"
-                                    New-UDAntdRadio -Content { "Material-ui" } -Value "mui"
-                                    New-UDAntdRadio -Content { "MaterializeCss" } -Value "mcss"
-                                } -DefaultValue "antd" -OnChange { Show-UDToast -Message "$EventData was selected!" }
-                            } }
+                        New-UDAntdMenuItem -Title 'Radio' -Content { "Radio" } -OnClick { 
+                            Update-ComponentContentSection -Doc "Radio" -Example '
+                            New-UDAntdRadioGroup -Content {
+                                New-UDAntdRadio -Content { "Ant-design" } -Value "antd"
+                                New-UDAntdRadio -Content { "Material-ui" } -Value "mui"
+                                New-UDAntdRadio -Content { "MaterializeCss" } -Value "mcss"
+                            } -DefaultValue "antd" -OnChange { Show-UDToast -Message "$EventData was selected!" }
+                            ' 
+                        } 
                         New-UDAntdMenuItem -Title 'Radio Group' -Content { "Radio Group" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Button Info" } }
                         New-UDAntdMenuItem -Title 'Switch' -Content { "Switch" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Switch" } }
                         New-UDAntdMenuItem -Title 'Text Box' -Content { "Text Box" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Text Box" } }
@@ -92,14 +88,13 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             Update-ComponentContentSection -Doc "Password Box" -Example 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                         }
                     } 
-                }
             }
 
-            New-UDAntdLayout -Id 'componentInfo' -Content {
-                New-UDAntdContent -Id 'nestedContent' -Style @{padding = '0px 50px 0px 50px' } -Content {
+            New-UDAntdLayout -Content {
+                New-UDAntdContent -Style @{padding = '0px 50px 0px 50px' } -Content {
                     New-UDAntdLayout -Content {
                         New-UDAntdHeader -Style $header_componentInfo_style -Content {
-                            New-UDAntdRadioGroup -Id 'contentSwitcher' -Size small -ButtonStyle solid -DefaultValue "showDoc" -Content {
+                            New-UDAntdRadioGroup -Size small -ButtonStyle solid -Value "showDoc" -Content {
                                 New-UDAntdRadioButton -Content { "Doc" } -Value "showDoc" 
                                 New-UDAntdRadioButton -Content { "Example" } -Value "showExample" 
                             } -OnChange {
