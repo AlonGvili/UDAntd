@@ -93,7 +93,9 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
                     New-UDAntdMenuItem -Title 'Icon' -Style @{paddingLeft = 48}  -Content { "Icon" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdIcon.md" -Example (
-                            New-UDAntdIcon -Icon WindowsOutline -Size 2x
+                            (gcm New-UDAntdIcon).Parameters['Icon'].Attributes.ValidValues | ForEach-Object {
+                                New-UDAntdIcon -Icon $_ -Size 2x
+                            } 
                         )
                     }
                     New-UDAntdMenuItem -Title 'Button' -Style @{paddingLeft = 48}  -Content { "Button" } -OnClick { 
