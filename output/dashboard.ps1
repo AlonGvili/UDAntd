@@ -17,7 +17,8 @@ function Update-ComponentContentSection {
     )
     $MarkdownDoc = Invoke-RestMethod "https://alongviliud.azurewebsites.net/AntdDocs/$Doc"
     $MDoc = New-UDMarkdown -Markdown $MarkdownDoc
-    $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
+    # $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
+    $CmdExample = $Example
     Set-Item -Path "Cache:CommandDoc" -Value $MDoc
     Set-Item -Path "Cache:CommandExample" -Value $CmdExample
 
