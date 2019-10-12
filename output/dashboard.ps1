@@ -77,7 +77,8 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             Set-Item -Path "Cache:CommandDoc" -Value "Text Area"
                             Set-Item -Path "Cache:CommandExample" -Value 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
                             Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
-                            Set-UDElement -Id 'contentSwitcher' -Attributes @{value = "showDoc"}
+                            $switcher = Get-UDElement -Id 'contentSwitcher'
+                            Set-UDElement -Id 'contentSwitcher' -Attributes @{value = "showDoc"} -Content {$switcher.content}
                             
                         }
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {
@@ -95,11 +96,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 New-UDAntdContent -Id 'nestedContent' -Style @{padding = '0px 50px 0px 50px'} -Content {
                     New-UDAntdLayout -Content {
                         New-UDAntdHeader -Style $header_componentInfo_style -Content {
-                            New-UDAntdRadioGroup -Id 'contentSwitcher' -Content {
+                            New-UDAntdRadioGroup -Id 'contentSwitcher' -Size small -ButtonStyle solid -DefaultValue "showDoc" -Content {
                                 New-UDAntdRadioButton -Content {"Doc"} -Value "showDoc" 
                                 New-UDAntdRadioButton -Content {"Example"} -Value "showExample" 
                             } -OnChange {
-                                # Set-Item -Path cache:ContentToDisplay = $EventData
                                 Set-Item -Path "Cache:ContentToDisplay" -Value $EventData
                                 $WhatToShow = Get-Item -Path "Cache:ContentToDisplay"
                             
@@ -111,7 +111,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                                     $Example = Get-Item -Path "Cache:CommandExample"
                                     Set-UDElement -Id 'componentInfoContent' -Content {New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)"}
                                 }
-                            } -Size small -ButtonStyle solid -DefaultValue "showDoc"
+                            } 
                         }
 
                         New-UDAntdContent -Id 'componentInfoContent' -Content {} 
