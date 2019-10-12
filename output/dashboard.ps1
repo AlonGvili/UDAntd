@@ -60,7 +60,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Menu' -Content {"Menu"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Menu Info" }}
                     } 
                     New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
-                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Add-UDElement -ParentId 'nestedContent' -Content { 
+                        New-UDAntdMenuItem -Title 'Radio' -Content {"Radio"} -OnClick { Set-UDElement -Id 'nestedContent' -Attributes @{style = @{backgroundClor = '#fff'}} -Content { 
                             New-UDAntdRadioGroup -Content {
                                 New-UDAntdRadio -Content {"Ant-design"} -Value "antd"
                                 New-UDAntdRadio -Content {"Material-ui"} -Value "mui"
