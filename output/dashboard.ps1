@@ -16,6 +16,17 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
     $Card = New-UDAntdCard -Id 'demoCard' -Content {} -Bordered -Title 'demoCard' -Style @{height = 150}
     
+    # Helper functions
+    function Update-ComponentContentSection {
+        param(
+            $Doc,
+            $Example
+        )
+        Set-Item -Path "Cache:CommandDoc" -Value $Doc
+        Set-Item -Path "Cache:CommandExample" -Value $Example
+        Set-UDElement -Id 'componentInfoContent' -Content {New-UDMarkdown -Markdown "Showing doc for $Doc"}
+        # Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
+    }
     # $Session:CommandDoc = ''
     # $Session:CommandExample = ''
 
@@ -74,19 +85,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Switch' -Content {"Switch"} -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Switch" }}
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Box" }}
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {
-                            Set-Item -Path "Cache:CommandDoc" -Value "Text Area"
-                            Set-Item -Path "Cache:CommandExample" -Value 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
-                            Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
-                            $switcher = Get-UDElement -Id 'contentSwitcher'
-                            Set-UDElement -Id 'contentSwitcher' -Attributes @{value = "showDoc"} -Content {$switcher.content}
-                            
+                            Update-ComponentContentSection -Doc "Text Area" -Example 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
                         }
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {
-                            Set-Item -Path "Cache:CommandDoc" -Value "Password Box"
-                            Set-Item -Path "Cache:CommandExample" -Value 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
-                            Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
-                            $switcher = Get-UDElement -Id 'contentSwitcher'
-                            Set-UDElement -Id 'contentSwitcher' -Attributes @{value = "showDoc"} -Content {$switcher.content}
+                            Update-ComponentContentSection -Doc "Password Box" -Example 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                         }
                     } 
                 }
@@ -96,7 +98,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 New-UDAntdContent -Id 'nestedContent' -Style @{padding = '0px 50px 0px 50px'} -Content {
                     New-UDAntdLayout -Content {
                         New-UDAntdHeader -Style $header_componentInfo_style -Content {
-                            New-UDAntdRadioGroup -Id 'contentSwitcher' -Size small -ButtonStyle solid -Value "showDoc" -Content {
+                            New-UDAntdRadioGroup -Id 'contentSwitcher' -Size small -ButtonStyle solid -DefaultValue "showDoc" -Content {
                                 New-UDAntdRadioButton -Content {"Doc"} -Value "showDoc" 
                                 New-UDAntdRadioButton -Content {"Example"} -Value "showExample" 
                             } -OnChange {
