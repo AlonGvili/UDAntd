@@ -96,7 +96,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 New-UDAntdContent -Id 'nestedContent' -Style @{padding = '0px 50px 0px 50px'} -Content {
                     New-UDAntdLayout -Content {
                         New-UDAntdHeader -Style $header_componentInfo_style -Content {
-                            New-UDAntdRadioGroup -Id 'contentSwitcher' -Size small -ButtonStyle solid -DefaultValue "showDoc" -Content {
+                            New-UDAntdRadioGroup -Id 'contentSwitcher' -Size small -ButtonStyle solid -Value "showDoc" -Content {
                                 New-UDAntdRadioButton -Content {"Doc"} -Value "showDoc" 
                                 New-UDAntdRadioButton -Content {"Example"} -Value "showExample" 
                             } -OnChange {
