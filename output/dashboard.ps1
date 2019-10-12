@@ -15,9 +15,6 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     New-UDAntdDrawer -Id 'reused_drawer_right' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
     $Card = New-UDAntdCard -Id 'demoCard' -Content {} -Bordered -Title 'demoCard' -Style @{height = 150}
-
-    $Cache:CommandDoc = ''
-    $Cache:CommandExample = ''
     
     # $Session:CommandDoc = ''
     # $Session:CommandExample = ''
@@ -78,8 +75,8 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Box" }}
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Area" }}
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {
-                            Set-Item -PSPath "Cache:CommandDoc" -Value "Password Box"
-                            Set-Item -PSPath "Cache:CommandExample" -Value 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
+                            Set-Item -Path "Cache:CommandDoc" -Value "Password Box"
+                            Set-Item -Path "Cache:CommandExample" -Value 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                         }
                     } 
                 }
@@ -93,21 +90,21 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                                 New-UDAntdRadioButton -Content {"Doc"} -Value "showDoc" 
                                 New-UDAntdRadioButton -Content {"Example"} -Value "showExample" 
                             } -OnChange {
-                                # Set-Item -PSPath cache:ContentToDisplay = $EventData
-                                Set-Item -PSPath "Cache:ContentToDisplay" -Value $EventData
+                                # Set-Item -Path cache:ContentToDisplay = $EventData
+                                Set-Item -Path "Cache:ContentToDisplay" -Value $EventData
                             } -Size large -ButtonStyle solid -DefaultValue "showDoc"
                         }
 
                         New-UDAntdContent -Id 'componentInfoContent' -Content {
-                            $WhatToShow = Get-Item -PSPath "Cache:$ContentToDisplay"
+                            $WhatToShow = Get-Item -Path "Cache:ContentToDisplay"
                             
                             if($WhatToShow -eq "showDoc"){
-                                $Doc = Get-Item -PSPath "Cache:$CommandDoc"
+                                $Doc = Get-Item -Path "Cache:CommandDoc"
                                 New-UDMarkdown -Markdown "Showing doc for $Doc"
                             }
                             elseif($WhatToShow -eq "showExample"){
-                                $Example = Get-Item -PSPath "Cache:$CommandExample"
-                                New-UDSyntaxHighlighter -Language powershell -Style github -Code $Cache:CommandExample
+                                $Example = Get-Item -Path "Cache:CommandExample"
+                                New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)"
                             }
                         } 
                     }
