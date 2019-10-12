@@ -77,12 +77,14 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             Set-Item -Path "Cache:CommandDoc" -Value "Text Area"
                             Set-Item -Path "Cache:CommandExample" -Value 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
                             Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
+                            Set-UDElement -Id 'contentSwitcher' -Attributes @{value = "showDoc"}
                             
                         }
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {
                             Set-Item -Path "Cache:CommandDoc" -Value "Password Box"
                             Set-Item -Path "Cache:CommandExample" -Value 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                             Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
+                            Set-UDElement -Id 'contentSwitcher' -Attributes @{value = "showDoc"}
                         }
                     } 
                 }
@@ -92,7 +94,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 New-UDAntdContent -Id 'nestedContent' -Style @{padding = '0px 50px 0px 50px'} -Content {
                     New-UDAntdLayout -Content {
                         New-UDAntdHeader -Style $header_componentInfo_style -Content {
-                            New-UDAntdRadioGroup -Content {
+                            New-UDAntdRadioGroup -Id 'contentSwitcher' -Content {
                                 New-UDAntdRadioButton -Content {"Doc"} -Value "showDoc" 
                                 New-UDAntdRadioButton -Content {"Example"} -Value "showExample" 
                             } -OnChange {
