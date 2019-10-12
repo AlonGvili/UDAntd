@@ -16,11 +16,18 @@ function Update-ComponentContentSection {
         $Example
     )
     $MarkdownDoc = Invoke-RestMethod "https://alongviliud.azurewebsites.net/AntdDocs/$Doc"
-    $MDoc = New-UDMarkdown -Markdown $MarkdownDoc 
+    $MDoc = New-UDMarkdown -Markdown $MarkdownDoc
+    $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
     Set-Item -Path "Cache:CommandDoc" -Value $MDoc
-    Set-Item -Path "Cache:CommandExample" -Value $Example
+    Set-Item -Path "Cache:CommandExample" -Value $CmdExample
+
+    $WhatToShow = Get-Item "Cache:ContentToDisplay"
     Set-UDElement -Id 'componentInfoContent' -Content { 
-        $MDoc 
+        if($WhatToShow -eq "showDoc"){
+            $MDoc
+        }else{
+            $CmdExample
+        }
     }
 }
 
@@ -83,7 +90,11 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             ' 
                         } 
                         New-UDAntdMenuItem -Title 'Radio Group' -Content { "Radio Group" } -OnClick {  }
-                        New-UDAntdMenuItem -Title 'Switch' -Content { "Switch" } -OnClick { }
+                        New-UDAntdMenuItem -Title 'Switch' -Content { "Switch" } -OnClick { 
+                            Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example '
+                            New-UDAntdSwitch -checkedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -unCheckedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -size default
+                            ' 
+                        }
                         New-UDAntdMenuItem -Title 'Text Box' -Content { "Text Box" } -OnClick { 
                             Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example 'New-UDAntdInput -Placeholder "user name"' 
                          }
@@ -101,6 +112,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     New-UDAntdLayout -Content {
                         New-UDAntdHeader -Style $header_componentInfo_style -Content {
                             New-UDAntdRadioGroup -Size small -ButtonStyle solid -Value "showDoc" -Content {
+                                Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
                                 New-UDAntdRadioButton -Content { "Doc" } -Value "showDoc" 
                                 New-UDAntdRadioButton -Content { "Example" } -Value "showExample" 
                             } -OnChange {
@@ -113,7 +125,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                                 }
                                 elseif ($WhatToShow -eq "showExample") {
                                     $Example = Get-Item -Path "Cache:CommandExample"
-                                    Set-UDElement -Id 'componentInfoContent' -Content { New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" }
+                                    Set-UDElement -Id 'componentInfoContent' -Content { $Example }
                                 }
                             } 
                         }
