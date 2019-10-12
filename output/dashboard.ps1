@@ -17,7 +17,10 @@ function Update-ComponentContentSection {
     )
     Set-Item -Path "Cache:CommandDoc" -Value $Doc
     Set-Item -Path "Cache:CommandExample" -Value $Example
-    Set-UDElement -Id 'componentInfoContent' -Content { New-UDMarkdown -Markdown "Showing doc for $Doc" }
+    Set-UDElement -Id 'componentInfoContent' -Content { 
+        $MarkdownDoc = Get-Content -Path $Doc -Raw
+        New-UDMarkdown -Markdown $MarkdownDoc 
+    }
 }
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
@@ -82,10 +85,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Switch' -Content { "Switch" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Switch" } }
                         New-UDAntdMenuItem -Title 'Text Box' -Content { "Text Box" } -OnClick { Set-UDElement -Id 'nestedContent' -Content { "Text Box" } }
                         New-UDAntdMenuItem -Title 'Text Area' -Content { "Text Area" } -OnClick {
-                            Update-ComponentContentSection -Doc "Text Area" -Example 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
+                            Update-ComponentContentSection -Doc "$PSScriptRoot\UniversalDashboard.Antd\Docs\New-UDAntdInputTextArea.md" -Example 'New-UDAntdInputTextArea -OnPressEnter {} -Autosize' 
                         }
                         New-UDAntdMenuItem -Title 'Password Box' -Content { "Password Box" } -OnClick {
-                            Update-ComponentContentSection -Doc "Password Box" -Example 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
+                            Update-ComponentContentSection -Doc "$PSScriptRoot\UniversalDashboard.Antd\Docs\New-UDAntdInputPassword.md" -Example 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                         }
                     } 
             }
