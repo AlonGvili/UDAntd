@@ -75,6 +75,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Box" }}
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Area" }}
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {
+                            Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
                             Set-Item -Path "Cache:CommandDoc" -Value "Password Box"
                             Set-Item -Path "Cache:CommandExample" -Value 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                         }
@@ -102,7 +103,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                                     $Example = Get-Item -Path "Cache:CommandExample"
                                     Set-UDElement -Id 'componentInfoContent' -Content {New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)"}
                                 }
-                            } -Size large -ButtonStyle solid -DefaultValue "showDoc"
+                            } -Size default -ButtonStyle solid -DefaultValue "showDoc"
                         }
 
                         New-UDAntdContent -Id 'componentInfoContent' -Content {} 
