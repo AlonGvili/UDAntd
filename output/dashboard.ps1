@@ -18,7 +18,7 @@ function Update-ComponentContentSection {
     Set-Item -Path "Cache:CommandDoc" -Value $Doc
     Set-Item -Path "Cache:CommandExample" -Value $Example
     Set-UDElement -Id 'componentInfoContent' -Content { 
-        $MarkdownDoc = Get-Content -Path "/Docs/$Doc" -Raw
+        $MarkdownDoc = Get-Content -Path "/AntdDocs/$Doc" -Raw
         New-UDMarkdown -Markdown $MarkdownDoc 
     }
 }
@@ -127,4 +127,5 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
-Start-UDDashboard -Wait -Dashboard $Dashboard -Force
+$Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
+Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder
