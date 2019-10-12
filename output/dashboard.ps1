@@ -16,10 +16,11 @@ function Update-ComponentContentSection {
         $Example
     )
     $MarkdownDoc = Invoke-RestMethod "https://alongviliud.azurewebsites.net/AntdDocs/$Doc"
-    Set-Item -Path "Cache:CommandDoc" -Value $MarkdownDoc
+    $MDoc = New-UDMarkdown -Markdown $MarkdownDoc 
+    Set-Item -Path "Cache:CommandDoc" -Value $MDoc
     Set-Item -Path "Cache:CommandExample" -Value $Example
     Set-UDElement -Id 'componentInfoContent' -Content { 
-        New-UDMarkdown -Markdown $MarkdownDoc 
+        $MDoc 
     }
 }
 
@@ -95,7 +96,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     } 
             }
 
-            New-UDAntdLayout -Style @{height = '100%'} -Content {
+            New-UDAntdLayout -Content {
                 New-UDAntdContent -Style @{padding = '0px 50px 0px 50px' } -Content {
                     New-UDAntdLayout -Content {
                         New-UDAntdHeader -Style $header_componentInfo_style -Content {
@@ -108,7 +109,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                             
                                 if ($WhatToShow -eq "showDoc") {
                                     $Doc = Get-Item -Path "Cache:CommandDoc"
-                                    Set-UDElement -Id 'componentInfoContent' -Content { New-UDMarkdown -Markdown $Doc }
+                                    Set-UDElement -Id 'componentInfoContent' -Content { $Doc }
                                 }
                                 elseif ($WhatToShow -eq "showExample") {
                                     $Example = Get-Item -Path "Cache:CommandExample"
