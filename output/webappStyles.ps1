@@ -29,6 +29,18 @@ $header_style = @{
     boxShadow       = '0 2px 8px rgba(0, 0, 0, 0.15)'
 }
 
+$header_componentInfo_style = @{
+    marginBottom    = 50; 
+    # position        = 'fixed';  
+    width           = '100%'; 
+    backgroundColor = 'transparent'
+    # zIndex          = 1; 
+    alignItems      = 'center'; 
+    display         = 'flex'; 
+    justifyContent  = 'flex-end' 
+    # boxShadow       = '0 2px 8px rgba(0, 0, 0, 0.15)'
+}
+
 $layout_style = @{
     backgroundColor = '#1A90FF' 
 }

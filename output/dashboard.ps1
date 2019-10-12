@@ -78,8 +78,8 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         New-UDAntdMenuItem -Title 'Text Box' -Content {"Text Box"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Box" }}
                         New-UDAntdMenuItem -Title 'Text Area' -Content {"Text Area"} -OnClick {Set-UDElement -Id 'nestedContent' -Content { "Text Area" }}
                         New-UDAntdMenuItem -Title 'Password Box' -Content {"Password Box"} -OnClick {
-                            $Cache:CommandDoc = "Password Box"
-                            $Cache:CommandExample = 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
+                            Set-Item -PSPath "Cache:CommandDoc" -Value "Password Box"
+                            Set-Item -PSPath "Cache:CommandExample" -Value 'New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle'
                         }
                     } 
                 }
@@ -93,15 +93,20 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                                 New-UDAntdRadioButton -Content {"Doc"} -Value "showDoc" 
                                 New-UDAntdRadioButton -Content {"Example"} -Value "showExample" 
                             } -OnChange {
-                                $Cache:ContentToDisplay = $EventData
+                                # Set-Item -PSPath cache:ContentToDisplay = $EventData
+                                Set-Item -PSPath "Cache:ContentToDisplay" -Value $EventData
                             } -Size large -ButtonStyle solid -DefaultValue "showDoc"
                         }
 
                         New-UDAntdContent -Id 'componentInfoContent' -Content {
-                            if($Cache:ContentToDisplay -eq "showDoc"){
-                                New-UDMarkdown -Markdown "Showing doc for $Cache:CommandDoc"
+                            $WhatToShow = Get-Item -PSPath "Cache:$ContentToDisplay"
+                            
+                            if($WhatToShow -eq "showDoc"){
+                                $Doc = Get-Item -PSPath "Cache:$CommandDoc"
+                                New-UDMarkdown -Markdown "Showing doc for $Doc"
                             }
-                            elseif($Cache:ContentToDisplay -eq "showExample"){
+                            elseif($WhatToShow -eq "showExample"){
+                                $Example = Get-Item -PSPath "Cache:$CommandExample"
                                 New-UDSyntaxHighlighter -Language powershell -Style github -Code $Cache:CommandExample
                             }
                         } 
