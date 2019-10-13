@@ -1,12 +1,17 @@
 . .\$PSScriptRoot\install.modules.ps1
 Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
+Import-Module UniversalDashboard.Helmet -Force
+Import-Module UniversalDashboard.Markdown -Force
+Import-Module UniversalDashboard.SyntaxHighlighter -Force
+Import-Module PSDocs -Force
 
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\styles.ps1
 
 # remove some ud theme settings
 $Theme = Get-UDTheme -Name Default
-$Theme.Definition['main'] = @{padding = 'unset' }
+$Theme.Definition.Clear()
+# $Theme.Definition['main'] = @{padding = 'unset' }
 
 # Helper functions
 function Update-ComponentContentSection {
@@ -108,9 +113,12 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
         # web app content
         New-UDAntdContent -Style $content_style -Content {
-            New-UDAntdMenu -Mode inline -Style @{width = 256; minWidth = 256 } -Content {
+            New-UDAntdMenu -Mode inline -DefaultSelectedKeys @('component_icon') -Style @{width = 256; minWidth = 256 } -Content {
+
+                New-UDAntdMenuItem -Title 'Welcome' -Content { "Welcome" } -OnClick { }
+
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
-                    New-UDAntdMenuItem -Title 'Icon'  -Content { "Icon" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Icon' -Key 'component_icon'  -Content { "Icon" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdIcon.md" -Example (
                             (Get-Command New-UDAntdIcon).Parameters['Icon'].Attributes.ValidValues | ForEach-Object {
                                 New-UDAntdIcon -Icon $_ -Size 4x -Color '#1a90ff' -Style @{ margin = 16 }
