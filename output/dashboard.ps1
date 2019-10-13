@@ -34,14 +34,14 @@ function Update-ComponentContentSection {
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
-    New-UDHelmet -Content {
-        New-UDHtmlTag -Tag 'script' -Content {
-            let udTheme = document.querySelectorAll(
-                'link[href="/api/internal/dashboard/theme"]'
-            );
-            udTheme[0].disabled = true
-        }
-    }
+    # New-UDHelmet -Content {
+    #     New-UDHtmlTag -Tag 'script' -Content {
+    #         let udTheme = document.querySelectorAll(
+    #             'link[href="/api/internal/dashboard/theme"]'
+    #         );
+    #         udTheme[0].disabled = true
+    #     }
+    # }
 
     # web app reused components
     New-UDAntdDrawer -Id 'reused_drawer_right' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
