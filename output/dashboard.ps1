@@ -1,9 +1,8 @@
 Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force
-Import-Module "$PSScriptRoot\UniversalDashboard.SyntaxHighlighter\UniversalDashboard.SyntaxHighlighter.psd1" -Force
-Import-Module "$PSScriptRoot\UniversalDashboard.Markdown\UniversalDashboard.Markdown.psd1" -Force
+. $PSScriptRoot\install.modules.ps1
 
 # import webapp styles variables
-Import-Module -Variable * $PSScriptRoot\webappStyles.ps1
+Import-Module -Variable * $PSScriptRoot\styles.ps1
 
 # remove some ud theme settings
 $Theme = Get-UDTheme -Name Default
@@ -35,6 +34,15 @@ function Update-ComponentContentSection {
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
+    New-UDHelmet -Content {
+        New-UDHtmlTag -Tag 'script' -Content {
+            'let udTheme = document.querySelectorAll(
+                "link[href="/api/internal/dashboard/theme"]"
+            );
+            udTheme[0].disabled = true'
+        }
+    }
+
     # web app reused components
     New-UDAntdDrawer -Id 'reused_drawer_right' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
@@ -59,7 +67,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         } 
     }
 
-    $component_info_content = New-UDAntdContent -Id 'componentInfoContent' -Content {} -Style @{ paddingBottom = 50 } 
+    $component_info_content = New-UDAntdContent -Id 'componentInfoContent' -Content { } -Style @{ paddingBottom = 50 } 
 
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
@@ -91,27 +99,27 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         New-UDAntdContent -Style $content_style -Content {
             New-UDAntdMenu -Mode inline -Style @{width = 256; minWidth = 256 } -Content {
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
-                    New-UDAntdMenuItem -Title 'Icon' -Style @{paddingLeft = 48}  -Content { "Icon" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Icon'  -Content { "Icon" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdIcon.md" -Example (
-                            (gcm New-UDAntdIcon).Parameters['Icon'].Attributes.ValidValues | ForEach-Object {
-                                New-UDAntdIcon -Icon $_ -Size 4x -Color '#1a90ff' -Style @{ margin = 8}
+                            (Get-Command New-UDAntdIcon).Parameters['Icon'].Attributes.ValidValues | ForEach-Object {
+                                New-UDAntdIcon -Icon $_ -Size 4x -Color '#1a90ff' -Style @{ margin = 16 }
                             } 
                         )
                     }
-                    New-UDAntdMenuItem -Title 'Button' -Style @{paddingLeft = 48}  -Content { "Button" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdButton.md" -Example (
-                            New-UDAntdButton -Label SUBMIT -Size large -OnClick {} 
+                            New-UDAntdButton -Label SUBMIT -Size large -OnClick { } 
                         )
                     }
-                    New-UDAntdMenuItem -Title 'Button Group' -Style @{paddingLeft = 48}  -Content { "Button Group" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
-                    New-UDAntdMenuItem -Title 'Badge' -Style @{paddingLeft = 48}  -Content { "Badge" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Card' -Style @{paddingLeft = 48}  -Content { "Card" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Carousel' -Style @{paddingLeft = 48}   -Content { "Carousel" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Description List' -Style @{paddingLeft = 48}  -Content { "Description List" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Popover' -Style @{paddingLeft = 48}  -Content { "Popover" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Statistic'  -Style @{paddingLeft = 48} -Content { "Statistic" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Badge'  -Content { "Badge" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Card'  -Content { "Card" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Carousel'   -Content { "Carousel" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Description List'  -Content { "Description List" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Popover'  -Content { "Popover" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Statistic'  -Content { "Statistic" } -OnClick { }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Navigation' -Content {
                     New-UDAntdMenuItem -Title 'Dropdown'  -Content { "Dropdown" } -OnClick { }
@@ -137,7 +145,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example (New-UDAntdInput -Placeholder "user name") 
                     }
                     New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick {
-                        Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example (New-UDAntdInputTextArea -OnPressEnter {} -Autosize)
+                        Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example (New-UDAntdInputTextArea -OnPressEnter { } -Autosize)
                     }
                     New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick {
                         Update-ComponentContentSection -Doc "New-UDAntdInputPassword.md" -Example (New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle)
