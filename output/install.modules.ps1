@@ -38,13 +38,13 @@ if ($Null -eq (Get-InstalledModule -Name PSDocs -ErrorAction SilentlyContinue)) 
     Import-Module PSDocs -Force
 }
 
-Write-Verbose -Message "Start download the module from github" -Verbose
+# Write-Verbose -Message "Start download the module from github" -Verbose
 
 $ProgressPreference = 'SilentlyContinue' 
 $UDAntdGithubLatestRelease = Get-GitHubRelease -OwnerName AlonGvili -RepositoryName UniversalDashboard.Antd -Latest  -NoStatus -AccessToken $ENV:APPSETTING_GITHUB_TOKEN
 Invoke-WebRequest $UDAntdGithubLatestRelease.assets.browser_download_url -OutFile $PSScriptRoot\UniversalDashboard.Antd.zip
 Expand-Archive -Path $PSScriptRoot\UniversalDashboard.Antd.zip -DestinationPath $PSScriptRoot\UniversalDashboard.Antd -Force
 
-Write-Verbose -Message "Finish download the module from github" -Verbose
+# Write-Verbose -Message "Finish download the module from github" -Verbose
 
 Copy-Item -Path $PSScriptRoot\Docs\* -Destination $PSScriptRoot\UniversalDashboard.Antd\Docs -Recurse -Force
