@@ -11,12 +11,12 @@ $Cred = [System.Management.Automation.PSCredential]::new('AlonGvili', $Pass)
 #     Import-Module -Name PowerShellGet -Force;
 # }
 
-if ($Null -eq (Get-InstalledModule -Name PowerShellForGitHub -ErrorAction SilentlyContinue)) {
-    Install-Module PowerShellForGitHub -Scope CurrentUser -Force;
-    Import-Module PowerShellForGitHub -Force
-    Set-GitHubAuthentication -Credential $Cred
-    Set-GitHubConfiguration -DisableTelemetry -SuppressTelemetryReminder -DefaultNoStatus -DisableLogging
-}
+# if ($Null -eq (Get-InstalledModule -Name PowerShellForGitHub -ErrorAction SilentlyContinue)) {
+#     Install-Module PowerShellForGitHub -Scope CurrentUser -Force;
+#     Import-Module PowerShellForGitHub -Force
+#     Set-GitHubAuthentication -Credential $Cred
+#     Set-GitHubConfiguration -DisableTelemetry -SuppressTelemetryReminder -DefaultNoStatus -DisableLogging
+# }
 
 if ($Null -eq (Get-InstalledModule -Name UniversalDashboard.Helmet -ErrorAction SilentlyContinue)) {
     Install-Module UniversalDashboard.Helmet -Scope CurrentUser -Force;

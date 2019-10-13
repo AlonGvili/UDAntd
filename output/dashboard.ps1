@@ -1,4 +1,4 @@
-. .\$PSScriptRoot\install.modules.ps1
+. $PSScriptRoot\install.modules.ps1
 Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
 Import-Module UniversalDashboard.Helmet -Force
 Import-Module UniversalDashboard.Markdown -Force
@@ -85,7 +85,20 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
                     New-UDAntdIcon -Icon HomeOutline -Size lg 
-                } -OnClick { '#' }
+                } -OnClick { 
+                    $LoadedModules = Get-Module | Select-Object Name
+                    $InstalledModules = Get-InstalledModule  | Select-Object Name
+                    Set-Udelement -Id 'componentInfoContent' -Content {
+                        New-UDAntdCard -Content {
+                            $LoadedModules | ConvertTo-Json
+                        } -Bordered -Style @{padding = 24; marginBottom = 48 }
+
+                        New-UDAntdCard -Content {
+                            $InstalledModules | ConvertTo-Json
+                        } -Bordered -Style @{padding = 24; marginTop = 48 }
+                    }
+
+                 }
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreOutline -Size lg 
