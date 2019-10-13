@@ -1,4 +1,4 @@
-$Pass = ConvertTo-SecureString -String $ENV:APPSETTINGS_GITHUB_TOKEN -AsPlainText -Force -ErrorAction Stop
+$Pass = ConvertTo-SecureString -String $ENV:GITHUB_TOKEN -AsPlainText -Force -ErrorAction Stop
 $Cred = [System.Management.Automation.PSCredential]::new('AlonGvili', $Pass)
 
 if ($Null -eq (Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue)) {
