@@ -1,4 +1,4 @@
-.\$PSScriptRoot\install.modules.ps1
+. $PSScriptRoot\install.modules.ps1
 Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
 Import-Module UniversalDashboard.Helmet -Force
 Import-Module UniversalDashboard.Markdown -Force
@@ -11,7 +11,7 @@ Import-Module -Variable * $PSScriptRoot\styles.ps1
 # clear ud theme definition and add new ones.
 $Theme = Get-UDTheme -Name Default
 $Theme.Definition.Clear()
-$Theme.Definition.Add('.ant-menu-item-group-list .ant-menu-item, .ant-menu-item-group-list .ant-menu-submenu-title',@{padding = '0 16px 0 48px'})
+# $Theme.Definition.Add('.ant-menu-item-group-list .ant-menu-item, .ant-menu-item-group-list .ant-menu-submenu-title',@{padding = '0 16px 0 48px'})
 
 # Helper functions
 function Update-ComponentContentSection {

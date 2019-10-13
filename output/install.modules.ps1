@@ -19,7 +19,7 @@ $Cred = [System.Management.Automation.PSCredential]::new('AlonGvili', $Pass)
 # }
 
 if ($Null -eq (Get-InstalledModule -Name UniversalDashboard.Helmet -ErrorAction SilentlyContinue)) {
-    Install-Module UniversalDashboard.Helmet -Scope CurrentUser -Force;
+    Install-Module UniversalDashboard.Helmet -Scope AllUsers -Force;
     Import-Module UniversalDashboard.Helmet -Force
 }
 
