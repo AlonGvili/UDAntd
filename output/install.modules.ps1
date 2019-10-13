@@ -5,10 +5,10 @@ if ($Null -eq (Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue)) {
     Install-PackageProvider -Name NuGet -Force -Scope CurrentUser;
 }
 
-if ($Null -eq (Get-InstalledModule -Name PowerShellGet -MinimumVersion 2.0.0 -ErrorAction SilentlyContinue)) {
-    Install-Module PowerShellGet -MinimumVersion 2.0.0 -AllowClobber -Scope CurrentUser -Force;
+if ($Null -eq (Get-InstalledModule -Name PowerShellGet -ErrorAction SilentlyContinue)) {
+    Install-Module PowerShellGet -AllowClobber -Scope CurrentUser -Force;
     Remove-Module -Name PowerShellGet -ErrorAction SilentlyContinue;
-    Import-Module -Name PowerShellGet -MinimumVersion 2.0.0;
+    Import-Module -Name PowerShellGet -Force;
 }
 
 if ($Null -eq (Get-InstalledModule -Name PowerShellForGitHub -ErrorAction SilentlyContinue)) {
