@@ -88,11 +88,11 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     $installModules = Get-Module -ListAvailable  | Select Name
                     $EnvVer = dir Env:
                     Set-Udelement -Id 'componentInfoContent' -Content {
-                        New-UDAntCard -Content {
+                        New-UDAntdCard -Content {
                             $installModules
                         } -Bordered 
 
-                        New-UDAntCard -Content {
+                        New-UDAntdCard -Content {
                             $EnvVer
                         } -Bordered 
                     }
