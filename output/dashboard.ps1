@@ -36,10 +36,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
     New-UDHelmet -Content {
         New-UDHtmlTag -Tag 'script' -Content {
-            'let udTheme = document.querySelectorAll(
-                "link[href="/api/internal/dashboard/theme"]"
+            let udTheme = document.querySelectorAll(
+                link[href="/api/internal/dashboard/theme"]
             );
-            udTheme[0].disabled = true'
+            udTheme[0].disabled = true
         }
     }
 
@@ -75,7 +75,6 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # web app top header
         New-UDAntdHeader -Id 'mainHeader' -Style $header_style -Content {
 
-            New-UDAntdIcon -Icon BugFill -Color '#1A90FF' -Size 3x 
             # web app top navbar
             New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
 
@@ -85,7 +84,19 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreOutline -Size lg 
-                } -OnClick { '#' }
+                } -OnClick { 
+                    $installModules = Get-Module -ListAvailable  | Select Name
+                    $EnvVer = dir Env:
+                    Set-Udelement -Id 'componentInfoContent' -Content {
+                        New-UDAntCard -Content {
+                            $installModules
+                        } -Bordered 
+
+                        New-UDAntCard -Content {
+                            $EnvVer
+                        } -Bordered 
+                    }
+                 }
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
                     New-UDAntdIcon -Icon GithubOutline -Size lg
