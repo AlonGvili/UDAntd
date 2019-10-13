@@ -1,5 +1,5 @@
-Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force
 . $PSScriptRoot\install.modules.ps1
+Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force
 
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\styles.ps1
@@ -85,18 +85,18 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreOutline -Size lg 
                 } -OnClick { 
-                    $installModules = Get-Module -ListAvailable  | Select Name
+                    $installModules = Get-Module -ListAvailable | Select-Object Name
                     $EnvVer = dir Env:
                     Set-Udelement -Id 'componentInfoContent' -Content {
                         New-UDAntdCard -Content {
-                            $installModules | Out-String
-                        } -Bordered 
+                            $installModules | ConvertTo-Json
+                        } -Bordered -Style @{padding = 24; marginBottom = 48 }
 
                         New-UDAntdCard -Content {
-                            $EnvVer | Out-String
-                        } -Bordered 
+                            $EnvVer | ConvertTo-Json
+                        } -Bordered -Style @{padding = 24; marginTop = 48 }
                     }
-                 }
+                }
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
                     New-UDAntdIcon -Icon GithubOutline -Size lg
