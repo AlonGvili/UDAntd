@@ -1,5 +1,5 @@
 . $PSScriptRoot\install.modules.ps1
-Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force
+Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
 
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\styles.ps1
