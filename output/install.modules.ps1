@@ -39,7 +39,7 @@ if ($Null -eq (Get-InstalledModule -Name PSDocs -ErrorAction SilentlyContinue)) 
 }
 
 Write-Verbose -Message "Start download the module from github" -Verbose
-Invoke-WebRequest (Get-GitHubRelease -OwnerName AlonGvili -RepositoryName UniversalDashboard.Antd -Latest | 
+Invoke-WebRequest (Get-GitHubRelease -OwnerName AlonGvili -RepositoryName UniversalDashboard.Antd -Latest -NoStatus | 
     Select-Object -expand assets | 
     Select-Object  -expand browser_download_url ) -OutFile $PSScriptRoot\UniversalDashboard.Antd.zip
 Expand-Archive -Path $PSScriptRoot\UniversalDashboard.Antd.zip -DestinationPath $PSScriptRoot\UniversalDashboard.Antd -Force
