@@ -20,18 +20,22 @@ $Cred = [System.Management.Automation.PSCredential]::new('AlonGvili', $Pass)
 
 if ($Null -eq (Get-InstalledModule -Name UniversalDashboard.Helmet -ErrorAction SilentlyContinue)) {
     Install-Module UniversalDashboard.Helmet -Scope CurrentUser -Force;
+    Import-Module UniversalDashboard.Helmet -Force
 }
 
 if ($Null -eq (Get-InstalledModule -Name UniversalDashboard.Markdown -ErrorAction SilentlyContinue)) {
     Install-Module UniversalDashboard.Markdown -Scope CurrentUser -Force;
+    Import-Module UniversalDashboard.Markdown -Force
 }
 
 if ($Null -eq (Get-InstalledModule -Name UniversalDashboard.SyntaxHighlighter -ErrorAction SilentlyContinue)) {
     Install-Module UniversalDashboard.SyntaxHighlighter -Scope CurrentUser -Force;
+    Import-Module UniversalDashboard.SyntaxHighlighter -Force
 }
 
 if ($Null -eq (Get-InstalledModule -Name PSDocs -ErrorAction SilentlyContinue)) {
     Install-Module -Name PSDocs -Scope CurrentUser -Force;
+    Import-Module PSDocs -Force
 }
 
 # Write-Verbose -Message "Start download the module from github" -Verbose
