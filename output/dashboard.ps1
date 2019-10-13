@@ -37,7 +37,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
     New-UDHelmet -Content {
         New-UDHtmlTag -Tag 'script' -Content {
             let udTheme = document.querySelectorAll(
-                link[href="/api/internal/dashboard/theme"]
+                'link[href="/api/internal/dashboard/theme"]'
             );
             udTheme[0].disabled = true
         }
