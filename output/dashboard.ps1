@@ -34,6 +34,11 @@ function Update-ComponentContentSection {
         }
     }   
 
+    Document CodeExample {
+    
+            $InputObject  | Code -Info powershell
+    }   
+
     $WhatToShow = Get-Item "Cache:ContentToDisplay"
     Set-UDElement -Id 'componentInfoContent' -Content { 
         if ($WhatToShow -eq "showDoc") {
@@ -41,7 +46,7 @@ function Update-ComponentContentSection {
         }
         else {
             $Example
-            New-UDMarkdown -Markdown (CommandApi -InputObject $cmdParams -PassThru)
+            New-UDMarkdown -Markdown (CodeExample -InputObject ($Example | Out-String) -PassThru)
         }
     }
 
