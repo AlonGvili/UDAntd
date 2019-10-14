@@ -4,6 +4,7 @@ Import-Module "$PSScriptRoot\PSDocs\0.6.3\PSDocs.psd1" -Force -ErrorAction Stop
 
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\styles.ps1
+Import-Module -Function * $PSScriptRoot\helpers\LivePreview.ps1
 
 # clear ud theme definition and add new ones.
 $Theme = Get-UDTheme -Name Default
@@ -22,23 +23,6 @@ function Update-ComponentContentSection {
     $MarkdownDoc = Get-Content -Path "$Root\UniversalDashboard.Antd\Docs\$Doc" -Raw
 
     $MDoc = New-UDMarkdown -Markdown $MarkdownDoc
-    # $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
-    # $CmdExample = $Example
-
-    $cmd = $Doc -replace '(\w+)\.md','$1'
-    $cmdParams = (GCM $cmd).Parameters.Values
-    Document CommandApi {
-
-        Section 'Command Api' {
-    
-            $InputObject  | Table -Property Name,ParameterType;
-        }
-    }   
-
-    Document CodeExample {
-    
-            $InputObject  | Code -Info powershell
-    }   
 
     $WhatToShow = Get-Item "Cache:ContentToDisplay"
     Set-UDElement -Id 'componentInfoContent' -Content { 
@@ -46,15 +30,13 @@ function Update-ComponentContentSection {
             $MDoc
         }
         else {
-            $Example
-            New-UDMarkdown -Markdown (CodeExample -InputObject $ExampleCode -PassThru)
+            Set-LivePreviewPage
         }
     }
 
     Set-Item -Path "Cache:CommandDoc" -Value $MDoc
     Set-Item -Path "Cache:CommandExample" -Value @(
-        $Example
-        New-UDMarkdown -Markdown (CodeExample -InputObject $ExampleCode -PassThru)
+        Set-LivePreviewPage
     )
 
 }
@@ -91,7 +73,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             }
             elseif ($WhatToShow -eq "showExample") {
                 $Example = Get-Item -Path "Cache:CommandExample"
-                Set-UDElement -Id 'componentInfoContent' -Content { $Example }
+                Set-UDElement -Id 'componentInfoContent' -Content { Get-LivePreview }
             }
         } 
     }
@@ -111,7 +93,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     New-UDAntdIcon -Icon HomeOutline -Size lg 
                 } -OnClick { 
                     $LoadedModules = Get-Module | Select-Object Name
-                    $InstalledModules = Get-InstalledModule   | Select-Object Name
+                    $InstalledModules = Get-InstalledModule | Select-Object Name
                     Set-Udelement -Id 'componentInfoContent' -Content {
                         New-UDAntdCard -Content {
                             $LoadedModules | ConvertTo-Json
@@ -122,7 +104,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         } -Bordered -Style @{padding = 24; marginTop = 48 }
                     }
 
-                 }
+                }
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreOutline -Size lg 
@@ -152,7 +134,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         New-UDAntdContent -Style $content_style -Content {
             New-UDAntdMenu -Mode inline -DefaultSelectedKeys @('component_icon') -Style @{width = 256; minWidth = 256 } -Content {
 
-                New-UDAntdMenuItem -Title 'Welcome' -Style @{padding = 'unset'} -Content { "Welcome" } -OnClick { }
+                New-UDAntdMenuItem -Title 'Welcome' -Style @{padding = 'unset' } -Content { "Welcome" } -OnClick { }
 
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
                     New-UDAntdMenuItem -Title 'Icon' -Key 'component_icon' -InlineIndent 48  -Content { "Icon" } -OnClick { 
@@ -163,9 +145,17 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         )
                     }
                     New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { 
-                        Update-ComponentContentSection -Doc "New-UDAntdButton.md" -Example (
-                            New-UDAntdButton -Label SUBMIT -Size large -OnClick { } 
-                        ) -ExampleCode "New-UDAntdButton -Label SUBMIT -Size large -OnClick { }"
+                        @(
+                            [PSCustomObject]@{
+                                Example = New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary
+                                Code    = "New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary"
+                            }
+
+                            [PSCustomObject]@{
+                                Example = New-UDAntdButton -Icon "setting" -Size large -OnClick { } -ButtonType primary -Shape circle
+                                Code    = "New-UDAntdButton -Icon 'setting' -Size large -OnClick { } -ButtonType primary -Shape circle"
+                            }
+                        ) | New-LivePreview | Add-LivePreview 
                     }
                     New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { }
                 } 
@@ -229,13 +219,3 @@ $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instan
 $Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
 Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
 
-
-Document Sample {
-
-    # Set the title for the document
-    Title 'Level 1'
-
-    Section 'Level 2' -Force {
-
-    }
-} 
