@@ -15,7 +15,8 @@ $Root = $PSScriptRoot
 function Update-ComponentContentSection {
     param(
         $Doc,
-        $Example
+        $Example,
+        $ExampleCode
     )
     # $MarkdownDoc = Invoke-RestMethod "https://udantd.site/AntdDocs/$Doc"
     $MarkdownDoc = Get-Content -Path "$Root\UniversalDashboard.Antd\Docs\$Doc" -Raw
@@ -46,14 +47,14 @@ function Update-ComponentContentSection {
         }
         else {
             $Example
-            New-UDMarkdown -Markdown (CodeExample -InputObject ($Example | Out-String) -PassThru)
+            New-UDMarkdown -Markdown (CodeExample -InputObject $ExampleCode -PassThru)
         }
     }
 
     Set-Item -Path "Cache:CommandDoc" -Value $MDoc
     Set-Item -Path "Cache:CommandExample" -Value @(
         $Example
-        New-UDMarkdown -Markdown (CommandApi -InputObject $cmdParams -PassThru)
+        New-UDMarkdown -Markdown (CodeExample -InputObject $ExampleCode -PassThru)
     )
 
 }
@@ -164,7 +165,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdButton.md" -Example (
                             New-UDAntdButton -Label SUBMIT -Size large -OnClick { } 
-                        )
+                        ) -ExampleCode "New-UDAntdButton -Label SUBMIT -Size large -OnClick { }"
                     }
                     New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { }
                 } 
@@ -197,10 +198,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         )
                     }
                     New-UDAntdMenuItem -Title 'Input'  -Content { "Input" } -OnClick { 
-                        Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example (New-UDAntdInput -Placeholder "user name") 
+                        Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example (New-UDAntdInput -Placeholder "user name") -ExampleCode "New-UDAntdInput -Placeholder 'user name'"
                     }
                     New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick {
-                        Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example (New-UDAntdInputTextArea -OnPressEnter { } -Autosize)
+                        Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example (New-UDAntdInputTextArea -OnPressEnter { } -Autosize) -ExampleCode "New-UDAntdInputTextArea -OnPressEnter { } -Autosize"
                     }
                     New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick {
                         Update-ComponentContentSection -Doc "New-UDAntdInputPassword.md" -Example (New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle)
