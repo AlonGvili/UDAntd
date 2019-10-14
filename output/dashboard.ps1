@@ -13,7 +13,6 @@ $Theme = Get-UDTheme -Name Default
 $Theme.Definition.Clear()
 $Theme.Definition.Add('.ant-menu-item-group-list .ant-menu-item, .ant-menu-item-group-list .ant-menu-submenu-title',@{padding = '0 16px 0 48px'})
 
-$UDSession = New-UDEndpointInitialization -Module @('PSDocs','UniversalDashboard.Markdown','UniversalDashboard.SyntaxHighlighter',"$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1") -Function 'New-UDMarkdown'
 # Helper functions
 function Update-ComponentContentSection {
     param(
@@ -48,6 +47,9 @@ function Update-ComponentContentSection {
         }
     }
 }
+
+$UDSession = New-UDEndpointInitialization -Module @('PSDocs','UniversalDashboard.Markdown','UniversalDashboard.SyntaxHighlighter',"$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1") -Function @('Update-ComponentContentSection','New-UDMarkdown') 
+
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
