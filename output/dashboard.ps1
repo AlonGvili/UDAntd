@@ -1,9 +1,9 @@
-. ."$PSScriptRoot\install.modules.ps1"
-# Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
-# Import-Module UniversalDashboard.Helmet -Force
-# Import-Module UniversalDashboard.Markdown -Force
-# Import-Module UniversalDashboard.SyntaxHighlighter -Force
-# Import-Module PSDocs -Force
+. "$PSScriptRoot\install.modules.ps1"
+Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
+Import-Module UniversalDashboard.Helmet -Force
+Import-Module UniversalDashboard.Markdown -Force
+Import-Module UniversalDashboard.SyntaxHighlighter -Force
+Import-Module PSDocs -Force
 
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\styles.ps1
