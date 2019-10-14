@@ -10,10 +10,10 @@ $LivePreviewExamplesDB = @{
         [PSCustomObject]@{
             Title   = "SIZE"
             Example = @(
-                New-UDAntdRow -Align middle -Justify space-between -Flex -Content {
-                    New-UDAntdButton -Icon "setting" -Size small -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto' }
-                    New-UDAntdButton -Icon "setting" -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto' }
-                    New-UDAntdButton -Icon "setting" -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto' }
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
+                    New-UDAntdButton -Icon "setting" -Size small -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px' }
+                    New-UDAntdButton -Icon "setting" -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px' }
+                    New-UDAntdButton -Icon "setting" -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px' }
                 }
             )
             Code    = "New-UDAntdButton -Icon 'setting' -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto'}"
