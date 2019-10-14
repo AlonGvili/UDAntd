@@ -1,7 +1,7 @@
 # Live preview cache variables
 Set-Item "Cache:LivePreviewExamples" -Value @() -Force
 
-Set-LivePreviewPage {
+function Set-LivePreviewPage {
     $WhatToShow = Get-Item "Cache:ContentToDisplay"
     Set-UDElement -Id 'componentInfoContent' -Content { 
         if ($WhatToShow -eq "showDoc") {
