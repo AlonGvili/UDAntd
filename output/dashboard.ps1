@@ -46,10 +46,10 @@ function Update-ComponentContentSection {
     }
 
     Set-Item -Path "Cache:CommandDoc" -Value $MDoc
-    Set-Item -Path "Cache:CommandExample" -Value {
+    Set-Item -Path "Cache:CommandExample" -Value @(
         $Example
         New-UDMarkdown -Markdown (CommandApi -InputObject $cmdParams -PassThru)
-    }
+    )
 
 }
 
