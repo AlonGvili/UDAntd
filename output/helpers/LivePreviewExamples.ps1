@@ -14,16 +14,20 @@ $LivePreviewExamplesDB = @{
         [PSCustomObject]@{
             Example = New-UDAntdButton -Id 'button_loading_example' -Icon "setting" -Size large -OnClick {
                 Set-UDElement -Id 'button_loading_example' -Attributes @{loading = $true }
+                Start-Sleep -Seconds 2
+                Set-UDElement -Id 'button_loading_example' -Attributes @{loading = $false }
             } -ButtonType danger -Shape circle -Style @{margin = '16px auto' }
             Code    = "New-UDAntdButton -Id 'button_loading_example' -Icon 'setting' -Size large -OnClick {
                 Set-UDElement -Id 'button_loading_example' -Attributes @{loading = $true}
+                Start-Sleep -Seconds 2
+                Set-UDElement -Id 'button_loading_example' -Attributes @{loading = $false }
              } -ButtonType danger -Shape circle -Style @{margin = '16px auto' }"
         }
         
     )
 
     ButtonGroup = @(
- -Content {}
+
         [PSCustomObject]@{
             Example = New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -ButtonType primary -Label Show -Size large
@@ -33,6 +37,17 @@ $LivePreviewExamplesDB = @{
                 New-UDAntdButton -ButtonType primary -Label Show -Size large
                 New-UDAntdButton -ButtonType primary -Label Hide -Size large
             }"
+        }
+
+        [PSCustomObject]@{
+            Example = New-UDAntdButtonGroup -Content {
+                New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud'
+                New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud-download'
+            } 
+            Code    = "New-UDAntdButtonGroup -Content {
+                New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud'
+                New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud-download'
+            }".TrimStart()
         }
 
     )
