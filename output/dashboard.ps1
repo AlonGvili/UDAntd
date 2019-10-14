@@ -10,6 +10,7 @@ $Theme = Get-UDTheme -Name Default
 $Theme.Definition.Clear()
 $Theme.Definition.Add('.ant-menu-item-group-list .ant-menu-item, .ant-menu-item-group-list .ant-menu-submenu-title',@{padding = '0 16px 0 48px'})
 
+$Root = $PSScriptRoot
 # Helper functions
 function Update-ComponentContentSection {
     param(
@@ -17,7 +18,7 @@ function Update-ComponentContentSection {
         $Example
     )
     # $MarkdownDoc = Invoke-RestMethod "https://udantd.site/AntdDocs/$Doc"
-    $MarkdownDoc = Get-Content -Path "$PSScriptRoot\UniversalDashboard.Antd\Docs\$Doc" -Raw
+    $MarkdownDoc = Get-Content -Path "$Root\UniversalDashboard.Antd\Docs\$Doc" -Raw
 
     $MDoc = New-UDMarkdown -Markdown $MarkdownDoc
     # $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
@@ -209,7 +210,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
     }
     
-} -Theme $Theme -Scripts "$PSScriptRoot\helpers.js"
+} -Theme $Theme 
 
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
