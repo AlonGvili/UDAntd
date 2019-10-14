@@ -42,7 +42,7 @@ function Update-ComponentContentSection {
         }
         else {
             $Example
-            CommandApi -InputObject $cmd
+            New-UDMarkdown -Markdown (CommandApi -InputObject $cmd)
         }
     }
 }
