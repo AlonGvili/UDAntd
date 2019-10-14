@@ -110,6 +110,7 @@ function New-LivePreviewExampleCode {
         }
         codeBlock = @{
             padding         = 16
+            marginTop       = 16
             backgroundColor = '#f5f5f5'
             color           = '#212121'
         }
