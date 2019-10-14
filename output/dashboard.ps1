@@ -1,9 +1,6 @@
-. "$PSScriptRoot\install.modules.ps1"
 Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
-Import-Module UniversalDashboard.Helmet -Force
-Import-Module UniversalDashboard.Markdown -Force
-Import-Module UniversalDashboard.SyntaxHighlighter -Force
-Import-Module PSDocs -Force
+Import-Module "$PSScriptRoot\UniversalDashboard.Markdown\UniversalDashboard.Markdown.psd1" -Force -ErrorAction Stop
+Import-Module "$PSScriptRoot\PSDocs\0.6.3\PSDocs.psd1" -Force -ErrorAction Stop
 
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\styles.ps1
@@ -19,7 +16,7 @@ function Update-ComponentContentSection {
         $Doc,
         $Example
     )
-    $MarkdownDoc = Invoke-RestMethod "https://alongviliud.azurewebsites.net/AntdDocs/$Doc"
+    $MarkdownDoc = Invoke-RestMethod "https://udantd.site/AntdDocs/$Doc"
     $MDoc = New-UDMarkdown -Markdown $MarkdownDoc
     # $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
     # $CmdExample = $Example
@@ -48,7 +45,6 @@ function Update-ComponentContentSection {
     }
 }
 
-$UDSession = New-UDEndpointInitialization -Module @('PSDocs','UniversalDashboard.Markdown','UniversalDashboard.SyntaxHighlighter',"$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1") -Function @('Update-ComponentContentSection','New-UDMarkdown') 
 
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
@@ -212,7 +208,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
     }
     
-} -Theme $Theme -EndpointInitialization $UDSession
+} -Theme $Theme
 
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
