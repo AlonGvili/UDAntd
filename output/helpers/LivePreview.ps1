@@ -54,14 +54,12 @@ function New-LivePreview {
         foreach ($Object in $InputObject) {
             $CardParams = @{
                 # Extra     = ( New-UDAntdButton -Icon "copy" -OnClick { Set-Clipboard -Value $Object.Code } )
-                Bordered  = $true
                 Content   = { 
                     New-LivePreviewExample -Examle $Object.Example
                     New-LivePreviewExampleCode -Code $Object.Code
                 }
                 Style     = @{
                     backgroundColor = '#fff'
-                    border          = '1px solid #f5f5f5'
                     display         = 'flex'
                     flexDirection   = 'column'
                     justifyContent  = 'center'
@@ -111,9 +109,10 @@ function New-LivePreviewExampleCode {
         codeBlock = @{
             padding         = 16
             marginTop       = 16
-            backgroundColor = '#f5f5f5'
-            color           = '#212121'
+            backgroundColor = '#021d38'
+            color           = '#e6f7ff'
             textAlign       = 'start'
+            borderRadius    = 4
         }
     }
     

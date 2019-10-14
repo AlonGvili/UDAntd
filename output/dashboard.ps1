@@ -125,9 +125,11 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     }
                     New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { 
                         $LivePreviewExamplesDB['Button'] | New-LivePreview | Add-LivePreview 
+                        Set-LivePreviewPage
                     }
                     New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { 
                         $LivePreviewExamplesDB['ButtonGroup'] | New-LivePreview | Add-LivePreview
+                        Set-LivePreviewPage
                     }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
@@ -173,7 +175,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             # The section for displaying the command markdown file and the live examples.
             New-UDAntdLayout -Content {
                 New-UDAntdContent -Style $component_content_style -Content {
-                    New-UDAntdLayout -Content {
+                    New-UDAntdLayout -Style @{backgroundColor = '#fff'} -Content {
                         $component_info_header
                         $component_info_content
                     }

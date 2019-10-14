@@ -16,3 +16,10 @@ function New-HelpDoc {
         New-HelpDocNotes -InputObject $Notes
     }
 }   
+
+function New-HelpDocSummery {
+    param(
+        [Parameter()]
+        []$InputObject
+    )
+}

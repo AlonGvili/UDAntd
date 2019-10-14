@@ -1,5 +1,5 @@
 $LivePreviewExamplesDB = @{
-    Button = @(
+    Button      = @(
         
         [PSCustomObject]@{
             Example = New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px auto' }
@@ -34,7 +34,11 @@ New-UDAntdButton -Id 'button_loading_example' -Icon 'setting' -Size large -OnCli
             Example = New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -ButtonType primary -Label Show -Size large
                 New-UDAntdButton -ButtonType primary -Label Hide -Size large
-            } 
+            } -Style @{
+                padding         = 16
+                backgroundColor = '#1890ff33'
+                borderRadius    = 4
+            }
             Code    = "
 New-UDAntdButtonGroup -Content {
     New-UDAntdButton -ButtonType primary -Label Show -Size large
@@ -46,7 +50,11 @@ New-UDAntdButtonGroup -Content {
             Example = New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud'
                 New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud-download'
-            } 
+            } -Style @{
+                padding         = 16
+                backgroundColor = '#1890ff33'
+                borderRadius    = 4
+            }
             Code    = "
 New-UDAntdButtonGroup -Content {
     New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud'
@@ -61,7 +69,11 @@ New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -Label  N
                 New-UDAntdButton -Label  T
                 New-UDAntdButton -Label  D            
-            } 
+            } -Style @{
+                padding         = 16
+                backgroundColor = '#1890ff33'
+                borderRadius    = 4
+            }
             Code    = "
 New-UDAntdButtonGroup -Content {
     New-UDAntdButton -Label  A

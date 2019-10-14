@@ -6,6 +6,7 @@ $content_style = @{
 
 $component_content_style = @{
     padding = '0px 50px 0px 50px' 
+    backgroundColor = '#fff'
 }
 
 $navbar_style = @{
