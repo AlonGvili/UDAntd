@@ -34,8 +34,8 @@ if ($Null -eq (Get-InstalledModule -Name UniversalDashboard.SyntaxHighlighter -E
 }
 
 if ($Null -eq (Get-InstalledModule -Name PSDocs -ErrorAction SilentlyContinue)) {
-    Install-Module -Name PSDocs -Scope CurrentUser -Force;
-    Import-Module PSDocs -Force
+    Install-Module -Name PSDocs -Scope AllUsers -Force;
+    Import-Module PSDocs -Force -Scope Global
 }
 
 # Write-Verbose -Message "Start download the module from github" -Verbose

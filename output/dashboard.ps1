@@ -26,6 +26,16 @@ function Update-ComponentContentSection {
     Set-Item -Path "Cache:CommandDoc" -Value $MDoc
     Set-Item -Path "Cache:CommandExample" -Value $Example
 
+    $cmd = $Doc -replace '(\w+)\.md','$1'
+    Document 'CommandApi' {
+
+        Section 'Command Api' {
+    
+            (gcm $InputObject).Parameters.Values  | Table -Property Name,ParameterType;
+        }
+    }   
+
+    $apiDoc = CommandApi -InputObject $cmd
     $WhatToShow = Get-Item "Cache:ContentToDisplay"
     Set-UDElement -Id 'componentInfoContent' -Content { 
         if ($WhatToShow -eq "showDoc") {
@@ -33,6 +43,7 @@ function Update-ComponentContentSection {
         }
         else {
             $Example
+            $apiDoc
         }
     }
 }
@@ -131,7 +142,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 New-UDAntdMenuItem -Title 'Welcome' -Content { "Welcome" } -OnClick { }
 
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
-                    New-UDAntdMenuItem -Title 'Icon' -Key 'component_icon'  -Content { "Icon" } -OnClick { 
+                    New-UDAntdMenuItem -Title 'Icon' -Key 'component_icon' -InlineIndent 48  -Content { "Icon" } -OnClick { 
                         Update-ComponentContentSection -Doc "New-UDAntdIcon.md" -Example (
                             (Get-Command New-UDAntdIcon).Parameters['Icon'].Attributes.ValidValues | ForEach-Object {
                                 New-UDAntdIcon -Icon $_ -Size 4x -Color '#1a90ff' -Style @{ margin = 16 }
