@@ -1,5 +1,5 @@
 . ."$PSScriptRoot\install.modules.ps1"
-Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
+# Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
 # Import-Module UniversalDashboard.Helmet -Force
 # Import-Module UniversalDashboard.Markdown -Force
 # Import-Module UniversalDashboard.SyntaxHighlighter -Force
@@ -13,7 +13,7 @@ $Theme = Get-UDTheme -Name Default
 $Theme.Definition.Clear()
 $Theme.Definition.Add('.ant-menu-item-group-list .ant-menu-item, .ant-menu-item-group-list .ant-menu-submenu-title',@{padding = '0 16px 0 48px'})
 
-$UDSession = New-UDEndpointInitialization -Module @('PSDocs','UniversalDashboard.Markdown','UniversalDashboard.SyntaxHighlighter') -Function 'New-UDMarkdown'
+$UDSession = New-UDEndpointInitialization -Module @('PSDocs','UniversalDashboard.Markdown','UniversalDashboard.SyntaxHighlighter',"$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1") -Function 'New-UDMarkdown'
 # Helper functions
 function Update-ComponentContentSection {
     param(
@@ -140,7 +140,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         New-UDAntdContent -Style $content_style -Content {
             New-UDAntdMenu -Mode inline -DefaultSelectedKeys @('component_icon') -Style @{width = 256; minWidth = 256 } -Content {
 
-                New-UDAntdMenuItem -Title 'Welcome' -Content { "Welcome" } -OnClick { }
+                New-UDAntdMenuItem -Title 'Welcome' -Style @{padding = 'unset'} -Content { "Welcome" } -OnClick { }
 
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
                     New-UDAntdMenuItem -Title 'Icon' -Key 'component_icon' -InlineIndent 48  -Content { "Icon" } -OnClick { 
