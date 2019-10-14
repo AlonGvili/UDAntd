@@ -8,7 +8,7 @@ Import-Module -Variable * $PSScriptRoot\styles.ps1
 # clear ud theme definition and add new ones.
 $Theme = Get-UDTheme -Name Default
 $Theme.Definition.Clear()
-$Theme.Definition.Add('.ant-menu-item-group-list .ant-menu-item, .ant-menu-item-group-list .ant-menu-submenu-title',@{padding = '0 16px 0 48px'})
+# $Theme.Definition.Add('.ant-menu-item-group-list .ant-menu-item, .ant-menu-item-group-list .ant-menu-submenu-title',@{padding = '0 16px 0 48px'})
 
 $Root = $PSScriptRoot
 # Helper functions
@@ -23,8 +23,6 @@ function Update-ComponentContentSection {
     $MDoc = New-UDMarkdown -Markdown $MarkdownDoc
     # $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
     # $CmdExample = $Example
-    Set-Item -Path "Cache:CommandDoc" -Value $MDoc
-    Set-Item -Path "Cache:CommandExample" -Value $Example
 
     $cmd = $Doc -replace '(\w+)\.md','$1'
     $cmdParams = (GCM $cmd).Parameters.Values
@@ -32,7 +30,7 @@ function Update-ComponentContentSection {
 
         Section 'Command Api' {
     
-            $InputObject  | Table -Property Name,ParameteType;
+            $InputObject  | Table -Property Name,ParameterType;
         }
     }   
 
@@ -46,6 +44,13 @@ function Update-ComponentContentSection {
             New-UDMarkdown -Markdown (CommandApi -InputObject $cmdParams -PassThru)
         }
     }
+
+    Set-Item -Path "Cache:CommandDoc" -Value $MDoc
+    Set-Item -Path "Cache:CommandExample" -Value {
+        $Example
+        New-UDMarkdown -Markdown (CommandApi -InputObject $cmdParams -PassThru)
+    }
+
 }
 
 
