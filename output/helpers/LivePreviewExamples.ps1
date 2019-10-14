@@ -3,7 +3,16 @@ $LivePreviewExamplesDB = @{
         
         [PSCustomObject]@{
             Title   = "BASIC"
-            Example = New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px auto' }
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
+                    New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -Style @{margin = '16px' }
+                    New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px' }
+                    New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType danger -Style @{margin = '16px' }
+                    New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType dashed -Style @{margin = '16px' }
+                    New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType ghost -Style @{margin = '16px' }
+                    New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType link -Style @{margin = '16px' }
+                }
+            )
             Code    = "New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px auto'}"
         }
 
