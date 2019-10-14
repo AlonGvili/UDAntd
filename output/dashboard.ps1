@@ -1,4 +1,4 @@
-. $PSScriptRoot\install.modules.ps1
+. ."$PSScriptRoot\install.modules.ps1"
 Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
 # Import-Module UniversalDashboard.Helmet -Force
 # Import-Module UniversalDashboard.Markdown -Force
@@ -13,6 +13,7 @@ $Theme = Get-UDTheme -Name Default
 $Theme.Definition.Clear()
 $Theme.Definition.Add('.ant-menu-item-group-list .ant-menu-item, .ant-menu-item-group-list .ant-menu-submenu-title',@{padding = '0 16px 0 48px'})
 
+$UDSession = New-UDEndpointInitialization -Module @('PSDocs','UniversalDashboard.Markdown','UniversalDashboard.SyntaxHighlighter') -Function 'New-UDMarkdown'
 # Helper functions
 function Update-ComponentContentSection {
     param(
@@ -209,7 +210,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
     }
     
-} -Theme $Theme
+} -Theme $Theme -EndpointInitialization $UDSession
 
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
