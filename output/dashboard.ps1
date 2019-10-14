@@ -74,36 +74,11 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
                     New-UDAntdIcon -Icon HomeOutline -Size lg 
-                } -OnClick { 
-                    $LoadedModules = Get-Module | Select-Object Name
-                    $InstalledModules = Get-InstalledModule | Select-Object Name
-                    Set-Udelement -Id 'componentInfoContent' -Content {
-                        New-UDAntdCard -Content {
-                            $LoadedModules | ConvertTo-Json
-                        } -Bordered -Style @{padding = 24; marginBottom = 48 }
-
-                        New-UDAntdCard -Content {
-                            $InstalledModules | ConvertTo-Json
-                        } -Bordered -Style @{padding = 24; marginTop = 48 }
-                    }
-
-                }
+                } -OnClick { }
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreOutline -Size lg 
-                } -OnClick { 
-                    $installModules = Get-Module -ListAvailable | Select-Object Name
-                    $EnvVer = dir Env:
-                    Set-Udelement -Id 'componentInfoContent' -Content {
-                        New-UDAntdCard -Content {
-                            $installModules | ConvertTo-Json
-                        } -Bordered -Style @{padding = 24; marginBottom = 48 }
-
-                        New-UDAntdCard -Content {
-                            $EnvVer | ConvertTo-Json
-                        } -Bordered -Style @{padding = 24; marginTop = 48 }
-                    }
-                }
+                } -OnClick { }
 
                 New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
                     New-UDAntdIcon -Icon GithubOutline -Size lg
