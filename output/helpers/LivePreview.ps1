@@ -67,6 +67,7 @@ function New-LivePreview {
                     flexDirection   = 'column'
                     justifyContent  = 'center'
                     alignItems      = 'center'
+                    marginTop       = 48
                 }
             }
 
@@ -96,9 +97,15 @@ function New-LivePreviewExampleCode {
 
     $CodeExample = CodeExample -InputObject $Code -PassThru
     New-UDMarkdown -Markdown $CodeExample -Styles @{ 
-        root = @{
+        root      = @{
             marginTop = 24
             width     = '100%'
+            textAlign = 'center'
+        }
+        codeBlock = @{
+            padding         = 16
+            backgroundColor = '#f5f5f5'
+            color           = '#212121'
         }
     }
     

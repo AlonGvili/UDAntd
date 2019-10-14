@@ -147,13 +147,13 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { 
                         @(
                             [PSCustomObject]@{
-                                Example = New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary
-                                Code    = "New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary"
+                                Example = New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px auto'}
+                                Code    = "New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px auto'}"
                             }
 
                             [PSCustomObject]@{
-                                Example = New-UDAntdButton -Icon "setting" -Size large -OnClick { } -ButtonType primary -Shape circle
-                                Code    = "New-UDAntdButton -Icon 'setting' -Size large -OnClick { } -ButtonType primary -Shape circle"
+                                Example = New-UDAntdButton -Icon "setting" -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto'}
+                                Code    = "New-UDAntdButton -Icon 'setting' -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto'}"
                             }
                         ) | New-LivePreview | Add-LivePreview 
                     }
