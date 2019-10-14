@@ -5,6 +5,7 @@ Import-Module "$PSScriptRoot\PSDocs\0.6.3\PSDocs.psd1" -Force -ErrorAction Stop
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\styles.ps1
 Import-Module -Function * $PSScriptRoot\helpers\LivePreview.ps1
+Import-Module -Variable * $PSScriptRoot\helpers\LivePreviewExamples.ps1
 
 # clear ud theme definition and add new ones.
 $Theme = Get-UDTheme -Name Default
@@ -145,17 +146,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         )
                     }
                     New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { 
-                        @(
-                            [PSCustomObject]@{
-                                Example = New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px auto'}
-                                Code    = "New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px auto'}"
-                            }
-
-                            [PSCustomObject]@{
-                                Example = New-UDAntdButton -Icon "setting" -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto'}
-                                Code    = "New-UDAntdButton -Icon 'setting' -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto'}"
-                            }
-                        ) | New-LivePreview | Add-LivePreview 
+                        $LivePreviewExamplesDB['Button'] | New-LivePreview | Add-LivePreview 
                     }
                     New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { }
                 } 

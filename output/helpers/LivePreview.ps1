@@ -55,7 +55,6 @@ function New-LivePreview {
             $CardParams = @{
                 # Extra     = ( New-UDAntdButton -Icon "copy" -OnClick { Set-Clipboard -Value $Object.Code } )
                 Bordered  = $true
-                Title     = "Live Preview"
                 Content   = { 
                     New-LivePreviewExample -Examle $Object.Example
                     New-LivePreviewExampleCode -Code $Object.Code
