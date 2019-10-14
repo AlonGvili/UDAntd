@@ -54,9 +54,15 @@ function New-LivePreview {
         foreach ($Object in $InputObject) {
             $CardParams = @{
                 # Extra     = ( New-UDAntdButton -Icon "copy" -OnClick { Set-Clipboard -Value $Object.Code } )
+                Title = $Object.Title
                 Content   = { 
                     New-LivePreviewExample -Examle $Object.Example
                     New-LivePreviewExampleCode -Code $Object.Code
+                }
+                headStyle = @{
+                    textAlign = 'start'
+                    fontSize = 48
+                    fontWeight = 900
                 }
                 Style     = @{
                     backgroundColor = '#fff'

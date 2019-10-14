@@ -7,6 +7,10 @@ function New-HelpDoc {
         [Parameter(ValueFromPipelineByPropertyName)]
         [object]$Summery,
         [Parameter(ValueFromPipelineByPropertyName)]
+        [string]$Title,
+        [Parameter(ValueFromPipelineByPropertyName)]
+        [string]$Description,
+        [Parameter(ValueFromPipelineByPropertyName)]
         [object]$Notes
     )
 

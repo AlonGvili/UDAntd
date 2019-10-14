@@ -2,16 +2,23 @@ $LivePreviewExamplesDB = @{
     Button      = @(
         
         [PSCustomObject]@{
+            Title = "BASIC"
             Example = New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px auto' }
             Code    = "New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary -Style @{margin = '16px auto'}"
         }
 
         [PSCustomObject]@{
-            Example = New-UDAntdButton -Icon "setting" -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto' }
+            Title = "SIZE"
+            Example = @(
+                New-UDAntdButton -Icon "setting" -Size small -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto' }
+                New-UDAntdButton -Icon "setting" -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto' }
+                New-UDAntdButton -Icon "setting" -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto' }
+            )
             Code    = "New-UDAntdButton -Icon 'setting' -Size large -OnClick { } -ButtonType primary -Shape circle -Style @{margin = '16px auto'}"
         }
 
         [PSCustomObject]@{
+            Title = "STATE"
             Example = New-UDAntdButton -Id 'button_loading_example' -Icon "setting" -Size large -OnClick {
                 Set-UDElement -Id 'button_loading_example' -Attributes @{loading = $true }
                 Start-Sleep -Seconds 2
@@ -31,12 +38,11 @@ New-UDAntdButton -Id 'button_loading_example' -Icon 'setting' -Size large -OnCli
     ButtonGroup = @(
 
         [PSCustomObject]@{
+            Title = "BASIC"
             Example = New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -ButtonType primary -Label Show -Size large
                 New-UDAntdButton -ButtonType primary -Label Hide -Size large
-            } -Style @{
-                padding         = 16
-            }
+            } -Style @{ padding   = 16 }
             Code    = "
 New-UDAntdButtonGroup -Content {
     New-UDAntdButton -ButtonType primary -Label Show -Size large
@@ -45,6 +51,7 @@ New-UDAntdButtonGroup -Content {
         }
 
         [PSCustomObject]@{
+            Tile = "SIZE"
             Example = New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud'
                 New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud-download'
@@ -60,6 +67,7 @@ New-UDAntdButtonGroup -Content {
         }
 
         [PSCustomObject]@{
+            Title = "STATE"
             Example = New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -Label  A
                 New-UDAntdButton -Label  N
