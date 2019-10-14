@@ -53,14 +53,14 @@ function New-LivePreview {
     process {
         foreach ($Object in $InputObject) {
             $CardParams = @{
-                Extra    = ( New-UDAntdButton -Icon "copy" -OnClick { Set-Clipboard -Value $Object.Code } )
-                Bordered = $true
-                Title    = "Live Preview"
-                Content  = { 
+                # Extra     = ( New-UDAntdButton -Icon "copy" -OnClick { Set-Clipboard -Value $Object.Code } )
+                Bordered  = $true
+                Title     = "Live Preview"
+                Content   = { 
                     New-LivePreviewExample -Examle $Object.Example
                     New-LivePreviewExampleCode -Code $Object.Code
                 }
-                Style    = @{
+                Style     = @{
                     backgroundColor = '#fff'
                     border          = '1px solid #f5f5f5'
                     display         = 'flex'
@@ -69,9 +69,16 @@ function New-LivePreview {
                     alignItems      = 'center'
                     marginTop       = 48
                 }
+                BodyStyle = @{
+                    display       = 'flex'
+                    flexDirection = 'column'
+                    width         = '100%'
+                    padding       = 24
+                    textAlign     = 'center'
+                }
             }
 
-            New-UDAntdCard  @CardParams
+            New-UDAntdCard  @CardParams 
         }
     }
 }
