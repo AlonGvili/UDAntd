@@ -27,11 +27,12 @@ function Update-ComponentContentSection {
     Set-Item -Path "Cache:CommandExample" -Value $Example
 
     $cmd = $Doc -replace '(\w+)\.md','$1'
+    $cmdParams = (GCM $cmd).Parameters.Values
     Document CommandApi {
 
         Section 'Command Api' {
     
-            (gcm $InputObject).Parameters.Values  | Table -Property Name,ParameterType;
+            $InputObject  | Table -Property Name,ParameteType;
         }
     }   
 
@@ -42,7 +43,7 @@ function Update-ComponentContentSection {
         }
         else {
             $Example
-            New-UDMarkdown -Markdown (CommandApi -InputObject $cmd)
+            New-UDMarkdown -Markdown (CommandApi -InputObject $cmdParams -PassThru)
         }
     }
 }
@@ -216,3 +217,14 @@ $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instan
 
 $Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
 Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
+
+
+Document Sample {
+
+    # Set the title for the document
+    Title 'Level 1'
+
+    Section 'Level 2' -Force {
+
+    }
+} 
