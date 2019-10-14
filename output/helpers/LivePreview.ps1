@@ -63,6 +63,8 @@ function New-LivePreview {
                     textAlign = 'start'
                     fontSize = 48
                     fontWeight = 900
+                    width = '100%'
+                    borderBottom = 'unset'
                 }
                 Style     = @{
                     backgroundColor = '#fff'
