@@ -148,7 +148,9 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { 
                         $LivePreviewExamplesDB['Button'] | New-LivePreview | Add-LivePreview 
                     }
-                    New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { 
+                        $LivePreviewExamplesDB['ButtonGroup'] | New-LivePreview | Add-LivePreview
+                    }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
                     New-UDAntdMenuItem -Title 'Badge'  -Content { "Badge" } -OnClick { }

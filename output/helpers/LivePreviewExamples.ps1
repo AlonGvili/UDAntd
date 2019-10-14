@@ -21,4 +21,19 @@ $LivePreviewExamplesDB = @{
         }
         
     )
+
+    ButtonGroup = @(
+ -Content {}
+        [PSCustomObject]@{
+            Example = New-UDAntdButtonGroup -Content {
+                New-UDAntdButton -ButtonType primary -Label Show -Size large
+                New-UDAntdButton -ButtonType primary -Label Hide -Size large
+            } 
+            Code    = "New-UDAntdButtonGroup -Content {
+                New-UDAntdButton -ButtonType primary -Label Show -Size large
+                New-UDAntdButton -ButtonType primary -Label Hide -Size large
+            }"
+        }
+
+    )
 }
