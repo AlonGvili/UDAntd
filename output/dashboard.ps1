@@ -16,7 +16,9 @@ function Update-ComponentContentSection {
         $Doc,
         $Example
     )
-    $MarkdownDoc = Invoke-RestMethod "https://udantd.site/AntdDocs/$Doc"
+    # $MarkdownDoc = Invoke-RestMethod "https://udantd.site/AntdDocs/$Doc"
+    $MarkdownDoc = Get-Content -Path "$PSScriptRoot\UniversalDashboard.Antd\Docs\$Doc" -Raw
+
     $MDoc = New-UDMarkdown -Markdown $MarkdownDoc
     # $CmdExample = New-UDSyntaxHighlighter -Language powershell -Style github -Code "$($Example)" 
     # $CmdExample = $Example
@@ -24,7 +26,7 @@ function Update-ComponentContentSection {
     Set-Item -Path "Cache:CommandExample" -Value $Example
 
     $cmd = $Doc -replace '(\w+)\.md','$1'
-    Document 'CommandApi' {
+    Document CommandApi {
 
         Section 'Command Api' {
     
@@ -32,7 +34,6 @@ function Update-ComponentContentSection {
         }
     }   
 
-    $apiDoc = CommandApi -InputObject $cmd
     $WhatToShow = Get-Item "Cache:ContentToDisplay"
     Set-UDElement -Id 'componentInfoContent' -Content { 
         if ($WhatToShow -eq "showDoc") {
@@ -40,7 +41,7 @@ function Update-ComponentContentSection {
         }
         else {
             $Example
-            $apiDoc
+            CommandApi -InputObject $cmd
         }
     }
 }
@@ -208,9 +209,9 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
     }
     
-} -Theme $Theme
+} -Theme $Theme -Scripts "$PSScriptRoot\helpers.js"
 
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
 $Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
-Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder
+Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
