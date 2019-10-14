@@ -46,15 +46,6 @@ function Update-ComponentContentSection {
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
-    # New-UDHelmet -Content {
-    #     New-UDHtmlTag -Tag 'script' -Content {
-    #         let udTheme = document.querySelectorAll(
-    #             'link[href="/api/internal/dashboard/theme"]'
-    #         );
-    #         udTheme[0].disabled = true
-    #     }
-    # }
-
     # web app reused components
     New-UDAntdDrawer -Id 'reused_drawer_right' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
     New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
@@ -66,16 +57,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             New-UDAntdRadioButton -Content { "Show-Preview" } -Value "showExample" 
         } -OnChange {
             Set-Item -Path "Cache:ContentToDisplay" -Value $EventData
-            $WhatToShow = Get-Item -Path "Cache:ContentToDisplay"
-        
-            if ($WhatToShow -eq "showDoc") {
-                $Doc = Get-Item -Path "Cache:CommandDoc"
-                Set-UDElement -Id 'componentInfoContent' -Content { $Doc }
-            }
-            elseif ($WhatToShow -eq "showExample") {
-                $Example = Get-Item -Path "Cache:CommandExample"
-                Set-UDElement -Id 'componentInfoContent' -Content { Get-LivePreview }
-            }
+            Set-LivePreviewPage
         } 
     }
 
@@ -139,11 +121,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
                     New-UDAntdMenuItem -Title 'Icon' -Key 'component_icon' -InlineIndent 48  -Content { "Icon" } -OnClick { 
-                        Update-ComponentContentSection -Doc "New-UDAntdIcon.md" -Example (
-                            (Get-Command New-UDAntdIcon).Parameters['Icon'].Attributes.ValidValues | ForEach-Object {
-                                New-UDAntdIcon -Icon $_ -Size 4x -Color '#1a90ff' -Style @{ margin = 16 }
-                            } 
-                        )
+
                     }
                     New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { 
                         $LivePreviewExamplesDB['Button'] | New-LivePreview | Add-LivePreview 

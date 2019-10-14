@@ -113,20 +113,9 @@ function New-LivePreviewExampleCode {
             marginTop       = 16
             backgroundColor = '#f5f5f5'
             color           = '#212121'
+            textAlign       = 'start'
         }
     }
     
 }
 
-
-# @(
-#     [PSCustomObject]@{
-#         Example = New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary
-#         Code    = "New-UDAntdButton -Label SUBMIT -Size large -OnClick { } -ButtonType primary"
-#     }
-
-#     [PSCustomObject]@{
-#         Example = New-UDAntdButton -Icon "setting" -Size large -OnClick { } -ButtonType primary -Shape circle
-#         Code    = "New-UDAntdButton -Icon 'setting' -Size large -OnClick { } -ButtonType primary -Shape circle"
-#     }
-# ) | New-LivePreview | Add-LivePreview -PassThru
