@@ -43,7 +43,7 @@ $header_componentInfo_style = @{
 }
 
 $layout_style = @{
-    backgroundColor = '#1A90FF' 
+    backgroundColor = '#1890ff33' 
 }
 
 $code_style = @{

@@ -36,8 +36,6 @@ New-UDAntdButton -Id 'button_loading_example' -Icon 'setting' -Size large -OnCli
                 New-UDAntdButton -ButtonType primary -Label Hide -Size large
             } -Style @{
                 padding         = 16
-                backgroundColor = '#1890ff33'
-                borderRadius    = 4
             }
             Code    = "
 New-UDAntdButtonGroup -Content {
@@ -52,8 +50,6 @@ New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud-download'
             } -Style @{
                 padding         = 16
-                backgroundColor = '#1890ff33'
-                borderRadius    = 4
             }
             Code    = "
 New-UDAntdButtonGroup -Content {
@@ -71,8 +67,6 @@ New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -Label  D            
             } -Style @{
                 padding         = 16
-                backgroundColor = '#1890ff33'
-                borderRadius    = 4
             }
             Code    = "
 New-UDAntdButtonGroup -Content {
