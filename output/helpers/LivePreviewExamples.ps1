@@ -1,5 +1,5 @@
 $LivePreviewExamplesDB = @{
-    Icon = @(
+    Icon        = @(
         [PSCustomObject]@{
             Title   = "OUTLINE"
             Example = @(
@@ -60,6 +60,22 @@ $LivePreviewExamplesDB = @{
             Code    = '
 (Get-Command new-udantdicon).Parameters["size"].Attributes.ValidValues | ForEach-Object {
     New-UDAntdIcon -Icon CodeOutline -Size $_ -Style @{ margin = 16 } -Color "#1890ff"
+}
+'
+        }
+
+        [PSCustomObject]@{
+            Title   = "EVENT"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify center -Flex -Gutter 48 -Content {
+                    New-UDAntdIcon -Id 'DemoIcon' -Icon CodeFill -Size 4x -Style @{ margin = 16 } -Color '#1890ff' -OnClick {
+                        Set-UDElement -Id 'DemoIcon' -Attributes @{icon = 'CodeTwoTone'; isTwoTone = $true; primaryColor = '#ffc107' }
+                    }
+                }
+            )
+            Code    = '
+New-UDAntdIcon -Id "DemoIcon" -Icon CodeFill -Size 4x -Style @{ margin = 16 } -Color "#1890ff" -OnClick {
+    Set-UDElement -Id "DemoIcon" -Attributes @{icon = "CodeTwoTone"; isTwoTone = $true; primaryColor = "#ffc107" }
 }
 '
         }
@@ -175,21 +191,21 @@ New-UDAntdButtonGroup -Content {
 
     )
 
-    Input = @(
+    Input       = @(
 
         [PSCustomObject]@{
             Title   = "ENDPOINT"
             Example = @(
-                New-UDAntdInput -Id 'demoInput' -size large -PlaceHolder 'Test for endpoint' -onChange {} -OnPressEnter {
-                param($text)
+                New-UDAntdInput -Id 'demoInput' -size large -PlaceHolder 'Test for endpoint' -onChange { } -OnPressEnter {
+                    param($text)
 
-                Show-UDToast -Message $text
+                    Show-UDToast -Message $text
                 }
 
-                New-UDAntdInput -Id 'demoInput1' -size large -PlaceHolder 'Test for endpoint' -onChange {} -OnPressEnter {
-                param($args)
+                New-UDAntdInput -Id 'demoInput1' -size large -PlaceHolder 'Test for endpoint' -onChange { } -OnPressEnter {
+                    param($args)
 
-                Show-UDToast -Message $args[1]
+                    Show-UDToast -Message $args[1]
                 }
             )
             Code    = '

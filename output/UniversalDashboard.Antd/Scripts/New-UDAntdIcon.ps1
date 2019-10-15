@@ -776,7 +776,7 @@ function New-UDAntdIcon {
             primaryColor   = $PrimaryColor
             secondaryColor = $SecondaryColor
             style          = $Style
-            onClickEvent = $OnClick
+            hasCallback = $null -ne $OnClick
         }
 
     }
