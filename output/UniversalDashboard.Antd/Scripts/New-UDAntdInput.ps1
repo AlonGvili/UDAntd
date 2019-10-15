@@ -34,7 +34,8 @@ function New-UDAntdInput {
 
         if ($null -ne $OnPressEnter) {
             if ($OnPressEnter -is [scriptblock]) {
-                $OnPressEnterEndpoint = New-UDEndpoint -Endpoint $OnPressEnter -Id ($Id + "onPressEnter")
+                $OnPressEnterEndpoint = New-UDEndpoint -Endpoint $OnPressEnter -Id $Id  
+                # $OnPressEnterEndpoint
             }
             elseif ($OnPressEnter -isnot [UniversalDashboard.Models.Endpoint]) {
                 throw "OnPressEnter must be a script block or UDEndpoint"
@@ -59,6 +60,7 @@ function New-UDAntdInput {
             disabled = $Disabled.IsPresent
             allowClear = $AllowClear.IsPresent
             size = $Size
+            hasCallback = $null -ne $OnPressEnter
             prefix = $Prefix
             suffix = $Suffix
             addonBefore = $AddonBefore

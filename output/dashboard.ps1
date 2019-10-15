@@ -4,83 +4,39 @@ Import-Module "$PSScriptRoot\PSDocs\0.6.3\PSDocs.psd1" -Force -ErrorAction Stop
 
 # import webapp styles variables
 Import-Module -Variable * $PSScriptRoot\styles.ps1
+Import-Module -Variable * $PSScriptRoot\helpers\ReusedComponent.ps1
 Import-Module -Function * $PSScriptRoot\helpers\LivePreview.ps1
 Import-Module -Variable * $PSScriptRoot\helpers\LivePreviewExamples.ps1
 
 # clear ud theme definition and add new ones.
 $Theme = Get-UDTheme -Name Default
 $Theme.Definition.Clear()
-# $Theme.Definition.Add('.ant-menu-item-group-list .ant-menu-item, .ant-menu-item-group-list .ant-menu-submenu-title',@{padding = '0 16px 0 48px'})
 
 $Root = $PSScriptRoot
 # Helper functions
-function Update-ComponentContentSection {
-    param(
-        $Doc,
-        $Example,
-        $ExampleCode
-    )
-    # $MarkdownDoc = Invoke-RestMethod "https://udantd.site/AntdDocs/$Doc"
-    $MarkdownDoc = Get-Content -Path "$Root\UniversalDashboard.Antd\Docs\$Doc" -Raw
-
-    $MDoc = New-UDMarkdown -Markdown $MarkdownDoc
-
-    $WhatToShow = Get-Item "Cache:ContentToDisplay"
-    Set-UDElement -Id 'componentInfoContent' -Content { 
-        if ($WhatToShow -eq "showDoc") {
-            $MDoc
-        }
-        else {
-            Set-LivePreviewPage
-        }
-    }
-
-    Set-Item -Path "Cache:CommandDoc" -Value $MDoc
-    Set-Item -Path "Cache:CommandExample" -Value @(
-        Set-LivePreviewPage
-    )
-
-}
-
-
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
-    # web app reused components
-    New-UDAntdDrawer -Id 'reused_drawer_right' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
-    New-UDAntdPopover -Id 'reused_popover_top' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
     
-    $component_info_header = New-UDAntdHeader -Style $header_componentInfo_style -Content {
-        New-UDAntdRadioGroup -Size small -ButtonStyle outline -Value "showDoc" -Content {
-            Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
-            New-UDAntdRadioButton -Content { "Get-Help" } -Value "showDoc" 
-            New-UDAntdRadioButton -Content { "Show-Preview" } -Value "showExample" 
-        } -OnChange {
-            Set-Item -Path "Cache:ContentToDisplay" -Value $EventData
-            Set-LivePreviewPage
-        } 
-    }
-
-    $component_info_content = New-UDAntdContent -Id 'componentInfoContent' -Content { } -Style @{ paddingBottom = 50 } 
 
     # web app main layout
-    New-UDAntdLayout -Id 'mainLayout' -Style $layout_style -Content {
+    New-UDAntdLayout -Id 'mainLayout' -Style $WebAppStyles['Webapp'] -Content {
 
         # web app top header
-        New-UDAntdHeader -Id 'mainHeader' -Style $header_style -Content {
+        New-UDAntdHeader -Id 'mainHeader' -Style $WebAppStyles['Header'] -Content {
 
             # web app top navbar
-            New-UDAntdMenu -Id 'mainNavbar' -Style $navbar_style -Content {
+            New-UDAntdMenu -Id 'mainNavbar' -Style $WebAppStyles['NavBar'] -Content {
 
-                New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
+                New-UDAntdMenuItem -Style $WebAppStyles['NavBarItem'] -Title Components -Content {
                     New-UDAntdIcon -Icon HomeOutline -Size lg 
                 } -OnClick { }
 
-                New-UDAntdMenuItem -Style $navbar_item_style -Title Components -Content {
+                New-UDAntdMenuItem -Style $WebAppStyles['NavBarItem'] -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreOutline -Size lg 
                 } -OnClick { }
 
-                New-UDAntdMenuItem -Style $navbar_item_style -Title Test -Content {
+                New-UDAntdMenuItem -Style $WebAppStyles['NavBarItem'] -Title Test -Content {
                     New-UDAntdIcon -Icon GithubOutline -Size lg
                 } -OnClick { Invoke-UDRedirect -Url https://github.com/AlonGvili/UDAntd -OpenInNewWindow }
             
@@ -89,16 +45,16 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         }  
 
         # web app content
-        New-UDAntdContent -Style $content_style -Content {
-            New-UDAntdMenu -Mode inline -DefaultSelectedKeys @('component_icon') -Style @{width = 256; minWidth = 256 } -Content {
+        New-UDAntdContent -Style $WebAppStyles['Content'] -Content {
 
-                New-UDAntdMenuItem -Title 'Welcome' -Style @{padding = 'unset' } -Content { "Welcome" } -OnClick { }
+            New-UDAntdMenu -Mode inline -DefaultSelectedKeys 'component_button' -Style @{width = 256; minWidth = 256 } -Content {
 
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
-                    New-UDAntdMenuItem -Title 'Icon' -Key 'component_icon' -InlineIndent 48  -Content { "Icon" } -OnClick { 
-
+                    New-UDAntdMenuItem -Id 'component_icon' -Title 'Icon'  -Content { "Icon" } -OnClick { 
+                        $LivePreviewExamplesDB['Icon'] | New-LivePreview | Add-LivePreview 
+                        Set-LivePreviewPage
                     }
-                    New-UDAntdMenuItem -Title 'Button'  -Content { "Button" } -OnClick { 
+                    New-UDAntdMenuItem -Id 'component_button' -Title 'Button'  -Content { "Button" } -OnClick { 
                         $LivePreviewExamplesDB['Button'] | New-LivePreview | Add-LivePreview 
                         Set-LivePreviewPage
                     }
@@ -120,39 +76,26 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     New-UDAntdMenuItem -Title 'Menu'  -Content { "Menu" } -OnClick { }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
-                    New-UDAntdMenuItem -Title 'Radio'  -Content { "Radio" } -OnClick { 
-                        Update-ComponentContentSection -Doc "New-UDAntdRadio.md" -Example (
-                            New-UDAntdRadioGroup -Content {
-                                New-UDAntdRadio -Content { "Ant-design" } -Value "antd"
-                                New-UDAntdRadio -Content { "Material-ui" } -Value "mui"
-                                New-UDAntdRadio -Content { "MaterializeCss" } -Value "mcss"
-                            } -DefaultValue "antd" -OnChange { Show-UDToast -Message "$EventData was selected!" }
-                        )
-                    } 
+                    New-UDAntdMenuItem -Title 'Radio'  -Content { "Radio" } -OnClick { } 
                     New-UDAntdMenuItem -Title 'Radio Group'  -Content { "Radio Group" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Switch'  -Content { "Switch" } -OnClick { 
-                        Update-ComponentContentSection -Doc "New-UDAntdSwitch.md" -Example (
-                            New-UDAntdSwitch -checkedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -unCheckedChildren (New-UDAntdIcon -Icon ChromeOutline -Size sm ) -size default
-                        )
-                    }
+                    New-UDAntdMenuItem -Title 'Switch'  -Content { "Switch" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Input'  -Content { "Input" } -OnClick { 
-                        Update-ComponentContentSection -Doc "New-UDAntdInput.md" -Example (New-UDAntdInput -Placeholder "user name") -ExampleCode "New-UDAntdInput -Placeholder 'user name'"
+                        $LivePreviewExamplesDB['Input'] | New-LivePreview | Add-LivePreview 
+                        Set-LivePreviewPage
                     }
-                    New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick {
-                        Update-ComponentContentSection -Doc "New-UDAntdInputTextArea.md" -Example (New-UDAntdInputTextArea -OnPressEnter { } -Autosize) -ExampleCode "New-UDAntdInputTextArea -OnPressEnter { } -Autosize"
-                    }
-                    New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick {
-                        Update-ComponentContentSection -Doc "New-UDAntdInputPassword.md" -Example (New-UDAntdInputPassword -PlaceHolder "Current password" -VisibilityToggle)
-                    }
+                    New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick {}
+                    
+                    New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick {}
+                    
                 } 
             }
 
             # The section for displaying the command markdown file and the live examples.
             New-UDAntdLayout -Content {
-                New-UDAntdContent -Style $component_content_style -Content {
+                New-UDAntdContent -Style $WebAppStyles['ComponentContentSectionBody'] -Content {
                     New-UDAntdLayout -Style @{backgroundColor = '#fff'} -Content {
-                        $component_info_header
-                        $component_info_content
+                        $ComponentContentSwitch
+                        $ComponentContentSection
                     }
                 }
             }
@@ -165,5 +108,6 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
 $Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
-Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
+# Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
+Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1002 
 

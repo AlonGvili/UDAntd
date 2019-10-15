@@ -1,69 +1,96 @@
-$content_style = @{
-    margin          = '128px 50px 50px 50px'; 
-    backgroundColor = '#fff' 
-    display         = 'flex'
-}
 
-$component_content_style = @{
-    padding = '0px 50px 0px 50px' 
-    backgroundColor = '#fff'
-}
+# All the webapp styles
+$WebAppStyles = @{
 
-$navbar_style = @{
-    height    = 64; 
-    display   = 'flex'; 
-    boxShadow = 'unset' 
-} 
+    ComponentContentSection       = @{
+        paddingBottom = 50 
+    }
 
-$navbar_item_style = @{
-    display    = 'flex'; 
-    alignItems = 'center' 
-}
+    ComponentContentSectionHeader = @{
+        marginBottom    = 50; 
+        padding         = 0
+        width           = '100%'; 
+        backgroundColor = 'transparent'
+        alignItems      = 'center'; 
+        display         = 'flex'; 
+        justifyContent  = 'flex-end' 
+    }
 
-$header_style = @{
-    marginBottom    = 50; 
-    position        = 'fixed';  
-    width           = '100%'; 
-    backgroundColor = '#ffffff'
-    zIndex          = 9999; 
-    alignItems      = 'center'; 
-    display         = 'flex'; 
-    justifyContent  = 'space-between' 
-    boxShadow       = '0 2px 8px rgba(0, 0, 0, 0.15)'
-}
+    ComponentContentSectionBody   = @{
+        padding         = '0px 50px 0px 50px' 
+        backgroundColor = '#fff'
+    }
 
-$header_componentInfo_style = @{
-    marginBottom    = 50; 
-    padding         = 0
-    width           = '100%'; 
-    backgroundColor = 'transparent'
-    alignItems      = 'center'; 
-    display         = 'flex'; 
-    justifyContent  = 'flex-end' 
-}
+    WebApp                        = @{
+        backgroundColor = '#1890ff33'
+    }
 
-$layout_style = @{
-    backgroundColor = '#1890ff33' 
-}
+    Header                        = @{
+        marginBottom    = 50; 
+        position        = 'fixed';  
+        width           = '100%'; 
+        backgroundColor = '#ffffff'
+        zIndex          = 9999; 
+        alignItems      = 'center'; 
+        display         = 'flex'; 
+        justifyContent  = 'space-between' 
+        boxShadow       = '0 2px 8px rgba(0, 0, 0, 0.15)'
+    }
 
-$code_style = @{
-    backgroundColor = '#2196F3'; 
-    border          = '1px solid #18639f'; 
-    color           = '#ffffff'; 
-    justifyContent  = 'center'; 
-    alignItems      = 'center' 
-}
+    NavBar                        = @{
+        height    = 64; 
+        display   = 'flex'; 
+        boxShadow = 'unset' 
+    }
 
-$code_header_style = @{ 
-    display        = 'flex'; 
-    justifyContent = 'center'; 
-    alignItems     = 'center' 
-}
+    NavBarItem                    = @{
+        display    = 'flex'; 
+        alignItems = 'center' 
+    }
 
-$component_menu_item_style = @{
-    paddingLeft = 48
-}
+    Content                       = @{
+        margin          = '128px 50px 50px 50px'; 
+        backgroundColor = '#fff' 
+        display         = 'flex'
+    }
 
-$component_menu_group_style = @{
-    paddingLeft = 24
+    LivePreviewStyle              = @{
+        backgroundColor = '#fff'
+        display         = 'flex'
+        flexDirection   = 'column'
+        justifyContent  = 'center'
+        alignItems      = 'center'
+        marginTop       = 48
+    }
+
+    LivePreviewHeadStyle          = @{
+        textAlign    = 'start'
+        fontSize     = 48
+        fontWeight   = 900
+        width        = '100%'
+        borderBottom = 'unset'
+    }
+
+    LivePreviewBodyStyle          = @{
+        display       = 'flex'
+        flexDirection = 'column'
+        width         = '100%'
+        padding       = 24
+        textAlign     = 'center'
+    }
+
+    LivePreviewExampleCodeRoot    = @{
+        marginTop = 24
+        width     = '100%'
+        textAlign = 'center'
+    }
+
+    LivePreviewExampleCodeBlock   = @{
+        padding         = 16
+        marginTop       = 16
+        backgroundColor = '#021d38'
+        color           = '#e6f7ff'
+        textAlign       = 'start'
+        borderRadius    = 4
+    }
 }

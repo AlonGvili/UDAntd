@@ -13,7 +13,7 @@ function New-UDAntdMenu {
         [Parameter()]
         [string[]]$DefaultOpenKeys,
         [Parameter()]
-        [string[]]$DefaultSelectedKeys,
+        [string]$DefaultSelectedKeys,
         [Parameter()]
         [scriptblock]$Content,
         [Parameter()]

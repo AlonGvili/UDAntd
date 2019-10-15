@@ -24,6 +24,6 @@ function New-HelpDoc {
 function New-HelpDocSummery {
     param(
         [Parameter()]
-        []$InputObject
+        [object]$InputObject
     )
 }
