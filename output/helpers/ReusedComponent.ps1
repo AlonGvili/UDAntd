@@ -4,7 +4,7 @@ $ComponentContentSwitch = New-UDAntdHeader -Style $WebAppStyles['ComponentConten
         New-UDAntdRadioButton -Content { "Get-Help" } -Value "showDoc" 
         New-UDAntdRadioButton -Content { "Show-Preview" } -Value "showExample" 
         New-UDAntdRadioButton -Content { "Open-PlayGround" } -Value "showPlayground" 
-        Set-LivePreviewPage
+        # Set-LivePreviewPage
     } -OnChange {
         Set-Item -Path "Cache:ContentToDisplay" -Value $EventData
         Set-LivePreviewPage
