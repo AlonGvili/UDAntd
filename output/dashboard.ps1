@@ -25,13 +25,13 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         New-UDAntdHeader -Id 'mainHeader' -Style $WebAppStyles['Header'] -Content {
 
             # web app top navbar
-            New-UDAntdMenu -Id 'mainNavbar' -Style $WebAppStyles['NavBar'] -Content {
+            New-UDAntdMenu -Id 'mainNavbar' -DefaultSelectedKeys 'components' -Style $WebAppStyles['NavBar'] -Content {
 
                 New-UDAntdMenuItem -Style $WebAppStyles['NavBarItem'] -Title Components -Content {
                     New-UDAntdIcon -Icon HomeOutline -Size lg 
                 } -OnClick { }
 
-                New-UDAntdMenuItem -Style $WebAppStyles['NavBarItem'] -Title Components -Content {
+                New-UDAntdMenuItem -Id 'components' -Style $WebAppStyles['NavBarItem'] -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreOutline -Size lg 
                 } -OnClick { }
 
@@ -47,7 +47,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         # web app content
         New-UDAntdContent -Style $WebAppStyles['Content'] -Content {
     
-            New-UDAntdMenu -Mode inline -DefaultSelectedKeys 'component_icon' -Style @{width = 256; minWidth = 256 } -Content {
+            New-UDAntdMenu -Mode inline -Style @{width = 256; minWidth = 256 } -Content {
 
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
                     New-UDAntdMenuItem -Id 'component_icon' -Title 'Icon'  -Content { "Icon" } -OnClick { 
