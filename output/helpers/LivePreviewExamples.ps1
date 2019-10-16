@@ -154,7 +154,7 @@ New-UDAntdButtonGroup -Content {
         }
 
         [PSCustomObject]@{
-            Tile    = "SIZE"
+            Title    = "SIZE"
             Example = New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud'
                 New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud-download'
@@ -194,27 +194,19 @@ New-UDAntdButtonGroup -Content {
     Input       = @(
 
         [PSCustomObject]@{
-            Title   = "ENDPOINT"
+            Title   = "BASIC"
             Example = @(
                 New-UDAntdInput -Id 'demoInput' -size large -PlaceHolder 'Test for endpoint' -onChange { } -OnPressEnter {
-                    param($text)
-
-                    Show-UDToast -Message $text
-                }
-
-                New-UDAntdInput -Id 'demoInput1' -size large -PlaceHolder 'Test for endpoint' -onChange { } -OnPressEnter {
-                    param($args)
-
-                    Show-UDToast -Message $args[1]
+                    Show-UDToast -Message $body
                 }
             )
             Code    = '
-            New-UDAntdInput -Id "demoInput" -size large -PlaceHolder "Test for endpoint" -onChange {} -OnPressEnter {
-                param($InputText)
-
-                Show-UDToast -Message $InputText
-            }
-'
+            New-UDAntdInput -Id "demoInput" -size large -PlaceHolder "Test for endpoint" -OnPressEnter {
+                Show-UDToast -Message $body
+            }'
+        Notes = @(
+                '>For now you MUST used the ```$Body``` variable inside OnPressEnter scriptblock, when you press enter this variable will store the input value.'
+            )
         }
     )
 }

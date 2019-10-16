@@ -16,9 +16,9 @@ $Root = $PSScriptRoot
 # Helper functions
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
+    Set-Item "Cache:ContentToDisplay" -Value "showDoc" -Force
 
-    
-
+    # Sync-UDElement -Id 'ComponentContentSection'
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $WebAppStyles['Webapp'] -Content {
 
@@ -44,10 +44,11 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
         
         }  
 
+    
         # web app content
         New-UDAntdContent -Style $WebAppStyles['Content'] -Content {
-
-            New-UDAntdMenu -Mode inline -DefaultSelectedKeys 'component_button' -Style @{width = 256; minWidth = 256 } -Content {
+    
+            New-UDAntdMenu -Mode inline -DefaultSelectedKeys 'component_icon' -Style @{width = 256; minWidth = 256 } -Content {
 
                 New-UDAntdMenuItemGroup -Title 'General' -Content {
                     New-UDAntdMenuItem -Id 'component_icon' -Title 'Icon'  -Content { "Icon" } -OnClick { 
@@ -83,9 +84,9 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         $LivePreviewExamplesDB['Input'] | New-LivePreview | Add-LivePreview 
                         Set-LivePreviewPage
                     }
-                    New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick {}
+                    New-UDAntdMenuItem -Title 'Text Area'  -Content { "Text Area" } -OnClick { }
                     
-                    New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick {}
+                    New-UDAntdMenuItem -Title 'Password Box'  -Content { "Password Box" } -OnClick { }
                     
                 } 
             }
@@ -93,9 +94,9 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             # The section for displaying the command markdown file and the live examples.
             New-UDAntdLayout -Content {
                 New-UDAntdContent -Style $WebAppStyles['ComponentContentSectionBody'] -Content {
-                    New-UDAntdLayout -Style @{backgroundColor = '#fff'} -Content {
+                    New-UDAntdLayout -Style @{backgroundColor = '#fff' } -Content {
                         $ComponentContentSwitch
-                        $ComponentContentSection
+                        $ComponentContentSection                                     
                     }
                 }
             }
@@ -108,6 +109,6 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
 $Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
-Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
-# Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1002 
+# Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
+Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1002 
 

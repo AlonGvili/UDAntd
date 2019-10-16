@@ -58,13 +58,22 @@ function New-LivePreview {
                 Content   = { 
                     New-LivePreviewExample -Examle $Object.Example
                     New-LivePreviewExampleCode -Code $Object.Code
+                    New-UDAntdCopyToClipboard -Shape circle -Size large -Icon "copy" -ButtonType primary -TextToCopy $Object.Code -Style @{
+                        position = 'absolute'
+                        right = 15
+                        bottom = 25
+                        zIndex = 20;
+                    }
                 }
                 headStyle = $WebAppStyles['LivePreviewHeadStyle']
                 Style     = $WebAppStyles['LivePreviewStyle']
                 BodyStyle = $WebAppStyles['LivePreviewBodyStyle']
             }
 
-            New-UDAntdCard  @CardParams 
+            New-UDAntdCard  @CardParams
+            if($Object.Notes){
+                New-LivePreviewNotes -Notes $Object.Notes
+            }
         }
     }
 }
@@ -93,6 +102,43 @@ function New-LivePreviewExampleCode {
         root      = $WebAppStyles['LivePreviewExampleCodeRoot']
         codeBlock = $WebAppStyles['LivePreviewExampleCodeBlock']
     }
+
     
 }
 
+function New-LivePreviewNotes {
+    param (
+        [Parameter()]
+        [string[]]$Notes
+    )
+
+    # Document NotesExample {
+    #     $InputObject | BlockQuote 
+    # }   
+
+    foreach ($Note in $Notes) {
+        # $NoteExample = NotesExample -InputObject $Note -PassThru
+        New-UDMarkdown -Markdown $Note -Styles @{
+            blockquote = @{
+                color           = '#000000a6'; 
+                borderLeft      = '4px solid #2196F3'; 
+                backgroundColor = '#f5f5f5'; 
+                borderRadius    = 0
+                textAlign       = 'start'
+                margin = '0 24px'
+            }
+            p          = @{
+                padding = 16
+                margin  = 0
+            }
+            inlinecode = @{
+                color           = "#fff"
+                backgroundColor = "#1890ff"
+                padding         = "4px 8px"
+                margin          = "0 4px"
+                borderRadius    = 2
+            }
+        }
+    }
+
+}

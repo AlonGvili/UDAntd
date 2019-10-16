@@ -10,6 +10,6 @@ $ComponentContentSwitch = New-UDAntdHeader -Style $WebAppStyles['ComponentConten
     } 
 }
 
-$ComponentContentSection = New-UDAntdContent -Id 'ComponentContentSection' -Content { } -Style $WebAppStyles['ComponentContentSection']
+$ComponentContentSection = New-UDAntdContent -Id 'ComponentContentSection' -Content {} -Style $WebAppStyles['ComponentContentSection']
 $DrawerRight = New-UDAntdDrawer -Id 'DrawerRight' -Title Antd -Placement right -Content { } -Closable -Width 600 -MaskClosable 
 $PopoverTop = New-UDAntdPopover -Id 'PopoverTop' -Title { 'AntdPopover' } -Placement top -Content { } -Children { } 
