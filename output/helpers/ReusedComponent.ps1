@@ -1,6 +1,6 @@
 $ComponentContentSwitch = New-UDAntdHeader -Style $WebAppStyles['ComponentContentSectionHeader'] -Content {
-    New-UDAntdRadioGroup -Size default -ButtonStyle outline -Value "showDoc" -Content {
-        Set-Item -Path "Cache:ContentToDisplay" -Value "showDoc"
+    New-UDAntdRadioGroup -Size default -ButtonStyle outline -Value "showExample" -Content {
+        Set-Item -Path "Cache:ContentToDisplay" -Value "showExample"
         New-UDAntdRadioButton -Content { "Get-Help" } -Value "showDoc" 
         New-UDAntdRadioButton -Content { "Show-Preview" } -Value "showExample" 
         New-UDAntdRadioButton -Content { "Open-PlayGround" } -Value "showPlayground" 

@@ -16,7 +16,6 @@ $Root = $PSScriptRoot
 # Helper functions
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
-    Set-Item "Cache:ContentToDisplay" -Value "showDoc" -Force
 
     # Sync-UDElement -Id 'ComponentContentSection'
     # web app main layout
