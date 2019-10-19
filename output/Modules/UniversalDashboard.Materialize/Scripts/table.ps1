@@ -46,7 +46,7 @@ function New-UDTable {
 		New-UDElement -Tag "div" -Attributes @{
 			className = 'card-content'
 		} -Content {
-			New-UDElement -Tag 'span' -Content { $Title }
+			New-UDElement -Tag 'span' -Content { $Title } -Attributes @{ className="card-title"}
 			New-UDElement -Tag 'table' -Content {
 				New-UDElement -Tag 'thead' -Content {
 					New-UDElement -Tag 'tr' -Content {
@@ -60,7 +60,7 @@ function New-UDTable {
 					New-UDElement -Tag 'tbody' -Content $Content
 				}
 				else {
-					New-UDElement -Tag 'tbody' -Endpoint $Endpoint -AutoRefresh:$AutoRefresh -RefreshInterval $RefreshInterval -ArgumentList $ArgumentList
+					New-UDElement -Tag 'tbody' -Endpoint $Endpoint -AutoRefresh:$AutoRefresh -RefreshInterval $RefreshInterval -ArgumentList $ArgumentList -Id "$Id-tbody"
 				}
 
 				

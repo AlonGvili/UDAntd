@@ -58,7 +58,7 @@ function New-LivePreview {
                 Content   = { 
                     New-LivePreviewExample -Examle $Object.Example
                     New-LivePreviewExampleCode -Code $Object.Code
-                    New-UDAntdCopyToClipboard -Shape circle -Size large -Icon "copy" -ButtonType primary -TextToCopy $Object.Code -Style @{
+                    New-UDAntdCopyToClipboard -Id 'CopyButton' -Shape circle -Size large -Icon "copy" -ButtonType primary -TextToCopy $Object.Code -Style @{
                         position = 'absolute'
                         right = 15
                         bottom = 25

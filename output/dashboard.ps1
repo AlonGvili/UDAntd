@@ -17,7 +17,9 @@ $Root = $PSScriptRoot
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
-    # Sync-UDElement -Id 'ComponentContentSection'
+
+
+
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $WebAppStyles['Webapp'] -Content {
 
@@ -27,13 +29,15 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
             # web app top navbar
             New-UDAntdMenu -Id 'mainNavbar' -DefaultSelectedKeys 'components' -Style $WebAppStyles['NavBar'] -Content {
 
-                New-UDAntdMenuItem -Style $WebAppStyles['NavBarItem'] -Title Components -Content {
+                New-UDAntdMenuItem -Style $WebAppStyles['NavBarItem'] -Title $x.biosDescription -Content {
                     New-UDAntdIcon -Icon HomeOutline -Size lg 
-                } -OnClick { }
+                } -OnClick {}
 
                 New-UDAntdMenuItem -Id 'components' -Style $WebAppStyles['NavBarItem'] -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreOutline -Size lg 
-                } -OnClick { }
+                } -OnClick {
+                    Set-LocalStorageItem -ItemKey 'server_info' -ItemValue { Get-ComputerInfo }
+                }
 
                 New-UDAntdMenuItem -Style $WebAppStyles['NavBarItem'] -Title Test -Content {
                     New-UDAntdIcon -Icon GithubOutline -Size lg
@@ -64,7 +68,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
-                    New-UDAntdMenuItem -Title 'Badge'  -Content { "Badge" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Badge'  -Content { "Badge" } -OnClick { 
+                        $LivePreviewExamplesDB['Badge'] | New-LivePreview | Add-LivePreview
+                        Set-LivePreviewPage
+                    }
                     New-UDAntdMenuItem -Title 'Card'  -Content { "Card" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Carousel'   -Content { "Carousel" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Description List'  -Content { "Description List" } -OnClick { }
@@ -95,7 +102,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                 New-UDAntdContent -Style $WebAppStyles['ComponentContentSectionBody'] -Content {
                     New-UDAntdLayout -Style @{backgroundColor = '#fff' } -Content {
                         $ComponentContentSwitch
-                        $ComponentContentSection                                     
+                        $ComponentContentSection                                                         
                     }
                 }
             }
@@ -108,6 +115,6 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
 $Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
-Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
-# Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1002 
+# Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
+Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1002 
 

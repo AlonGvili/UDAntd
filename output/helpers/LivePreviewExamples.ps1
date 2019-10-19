@@ -135,6 +135,48 @@ New-UDAntdButton -Id 'button_loading_example' -Icon 'setting' -Size large -OnCli
 } -ButtonType danger -Shape circle -Style @{ margin = '16px auto' }
 "
         }
+
+        [PSCustomObject]@{
+            Title   = "EVENT"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
+                    New-UDAntdButton -Icon "plus-circle" -ButtonType primary -Style @{ margin = '16px auto' } -OnClick {
+                        $UDModule = Get-Module -Name UniversalDashboard.Antd
+
+                        Get-Module | select Name, Version, Author | % {
+                            Set-UDLocalStorageItem -ItemKey $_.Name -ItemValue {
+                                $_
+                            }
+                        }
+                    } 
+                    New-UDAntdButton -Icon "redo" -ButtonType primary -Style @{ margin = '16px auto' } -OnClick {
+                        $udmoduleinfo = Get-UDLocalStorageItem -ItemKey 'UniversalDashboard.Antd'
+                        Show-UDToast =Message $udmoduleinfo.Functions
+
+                    }
+                    New-UDAntdButton -Icon "delete" -ButtonType primary -Style @{ margin = '16px auto' } -OnClick {
+                        $test = Get-UDLocalStorageItem -ItemKey 'test'  
+
+                        Get-UDLocalStorage
+                        # Show-UDToast -Message $test.username
+
+                    }
+                    New-UDAntdButton -Icon "undo" -ButtonType primary -Style @{ margin = '16px auto' } -OnClick {
+                        Set-UDLocalStorageItem -ItemKey 'test' -ItemValue {
+                            @{username = 'alon gvili' }
+                        }
+
+                    }
+                }
+            )
+            Code    = "
+New-UDAntdButton -Id 'button_loading_example' -Icon 'setting' -Size large -OnClick {
+    Set-UDElement -Id 'button_loading_example' -Attributes @{loading = $true}
+    Start-Sleep -Seconds 2
+    Set-UDElement -Id 'button_loading_example' -Attributes @{loading = $false }
+} -ButtonType danger -Shape circle -Style @{ margin = '16px auto' }
+"
+        }
         
     )
 
@@ -154,7 +196,7 @@ New-UDAntdButtonGroup -Content {
         }
 
         [PSCustomObject]@{
-            Title    = "SIZE"
+            Title   = "SIZE"
             Example = New-UDAntdButtonGroup -Content {
                 New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud'
                 New-UDAntdButton -ButtonType primary -Size small -Icon 'cloud-download'
@@ -204,9 +246,35 @@ New-UDAntdButtonGroup -Content {
             New-UDAntdInput -Id "demoInput" -size large -PlaceHolder "Test for endpoint" -OnPressEnter {
                 Show-UDToast -Message $body
             }'
-        Notes = @(
+            Notes   = @(
                 '>For now you MUST used the ```$Body``` variable inside OnPressEnter scriptblock, when you press enter this variable will store the input value.'
             )
         }
+    )
+
+    Badge       = @(
+        [PSCustomObject]@{
+            Title   = "BASIC"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
+                
+                }
+            )
+            Code    = '
+                New-UDAntdBadge
+            '
+        }
+        [PSCustomObject]@{
+            Title   = "EVENT"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
+                
+                }
+            )
+            Code    = '
+                New-UDAntdBadge
+            '
+        }
+
     )
 }
