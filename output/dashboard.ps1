@@ -17,7 +17,9 @@ $Root = $PSScriptRoot
 
 $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
-
+                        
+    # Get-UDLocalStorage -
+    # Show-UDToast -Message $r
 
 
     # web app main layout
@@ -115,6 +117,6 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
 $Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
-Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
-# Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1002 
+# Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
+Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1002 
 
