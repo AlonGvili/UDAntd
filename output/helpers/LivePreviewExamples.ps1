@@ -213,17 +213,73 @@ New-UDAntdButtonGroup -Content {
         [PSCustomObject]@{
             Title   = "BASIC"
             Example = @(
-                New-UDAntdBadge -PresetColor gold -Dot -Content ( New-UDAntdIcon -Icon AlertFill -Size 2x)
-                New-UDAntdBadge -PresetColor lime -Text demo  -Content ( New-UDAntdIcon -Icon AlertFill -Size 2x)
-                New-UDAntdBadge -Style @{ backgroundColor = 'blue'; color = '#fff'} -Count ( 16 ) 
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
+                    New-UDAntdBadge -PresetColor gold -Content ( New-UDAntdIcon -Icon NotificationOutline -Size lg)
+                    New-UDAntdBadge -PresetColor lime -Text 'Universal Dashboard'
+                    New-UDAntdBadge -Style @{ backgroundColor = '#fa541c'; color = '#fff' } -Count ( 166 ) -OverflowCount 9999 
+                    New-UDAntdBadge -Style @{ backgroundColor = '#fa541c'; color = '#fff' } -OverflowCount 9999 -ShowZero 
+                }
             )
             Code    = '
-            New-UDAntdInput -Id "demoInput" -size large -PlaceHolder "Test for endpoint" -OnPressEnter {
-                Show-UDToast -Message $body
-            }'
+            New-UDAntdBadge -PresetColor gold -Content ( New-UDAntdIcon -Icon NotificationOutline -Size lg)
+            New-UDAntdBadge -PresetColor lime -Text "Universal Dashboard"
+            New-UDAntdBadge -Style @{ backgroundColor = "#2f54eb"; color = "#fff" } -Count ( 166 ) -OverflowCount 9999 
+            '
             Notes   = @(
                 '>For now you MUST used the ```$Body``` variable inside OnPressEnter scriptblock, when you press enter this variable will store the input value.'
             )
+        }
+    )
+
+    Avatar = @(
+        [PSCustomObject]@{
+            Title   = "BASIC"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
+                    New-UDAntdAvatar -Shape circle -Size default -Content 'AG' -Style @{margin = '16px auto' }
+                    New-UDAntdAvatar -Shape circle -Size default -Content 'A' -Style @{margin = '16px auto' }
+                    New-UDAntdAvatar -Shape circle -Size default -Content 'Alon' -Style @{margin = '16px auto' }
+                }
+            )
+            Code    = '
+            New-UDAntdAvatar -Shape circle -Size default -Content "AG"
+            New-UDAntdAvatar -Shape circle -Size default -Content "A"
+            New-UDAntdAvatar -Shape circle -Size default -Content "Alon"
+            '
+        }
+        [PSCustomObject]@{
+            Title   = "SIZES"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
+                    New-UDAntdAvatar -Shape circle -Size small -Content "AG" -Style @{margin = '16px auto' }
+                    New-UDAntdAvatar -Shape circle -Size default -Content "AG" -Style @{margin = '16px auto' }
+                    New-UDAntdAvatar -Shape circle -Size large -Content "AG" -Style @{margin = '16px auto' }
+                }
+            )
+            Code    = '
+            New-UDAntdAvatar -Shape circle -Size small -Content "AG"
+            New-UDAntdAvatar -Shape circle -Size default -Content "AG"
+            New-UDAntdAvatar -Shape circle -Size large -Content "AG"
+            '
+        }
+        [PSCustomObject]@{
+            Title   = "TYPES"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
+                    New-UDAntdAvatar -Shape circle -Size large -Content "AG" -Style @{margin = '16px auto' }
+                    New-UDAntdAvatar -Shape circle -Size large -Src 'https://avatars2.githubusercontent.com/u/34351424?s=460&v=4' -Style @{margin = '16px auto' }
+                    New-UDAntdAvatar -Shape circle -Size large -Style @{backgroundColor = "#1890ff"; margin = '16px auto'} -Icon (
+                        New-UDAntdIcon -Icon NotificationOutline -Size lg -Color '#fff' 
+                    )
+                }
+            )
+            Code    = '
+            New-UDAntdAvatar -Shape circle -Size default -Content "AG"
+            New-UDAntdAvatar -Shape circle -Size default -Src "https://avatars2.githubusercontent.com/u/34351424?s=460&v=4"
+            New-UDAntdAvatar -Shape circle -Size default -Icon (
+                New-UDAntdIcon -Icon NotificationFill -Size sm 
+            )
+    '
         }
     )
 }

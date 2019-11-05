@@ -27,10 +27,10 @@ function New-UDAntdBadge {
         [string]$Text,
       
         [Parameter(ParameterSetName = 'Count')]
-        [int]$OverflowCount,
+        [int]$OverflowCount = 9999,
 
         [Parameter(ParameterSetName = 'Count')]
-        [object]$Count,
+        [int]$Count,
       
         [Parameter(ParameterSetName = 'Count')]
         [hashtable]$Style,

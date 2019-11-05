@@ -70,6 +70,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Display' -Content {
+                    New-UDAntdMenuItem -Title 'Avatar'  -Content { "Avatar" } -OnClick { 
+                        $LivePreviewExamplesDB['Avatar'] | New-LivePreview | Add-LivePreview
+                        Set-LivePreviewPage
+                    }
                     New-UDAntdMenuItem -Title 'Badge'  -Content { "Badge" } -OnClick { 
                         $LivePreviewExamplesDB['Badge'] | New-LivePreview | Add-LivePreview
                         Set-LivePreviewPage
@@ -117,6 +121,6 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
 $Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
-# Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
-Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1002 
+Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
+# Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1002 
 
