@@ -231,7 +231,7 @@ New-UDAntdButtonGroup -Content {
         }
     )
 
-    Avatar = @(
+    Avatar      = @(
         [PSCustomObject]@{
             Title   = "BASIC"
             Example = @(
@@ -268,8 +268,8 @@ New-UDAntdButtonGroup -Content {
                 New-UDAntdRow -Align middle -Justify space-between -Flex -Gutter 48 -Content {
                     New-UDAntdAvatar -Shape circle -Size large -Content "AG" -Style @{margin = '16px auto' }
                     New-UDAntdAvatar -Shape circle -Size large -Src 'https://avatars2.githubusercontent.com/u/34351424?s=460&v=4' -Style @{margin = '16px auto' }
-                    New-UDAntdAvatar -Shape circle -Size large -Style @{backgroundColor = "#1890ff"; margin = '16px auto'} -Icon (
-                        New-UDAntdIcon -Icon NotificationOutline -Size lg -Color '#fff' 
+                    New-UDAntdAvatar -Shape circle -Size large -Style @{backgroundColor = "#1890ff"; margin = '16px auto' } -Icon (
+                        New-UDAntdIcon -Icon NotificationOutline -Size sm -Color '#fff' 
                     )
                 }
             )
@@ -280,6 +280,262 @@ New-UDAntdButtonGroup -Content {
                 New-UDAntdIcon -Icon NotificationFill -Size sm 
             )
     '
+        }
+    )
+
+    Card        = @(
+        [PSCustomObject]@{
+            Title   = "BASIC"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Content {
+                    New-UDAntdCard -Bordered -Content {
+                        "Just a basic card"
+                    } -BodyStyle @{padding = 24 }
+                }
+            )
+            Code    = "
+            New-UDAntdCard -Bordered -Content {
+                'Just a basic card'
+            } -BodyStyle @{padding = 24}
+"
+        }
+
+        [PSCustomObject]@{
+            Title   = "CARD HEADER"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Style @{marginBottom = 16 } -Content {
+                    New-UDAntdCard -Bordered -Title 'UniversalDashboard' -Content {
+                        'Just a basic card with header'
+                    } -BodyStyle @{padding = 24 }
+                }
+
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Style @{marginBottom = 16 } -Content {
+                    New-UDAntdCard -Bordered -Title 'UniversalDashboard' -Content {
+                        'Just a basic card with title and buttons'
+                    } -Extra @(
+                        New-UDAntdButtonGroup -Content {
+                            New-UDAntdButton -Icon 'frown' -ButtonType primary -Size small -OnClick { }
+                            New-UDAntdButton -Icon 'smile' -ButtonType primary -Size small -OnClick { }
+                        } 
+                    ) -HeadStyle @{textAlign = 'left' } -BodyStyle @{padding = 24 }
+                }
+            )
+            Code    = "
+            New-UDAntdCard -Bordered -Title 'UniversalDashboard' -Content {
+                'Just a basic card with header'
+            } -BodyStyle @{padding = 24}
+
+            New-UDAntdCard -Bordered -Title 'UniversalDashboard' -Content {
+                'Just a basic card with title and buttons'
+            } -Extra @(
+                New-UDAntdButtonGroup -Content {
+                    New-UDAntdButton -Icon 'frown' -ButtonType primary -Size small -OnClick {}
+                    New-UDAntdButton -Icon 'smile' -ButtonType primary -Size small -OnClick {}
+                } 
+            ) -HeadStyle @{textAlign = 'left'} -BodyStyle @{padding = 24}
+
+"
+        }
+
+        [PSCustomObject]@{
+            Title   = "STATE"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Content {
+                    New-UDAntdCard -Id 'reloaded-card' -IsEndpoint -Bordered -Title 'UniversalDashboard' -Content {
+                        250..2500 | Get-Random
+                    } -Extra @(
+                        New-UDAntdButton -Icon 'reload' -ButtonType primary -Shape circle -Size small -OnClick {
+                            Sync-UDElement -Id 'reloaded-card'
+                        }
+                    ) -HeadStyle @{textAlign = 'left' } -BodyStyle @{fontSize = 24 }
+                }
+            )
+            Code    = "
+            New-UDAntdCard -Id 'reloaded-card' -IsEndpoint -Bordered -Title 'UniversalDashboard' -Content {
+                250..2500 | Get-Random
+            } -Extra @(
+                New-UDAntdButton -Icon 'reload' -ButtonType primary -Shape circle -Size small -OnClick {
+                    Sync-UDElement -Id 'reloaded-card'
+                }
+            ) -HeadStyle @{textAlign = 'left'} -BodyStyle @{fontSize = 24}
+"
+        }
+
+        [PSCustomObject]@{
+            Title   = "TABS"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Content {
+                    New-UDAntdCard -Tabs @(
+                        @{
+                            key     = 'alon'
+                            tab     = New-UDAntdIcon -Icon AlertTwoTone -Size sm -PrimaryColor '#1890ff'
+                            # disabled = $true
+                            content = New-UDMarkdown -Markdown '## Cool Developer'
+                        }
+                        @{
+                            key     = 'icon'
+                            tab     = @((New-UDAntdIcon -Icon PictureTwoTone -Size sm -PrimaryColor '#1890ff' -Style @{
+                                        marginRight   = 8
+                                        display       = 'inline-block'
+                                        color         = 'inherit'
+                                        fontStyle     = 'normal'
+                                        lineHeight    = 0
+                                        textAlign     = 'center'
+                                        textTransform = 'none'
+                                        verticalAlign = '-0.125em'
+                                        textRendering = 'optimizeLegibility'
+                                        # webkitFontSmoothing = 'antialiased'
+                                    }), 'Icon')
+                            content = New-UDMarkdown -Markdown '## Cool Icon'
+                        }
+                        @{
+                            key     = 'bugs'
+                            tab     = @((New-UDAntdIcon -Icon BugTwoTone -Size sm -PrimaryColor '#3F51B5' -Style @{
+                                        marginRight         = 8
+                                        display             = 'inline-block'
+                                        color               = 'inherit'
+                                        fontStyle           = 'normal'
+                                        lineHeight          = 0
+                                        textAlign           = 'center'
+                                        textTransform       = 'none'
+                                        verticalAlign       = '-0.125em'
+                                        textRendering       = 'optimizeLegibility'
+                                        webkitFontSmoothing = 'antialiased'
+                                    }), 'Bugs')
+                            content = New-UDMarkdown -Markdown '## You have a bug in the `code`' -Styles @{
+                                inlinecode = @{
+                                    padding         = 4
+                                    marginTop       = 16
+                                    backgroundColor = '#021d38'
+                                    color           = '#e6f7ff'
+                                    textAlign       = 'start'
+                                    borderRadius    = 4                            
+                                }
+                            }
+                        }
+                    ) -DefaultActiveKey bugs -Bordered -HeadStyle @{textAlign = 'left' } -BodyStyle @{padding = 24 } 
+                }
+            )
+            Code    = "
+            New-UDAntdCard -Tabs @(
+                @{
+                    key      = 'alon'
+                    tab      = New-UDAntdIcon -Icon AlertTwoTone -Size sm -PrimaryColor '#1890ff'
+                    content  = 'Alerts'
+                }
+                @{
+                    key     = 'icon'
+                    tab     = @((New-UDAntdIcon -Icon PictureTwoTone -Size sm -PrimaryColor '#1890ff' -Style @{
+                                marginRight   = 8
+                                display       = 'inline-block'
+                                color         = 'inherit'
+                                fontStyle     = 'normal'
+                                lineHeight    = 0
+                                textAlign     = 'center'
+                                textTransform = 'none'
+                                verticalAlign = '-0.125em'
+                                textRendering = 'optimizeLegibility'
+                                # webkitFontSmoothing = 'antialiased'
+                            }), 'Icon')
+                    content = New-UDMarkdown -Markdown (Invoke-RestMethod https://raw.githubusercontent.com/ant-design/ant-design/master/docs/spec/icon.en-US.md )
+                }
+                @{
+                    key     = 'bugs'
+                    tab     = @((New-UDAntdIcon -Icon BugTwoTone -Size sm -PrimaryColor '#3F51B5' -Style @{
+                                marginRight         = 8
+                                display             = 'inline-block'
+                                color               = 'inherit'
+                                fontStyle           = 'normal'
+                                lineHeight          = 0
+                                textAlign           = 'center'
+                                textTransform       = 'none'
+                                verticalAlign       = '-0.125em'
+                                textRendering       = 'optimizeLegibility'
+                                webkitFontSmoothing = 'antialiased'
+                            }), 'Bugs')
+                    content = New-UDMarkdown -Markdown (Invoke-RestMethod https://raw.githubusercontent.com/react-component/tabs/master/README.md )
+                }
+            ) -DefaultActiveKey bugs -Bordered -HeadStyle @{display = 'flex' } -BodyStyle @{padding = 'unset' } 
+"
+            Notes   = @(
+                '>The ```key``` property in every hashtable MUST be uniqe'
+            )
+        }
+        [PSCustomObject]@{
+            Title   = "GRID"
+            Example = @(
+                New-UDAntdRow -Align middle -Justify space-between -Flex -Content {
+                    New-UDAntdCard -Title "Grid Of Cards" -GridCards @(
+                        @{
+                            key       = 'alerts'
+                            hoverable = $true
+                            style     = @{width = '25%'; textAlign = 'center' }
+                            content   = 'Alerts'
+                        }
+                        @{
+                            key       = 'bugs'
+                            hoverable = $true
+                            style     = @{width = '25%'; textAlign = 'center' }
+                            content   = 'Bugs'
+                        }
+                        @{
+                            key       = 'issues'
+                            hoverable = $true
+                            style     = @{width = '25%'; textAlign = 'center' }
+                            content   = 'Issues'
+                        }
+                        @{
+                            key       = 'prs'
+                            hoverable = $false
+                            style     = @{width = '25%'; textAlign = 'center' }
+                            content   = 'PRs'
+                        }
+                        @{
+                            key       = 'users'
+                            hoverable = $false
+                            style     = @{width = '25%'; textAlign = 'center' }
+                            content   = 'Users'
+                        }
+                    )  
+                }
+            )
+            Code    = "
+            New-UDAntdCard -Title 'Grid Of Cards' -GridCards @(
+                @{
+                    key       = 'alerts'
+                    hoverable = $true
+                    style     = @{width = '25%'; textAlign = 'center' }
+                    content   = 'Alerts'
+                }
+                @{
+                    key       = 'bugs'
+                    hoverable = $true
+                    style     = @{width = '25%'; textAlign = 'center' }
+                    content   = 'Bugs'
+                }
+                @{
+                    key       = 'issues'
+                    hoverable = $true
+                    style     = @{width = '25%'; textAlign = 'center' }
+                    content   = 'Issues'
+                }
+                @{
+                    key       = 'prs'
+                    hoverable = $false
+                    style     = @{width = '25%'; textAlign = 'center' }
+                    content   = 'PRs'
+                }
+                @{
+                    key       = 'users'
+                    hoverable = $false
+                    style     = @{width = '25%'; textAlign = 'center' }
+                    content   = 'Users'
+                }
+            )  
+"
+            Notes   = @(
+                '>The ```key``` property in every hashtable MUST be uniqe'
+            )
         }
     )
 }

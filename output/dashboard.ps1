@@ -33,7 +33,7 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
 
                 New-UDAntdMenuItem -Style $WebAppStyles['NavBarItem'] -Title $x.biosDescription -Content {
                     New-UDAntdIcon -Icon HomeOutline -Size lg 
-                } -OnClick {}
+                } -OnClick { }
 
                 New-UDAntdMenuItem -Id 'components' -Style $WebAppStyles['NavBarItem'] -Title Components -Content {
                     New-UDAntdIcon -Icon AppstoreOutline -Size lg 
@@ -78,7 +78,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         $LivePreviewExamplesDB['Badge'] | New-LivePreview | Add-LivePreview
                         Set-LivePreviewPage
                     }
-                    New-UDAntdMenuItem -Title 'Card'  -Content { "Card" } -OnClick { }
+                    New-UDAntdMenuItem -Title 'Card'  -Content { "Card" } -OnClick {
+                        $LivePreviewExamplesDB['Card'] | New-LivePreview | Add-LivePreview 
+                        Set-LivePreviewPage
+                    }
                     New-UDAntdMenuItem -Title 'Carousel'   -Content { "Carousel" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Description List'  -Content { "Description List" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Popover'  -Content { "Popover" } -OnClick { }
@@ -89,6 +92,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                     New-UDAntdMenuItem -Title 'Menu'  -Content { "Menu" } -OnClick { }
                 } 
                 New-UDAntdMenuItemGroup -Title 'Data Entry' -Content {
+                    New-UDAntdMenuItem -Title 'AutoComplete'  -Content { "AutoComplete" } -OnClick { 
+                        # $LivePreviewExamplesDB['AutoComplete'] | New-LivePreview | Add-LivePreview 
+                        # Set-LivePreviewPage
+                    } 
                     New-UDAntdMenuItem -Title 'Radio'  -Content { "Radio" } -OnClick { } 
                     New-UDAntdMenuItem -Title 'Radio Group'  -Content { "Radio Group" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Switch'  -Content { "Switch" } -OnClick { }
