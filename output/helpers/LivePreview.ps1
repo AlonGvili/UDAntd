@@ -14,8 +14,11 @@ function Set-LivePreviewPage {
 }
 
 function Get-LivePreview {
-    $Examples = Get-Item "Cache:LivePreviewExamples"
-    $Examples
+    Get-Item "Cache:LivePreviewExamples" | ForEach-Object {
+        $_
+    }
+    
+    # New-UDMarkdown -Markdown "$($Examples[0])"
 }
 
 function Add-LivePreview {
@@ -53,16 +56,27 @@ function New-LivePreview {
     process {
         foreach ($Object in $InputObject) {
             $CardParams = @{
-                # Extra     = ( New-UDAntdButton -Icon "copy" -OnClick { Set-Clipboard -Value $Object.Code } )
                 Title     = $Object.Title
                 Content   = { 
-                    New-LivePreviewExample -Examle $Object.Example
-                    New-LivePreviewExampleCode -Code $Object.Code
-                    New-UDAntdCopyToClipboard -Id 'CopyButton' -Shape circle -Size large -Icon "copy" -ButtonType primary -TextToCopy $Object.Code -Style @{
-                        position = 'absolute'
-                        right = 15
-                        bottom = 25
-                        zIndex = 20;
+                    if($Object.Example.Count -eq $Object.Code.Count){
+                        0..($Object.Example.Count - 1) | ForEach-Object {
+                            New-UDAntdRow -Flex -Content {
+                                New-LivePreviewExample -Examle $Object.Example[$_]
+                                New-LivePreviewExampleCode -Code $Object.Code[$_]
+                                New-UDAntdCopyToClipboard -Id 'CopyButton' -Shape circle -Size large -Icon "copy" -ButtonType primary -TextToCopy $Object.Code[$_] -Style @{
+                                    position = 'absolute'
+                                    right = -20
+                                    bottom = 0
+                                    border = '2px solid #fff'
+                                    boxShadow = 'unset'
+                                    textShadow = 'unset'
+                                    zIndex = 20;
+                                }
+                            } -Style @{marginBottom = 24}
+                        }
+                    }
+                    else{
+                        Show-UDToast -Message "Examples [$($Object.Example.Count)] | Examples Code [$($Object.Code.Count)]" -Duration 8000
                     }
                 }
                 headStyle = $WebAppStyles['LivePreviewHeadStyle']
@@ -90,20 +104,22 @@ function New-LivePreviewExample {
 function New-LivePreviewExampleCode {
     param (
         [Parameter()]
-        [string]$Code
+        [string[]]$Code
     )
 
-    Document CodeExample {
-        $InputObject | Code -Info powershell
-    }   
-
-    $CodeExample = CodeExample -InputObject $Code -PassThru
-    New-UDMarkdown -Markdown $CodeExample -Styles @{ 
-        root      = $WebAppStyles['LivePreviewExampleCodeRoot']
-        codeBlock = $WebAppStyles['LivePreviewExampleCodeBlock']
-    }
-
+    Process {
+        Document CodeExample {
+            $InputObject | Code -Info powershell
+        }   
     
+        foreach($PSCode in $Code){
+            $CodeExample = CodeExample -InputObject $PSCode -PassThru
+            New-UDMarkdown -Markdown $CodeExample -Styles @{ 
+                root      = $WebAppStyles['LivePreviewExampleCodeRoot']
+                codeBlock = $WebAppStyles['LivePreviewExampleCodeBlock']
+            }
+        }
+    }
 }
 
 function New-LivePreviewNotes {

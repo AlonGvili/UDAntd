@@ -3,7 +3,8 @@
 $WebAppStyles = @{
 
     ComponentContentSection       = @{
-        paddingBottom = 50 
+        paddingBottom = 50
+        paddingTop = 50 
     }
 
     ComponentContentSectionHeader = @{
@@ -29,7 +30,7 @@ $WebAppStyles = @{
         marginBottom    = 50; 
         position        = 'fixed';  
         width           = '100%'; 
-        backgroundColor = '#ffffff'
+        # backgroundColor = '#ffffff'
         zIndex          = 9999; 
         alignItems      = 'center'; 
         display         = 'flex'; 
@@ -50,7 +51,7 @@ $WebAppStyles = @{
 
     Content                       = @{
         margin          = '128px 50px 50px 50px'; 
-        backgroundColor = '#fff' 
+        # backgroundColor = '#fff' 
         display         = 'flex'
     }
 
@@ -86,11 +87,73 @@ $WebAppStyles = @{
     }
 
     LivePreviewExampleCodeBlock   = @{
-        padding         = 16
-        marginTop       = 16
-        backgroundColor = '#021d38'
-        color           = '#e6f7ff'
+        padding         = '0px 24px 24px 24px'
+        margin       = 'unset'
+        backgroundColor = '#1d4175'
+        color           = '#fff'
         textAlign       = 'start'
-        borderRadius    = 4
+        borderRadius    = 0
+        border = 'unset'
+        lineHieght = 2
+    }
+
+    CopyCodeButtonStyle = @{
+        bottom          = 40
+        border          = 'unset'
+        boxShadow       = 'unset'
+        textShadow      = 'unset'
+        zIndex          = 22;
+        borderRadius    = '4px 0 4px 0'
+        backgroundColor = 'transparent'
+        color           = '#fff'
+        alignSelf       = 'flex-end'
+    }
+
+    CodeExampleMarkdownTitle = @{          
+        fontVariant         = 'tabular-nums'
+        fontFeatureSettings = 'tnum';
+        boxSizing           = 'border-box'
+        color               = 'rgb(229, 229, 229)'
+        fontSize            = '0.85rem'
+        fontWeight          = 'bold'
+        transform           = 'translateY(3px)'
+        display             = 'flex'
+        justifyContent      = 'space-between'
+        background          = '#1d4175'
+        padding             = '16px 24px'
+        marginTop           = 48
+        h5                  = @{
+            lineHeight   = 2.5
+            color        = '#fff'
+            marginBottom = 'unset'
+        }
+    }
+
+    UDAntdParameterTable = @{
+        table = @{
+            backgroundColor = '#1890ff'; 
+            width           = '100%'
+            thead           = @{
+                backgroundColor = '#1890ff'
+                padding         = 20
+                fontWeight      = 600
+                fontSize        = 20
+                borderBottom    = '1px solid #fff'
+                trow            = @{
+                    border          = '1px solid #fff'
+                    backgroundColor = '#1890ff'
+                }
+            }
+            tbody           = @{
+            }
+            trow            = @{
+                border = '2px solid #fff'
+            }
+            td              = @{
+                backgroundColor = '#f5f5f5'
+                padding         = 8
+            }
+        }
+
     }
 }

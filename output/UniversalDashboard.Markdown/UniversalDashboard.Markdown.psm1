@@ -71,7 +71,7 @@ function New-UDMarkdown {
         [parameter()]
         [hashtable]$Styles = @{},
         [parameter()]
-        [switch]$RenderRawHtml
+        [switch]$BlockRawHtml
     )
 
     @{
@@ -80,10 +80,10 @@ function New-UDMarkdown {
         id              = $Id 
         type            = 'ud-markdown'
 
-        markdown        = $Markdown.toString()
+        markdown        = $Markdown
         showLineNumbers = $ShowLineNumberInCodeBlock.IsPresent
         styles          = $Styles
-        escapeHtml      = $RenderRawHtml.IsPresent
+        escapeHtml      = $BlockRawHtml.IsPresent
     }
 }
 
