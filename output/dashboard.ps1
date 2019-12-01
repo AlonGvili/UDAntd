@@ -78,6 +78,10 @@ $Dashboard = New-UDDashboard -Title UDAntd -Content {
                         $LivePreviewExamplesDB['Card'] | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     }
+                    New-UDAntdMenuItem -Title 'Notification'  -Content { "Notification" } -OnClick {
+                        $LivePreviewExamplesDB['Notification'] | New-UDAntdComponent | Add-LivePreview
+                        Set-LivePreviewPage
+                    }
                     New-UDAntdMenuItem -Title 'Carousel'   -Content { "Carousel" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Description List'  -Content { "Description List" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Popover'  -Content { "Popover" } -OnClick { }

@@ -1,5 +1,5 @@
 $LivePreviewExamplesDB = @{
-    Icon = @(
+    Icon         = @(
         [PSCustomObject]@{
             Title       = 'API'
             Description = 'Command Parameters'
@@ -42,7 +42,7 @@ $LivePreviewExamplesDB = @{
             )
         }
     )
-    Card = @(
+    Card         = @(
         [PSCustomObject]@{
             Title       = 'API'
             Description = 'Command Parameters'
@@ -136,7 +136,7 @@ $LivePreviewExamplesDB = @{
             )
         }
     )
-    Button = @(
+    Button       = @(
         [PSCustomObject]@{
             Title       = 'API'
             Description = 'Command Parameters'
@@ -168,6 +168,144 @@ $LivePreviewExamplesDB = @{
                     New-UDAntdButton -ButtonType danger -Label 'SUBMIT' -Style @{margin = '0px 24px' }
                     New-UDAntdButton -ButtonType link -Label 'SUBMIT' -Style @{margin = '0px 24px' }
                     }" 
+                }
+            )
+        }
+    )
+    Notification = @(
+        [PSCustomObject]@{
+            Title       = 'API'
+            Description = 'Command Parameters'
+            Code        = @(
+                @{
+                    Title       = 'New-UDAntdNotification'
+                    Description = 'Command for creating ant-design notification message'
+                    Source      = '(Get-Command New-UDAntdNotification).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}'
+                }
+            )
+        }
+
+        [PSCustomObject]@{
+            Title       = "PRESETS"
+            Description = 'Basic notification message with buildin icon'
+            Code        = @(
+                @{
+                    Title       = ''
+                    Description = ''
+                    Source      = '
+                    New-UDAntdRow -Style @{
+                        display = "flex"
+                        alignItems = "center"
+                        justifyContent = "center"
+                    } -Content {
+                    
+                    New-UDAntdNotification -Id "success" -Title "Universal Dashboard" -Description "Notification Description Content" -Preset "success"
+                    New-UDAntdNotification -Id "error" -Title "Universal Dashboard" -Description "Notification Description Content" -Preset "error"
+                    New-UDAntdNotification -Id "warnning" -Title "Universal Dashboard" -Description "Notification Description Content" -Preset "warning"
+                    New-UDAntdNotification -Id "info" -Title "Universal Dashboard" -Description "Notification Description Content" -Preset "info"
+
+                    New-UDAntdButton -ButtonType primary -Label Success -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "success" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label Error -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "error" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label Warnning -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "warnning" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label Info -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "info" -Attributes @{visible = $true}
+                    }
+                    }
+                    '
+                }
+            )
+        }
+        [PSCustomObject]@{
+            Title       = "CUSTOM NOTIFICATION"
+            Description = 'Custom notification content with OnClose event'
+            Code        = @(
+                @{
+                    Title       = ''
+                    Description = 'After the first notification close it will open new notification message.'
+                    Source      = '
+                    New-UDAntdRow -Style @{
+                        display = "flex"
+                        alignItems = "center"
+                        justifyContent = "center"
+                    } -Content {
+                        New-UDAntdNotification -Id "noti2" -Title "Universal Dashboard" -Description (
+                        New-UDAntdIcon -Icon GitlabFill -Size 4x 
+                    ) -Style @{textAlign = "center"} 
+                    New-UDAntdNotification -Id "noti1" -Title "Universal Dashboard" -Description (
+                        New-UDAntdIcon -Icon GithubFill -Size 4x 
+                    ) -Style @{textAlign = "center"} -OnClose {
+                        Set-UDElement -Id "noti2" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label demo -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "noti1" -Attributes @{visible = $true}
+                    }
+                    }
+                    '
+                }
+            )
+        }
+        [PSCustomObject]@{
+            Title       = "Placement"
+            Description = 'Set the notification placement on the screen.'
+            Code        = @(
+                @{
+                    Title       = ''
+                    Description = 'They are 4 positions: topLeft, topRight, bottomLeft, bottomRight'
+                    Source      = '
+                    New-UDAntdRow -Style @{
+                        display = "flex"
+                        alignItems = "center"
+                        justifyContent = "center"
+                    } -Content {
+                        New-UDAntdNotification -Id "success-topLeft" -Title "Universal Dashboard" -Description "Notification Description Content" -Preset "success" -Placement topLeft
+                        New-UDAntdNotification -Id "success-topRight" -Title "Universal Dashboard" -Description "Notification Description Content" -Preset "success" -Placement topRight
+                        New-UDAntdNotification -Id "success-bottomRight" -Title "Universal Dashboard" -Description "Notification Description Content" -Preset "success" -Placement bottomRight
+                        New-UDAntdNotification -Id "success-bottomLeft" -Title "Universal Dashboard" -Description "Notification Description Content" -Preset "success" -Placement bottomLeft
+                    New-UDAntdButton -ButtonType primary -Label topLeft -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "success-topLeft" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label topRight -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "success-topRight" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label bottomRight -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "success-bottomRight" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label bottomLeft -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "success-bottomLeft" -Attributes @{visible = $true}
+                    }
+                    }
+                    '
+                }
+            )
+        }
+        [PSCustomObject]@{
+            Title       = "Style"
+            Description = 'Set the notification style like backgroundColor.'
+            Code        = @(
+                @{
+                    Title       = ''
+                    Description = ''
+                    Source      = '
+                    New-UDAntdRow -Style @{
+                        display = "flex"
+                        alignItems = "center"
+                        justifyContent = "center"
+                    } -Content {
+                        New-UDAntdNotification -Id "style-topLeft" -Title "Universal Dashboard" -Description "Notification Description Content" -Placement topLeft -Style @{
+                            backgroundColor = "#1d4175"
+                            color = "#fff"
+                        } -TitleStyle @{ color = "#fff"}
+                    New-UDAntdButton -ButtonType primary -Label topLeft -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "style-topLeft" -Attributes @{visible = $true}
+                    }
+                    }
+                    '
                 }
             )
         }
