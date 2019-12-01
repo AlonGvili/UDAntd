@@ -310,6 +310,84 @@ $LivePreviewExamplesDB = @{
             )
         }
     )
+    Message = @(
+        [PSCustomObject]@{
+            Title       = 'API'
+            Description = 'Command Parameters'
+            Code        = @(
+                @{
+                    Title       = 'New-UDAntdMessage'
+                    Description = 'Command for creating ant-design message'
+                    Source      = '(Get-Command New-UDAntdMessage).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}'
+                }
+            )
+        }
+
+        [PSCustomObject]@{
+            Title       = "PRESETS"
+            Description = 'Basic message with buildin icon'
+            Code        = @(
+                @{
+                    Title       = ''
+                    Description = ''
+                    Source      = '
+                    New-UDAntdRow -Style @{
+                        display = "flex"
+                        alignItems = "center"
+                        justifyContent = "center"
+                    } -Content {
+                    
+                    New-UDAntdMessage -Id "success" -Content {"Universal Dashboard"} -Preset "success"
+                    New-UDAntdMessage -Id "error" -Content {"Universal Dashboard" } -Preset "error"
+                    New-UDAntdMessage -Id "warnning" -Content {"Universal Dashboard"} -Preset "warning"
+                    New-UDAntdMessage -Id "info" -Content {"Universal Dashboard"} -Preset "info"
+                    New-UDAntdMessage -Id "loading" -Content {"Universal Dashboard"} -Preset "loading"
+
+                    New-UDAntdButton -ButtonType primary -Label Success -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "success" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label Error -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "error" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label Warnning -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "warnning" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label Info -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "info" -Attributes @{visible = $true}
+                    }
+                    New-UDAntdButton -ButtonType primary -Label Loading -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "loading" -Attributes @{visible = $true}
+                    }
+                    }
+                    '
+                }
+            )
+        }
+        [PSCustomObject]@{
+            Title       = "Custom Icon"
+            Description = 'Basic message with custom icon'
+            Code        = @(
+                @{
+                    Title       = ''
+                    Description = ''
+                    Source      = '
+                    New-UDAntdRow -Style @{
+                        display = "flex"
+                        alignItems = "center"
+                        justifyContent = "center"
+                    } -Content {
+                    
+                    New-UDAntdMessage -Id "custom-icon" -Key "mdemo" -Content {"Antd message with custom icon"} -Icon ( New-UDAntdIcon -Icon QuestionCircleOutline -Size lg -Color "#faad14")  
+
+                    New-UDAntdButton -ButtonType primary -Label "Custom Icon" -Style @{margin = "0px 24px" } -OnClick {
+                        Set-UDElement -Id "custom-icon" -Attributes @{visible = $true}
+                    }
+                    }
+                    '
+                }
+            )
+        }
+    )
     AutoComplete = @(
         [PSCustomObject]@{
             Title       = 'API'
