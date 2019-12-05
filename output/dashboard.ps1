@@ -48,22 +48,7 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
     
         # web app content
         New-UDAntdContent -Id 'main_content' -Style $WebAppStyles['Content'] -Content {
-    
-            # New-UDAntdSider -Content {
-
-            #     New-UDAntdMenu -Id 'main_component_menu' -Mode inline -Content {
-    
-            #         New-UDAntdMenuItem -Content { 
-            #             New-UDAntdIcon -Icon BuildOutline -Size sm
-            #             "Icons" 
-            #         } -OnClick { 
-            #             $LivePreviewExamplesDB['Icon'] | New-UDAntdComponent | Add-LivePreview
-            #             Set-LivePreviewPage
-            #         }
-                
-            #     }
-            # } 
-    
+        
     
             New-UDAntdMenu -Id 'main_component_menu' -Mode inline -Style @{width = 256; minWidth = 256 } -Content {
 
