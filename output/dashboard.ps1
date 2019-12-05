@@ -79,6 +79,10 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
                         $LivePreviewExamplesDB['Card'] | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     }
+                    New-UDAntdMenuItem -Content { "Comment" } -OnClick {
+                        $LivePreviewExamplesDB['Comment'] | New-UDAntdComponent | Add-LivePreview
+                        Set-LivePreviewPage
+                    }
                     New-UDAntdMenuItem -Title 'Notification'  -Content { "Notification" } -OnClick {
                         $LivePreviewExamplesDB['Notification'] | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
@@ -90,7 +94,10 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
                     New-UDAntdMenuItem -Title 'Carousel'   -Content { "Carousel" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Description List'  -Content { "Description List" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Popover'  -Content { "Popover" } -OnClick { }
-                    New-UDAntdMenuItem -Title 'Statistic'  -Content { "Statistic" } -OnClick { }
+                    New-UDAntdMenuItem -Content { "Statistic" } -OnClick {
+                        $LivePreviewExamplesDB['Statistic'] | New-UDAntdComponent | Add-LivePreview
+                        Set-LivePreviewPage
+                     }
                 } 
                 New-UDAntdMenuItemGroup -Id 'menu_group_navigation' -Title 'Navigation' -Content {
                     New-UDAntdMenuItem -Title 'Dropdown'  -Content { "Dropdown" } -OnClick { }

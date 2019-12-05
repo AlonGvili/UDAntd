@@ -172,6 +172,115 @@ $LivePreviewExamplesDB = @{
             )
         }
     )
+    Statistic       = @(
+        [PSCustomObject]@{
+            Title       = 'API'
+            Description = 'Command Parameters'
+            Code        = @(
+                @{
+                    Title       = 'New-UDAntdStatistic'
+                    Description = 'Command for creating ant-design statistic component'
+                    Source      = '(Get-Command New-UDAntdStatistic).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}'
+                }
+            )
+        }
+
+        [PSCustomObject]@{
+            Title       = "BASIC"
+            Description = 'Ant-Design buttons statistic'
+            Code        = @(
+                @{
+                    Title       = ''
+                    Description = ''
+                    Source      = "
+                    New-UDAntdRow -Style @{
+                        display = 'flex'
+                        alignItems = 'center'
+                        justifyContent = 'center'
+                    } -Content {
+                    New-UDAntdStatistic -Value { 100 } -Prefix ( New-UDAntdIcon -Icon GitlabOutline -Size sm ) -Title ( 'Active Users' )
+                    }" 
+                }
+                # @{
+                #     Title       = ''
+                #     Description = ''
+                #     Source      = "
+                #     New-UDAntdRow -Style @{
+                #         display = 'flex'
+                #         alignItems = 'center'
+                #         justifyContent = 'center'
+                #     } -Content {
+                #     New-UDAntdStatistic -Value { (Get-Date).Hour } -Prefix ( New-UDAntdIcon -Icon GitlabOutline -Size sm ) -Title ( 'Active Users' ) -OnFinish {
+                #         New-UDAntdNotification -Id 'success' -Title 'Universal Dashboard' -Description $EventData -Preset 'success' -Visible
+                #     } -IsEndpoint
+                #     }" 
+                # }
+            )
+        }
+    )
+    Comment       = @(
+        [PSCustomObject]@{
+            Title       = 'API'
+            Description = 'Command Parameters'
+            Code        = @(
+                @{
+                    Title       = 'New-UDAntdComment'
+                    Description = 'Command for creating ant-design comment component'
+                    Source      = '(Get-Command New-UDAntdComment).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}'
+                }
+            )
+        }
+
+        [PSCustomObject]@{
+            Title       = "BASIC"
+            Description = 'Ant-Design comment'
+            Code        = @(
+                @{
+                    Title       = 'An empty comment'
+                    Description = ''
+                    Source      = "
+                    New-UDAntdRow -Style @{
+                        display = 'flex'
+                        alignItems = 'center'
+                        justifyContent = 'center'
+                    } -Content {
+                    New-UDAntdComment
+                    }" 
+                }
+                @{
+                    Title       = 'Comment with text'
+                    Description = ''
+                    Source      = "
+                    New-UDAntdRow -Style @{
+                        display = 'flex'
+                        alignItems = 'center'
+                        justifyContent = 'center'
+                    } -Content {
+                    New-UDAntdComment -Message ( 'Just a demo message for udantd comment component' )
+                    }" 
+                }
+                @{
+                    Title       = 'Add nested comment using Add-UDElement'
+                    Description = ''
+                    Source      = "
+                    New-UDAntdRow -Style @{
+                        display = 'flex'
+                        alignItems = 'center'
+                        justifyContent = 'center'
+                    } -Content {
+                    New-UDAntdComment -Id 'nested-comment' -Message ( 'Just a demo message for udantd comment component' ) -Author ( 'alon gvili' ) -Avatar (
+                        New-UDAntdAvatar -Src 'https://avatars1.githubusercontent.com/u/34351424?s=400&u=1af0f32562a8f68850c736e3fca838c5ed022203&v=4' -Shape square
+                    ) -Actions @(
+                    New-UDAntdButton -Label 'Add Comment'  -ButtonType primary -OnClick {
+                        Add-UDElement -ParentId 'nested-comment' -Content {
+                            New-UDAntdComment -Id 'bot-comment' -Message ( 'Hello from ud bot :)' ) -Author ( 'ud bot' )
+                        }
+                    })
+                    }" 
+                }
+            )
+        }
+    )
     Notification = @(
         [PSCustomObject]@{
             Title       = 'API'
