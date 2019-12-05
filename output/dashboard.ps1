@@ -16,7 +16,7 @@ $Theme.Definition.Clear()
 
 $Root = $PSScriptRoot
 
-$Dashboard = New-UDDashboard -Title UDAntd -Content {
+$Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
 
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $WebAppStyles['Webapp'] -Content {
