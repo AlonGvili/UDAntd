@@ -8,7 +8,7 @@ Import-Module -Variable * $PSScriptRoot\styles.ps1 -Force
 Import-Module -Variable * $PSScriptRoot\helpers\ReusedComponent.ps1 -Force
 Import-Module -Function * $PSScriptRoot\helpers\UDAntdComponentTemp.ps1 -Force
 Import-Module -Function * $PSScriptRoot\helpers\LivePreview.ps1 -Force
-Import-Module -Variable * $PSScriptRoot\helpers\LivePreviewExamples.ps1 -Force
+# Import-Module -Variable * $PSScriptRoot\helpers\LivePreviewExamples.ps1 -Force
 
 # clear ud theme definition and add new ones.
 $Theme = Get-UDTheme -Name Default
@@ -18,6 +18,7 @@ $Root = $PSScriptRoot
 
 $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
 
+    $LivePreviewExamplesDB = Get-Content -Path $PSScriptRoot\data\d.json -Raw | ConvertFrom-Json
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $WebAppStyles['Webapp'] -Content {
 
@@ -54,11 +55,11 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
 
                 New-UDAntdMenuItemGroup -Id 'menu_group_general' -Title 'General' -Content {
                     New-UDAntdMenuItem -Title 'Icon'  -Content { "Icon" } -OnClick { 
-                        $LivePreviewExamplesDB['Icon'] | New-UDAntdComponent | Add-LivePreview
+                        $LivePreviewExamplesDB.Icon | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     }
                     New-UDAntdMenuItem -Id 'component_button' -Title 'Button'  -Content { "Button" } -OnClick { 
-                        $LivePreviewExamplesDB['Button'] | New-UDAntdComponent | Add-LivePreview
+                        $LivePreviewExamplesDB.Button | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     }
                     New-UDAntdMenuItem -Title 'Button Group'  -Content { "Button Group" } -OnClick { 
@@ -76,26 +77,26 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
                         # Set-LivePreviewPage
                     }
                     New-UDAntdMenuItem -Title 'Card'  -Content { "Card" } -OnClick {
-                        $LivePreviewExamplesDB['Card'] | New-UDAntdComponent | Add-LivePreview
+                        $LivePreviewExamplesDB.Card | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     }
                     New-UDAntdMenuItem -Content { "Comment" } -OnClick {
-                        $LivePreviewExamplesDB['Comment'] | New-UDAntdComponent | Add-LivePreview
+                        $LivePreviewExamplesDB.Comment | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     }
                     New-UDAntdMenuItem -Title 'Notification'  -Content { "Notification" } -OnClick {
-                        $LivePreviewExamplesDB['Notification'] | New-UDAntdComponent | Add-LivePreview
+                        $LivePreviewExamplesDB.Notification | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     }
                     New-UDAntdMenuItem -Title 'Message'  -Content { "Message" } -OnClick {
-                        $LivePreviewExamplesDB['Message'] | New-UDAntdComponent | Add-LivePreview
+                        $LivePreviewExamplesDB.Message | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     }
                     New-UDAntdMenuItem -Title 'Carousel'   -Content { "Carousel" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Description List'  -Content { "Description List" } -OnClick { }
                     New-UDAntdMenuItem -Title 'Popover'  -Content { "Popover" } -OnClick { }
                     New-UDAntdMenuItem -Content { "Statistic" } -OnClick {
-                        $LivePreviewExamplesDB['Statistic'] | New-UDAntdComponent | Add-LivePreview
+                        $LivePreviewExamplesDB.Statistic | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                      }
                 } 
@@ -105,11 +106,11 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
                 } 
                 New-UDAntdMenuItemGroup -Id 'menu_group_data_entry' -Title 'Data Entry' -Content {
                     New-UDAntdMenuItem -Title 'AutoComplete'  -Content { "AutoComplete" } -OnClick { 
-                        $LivePreviewExamplesDB['AutoComplete'] | New-UDAntdComponent | Add-LivePreview
+                        $LivePreviewExamplesDB.AutoComplete | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     } 
                     New-UDAntdMenuItem -Title 'Slider'  -Content { "Slider" } -OnClick { 
-                        $LivePreviewExamplesDB['Slider'] | New-UDAntdComponent | Add-LivePreview
+                        $LivePreviewExamplesDB.Slider | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     } 
                     New-UDAntdMenuItem -Title 'Radio'  -Content { "Radio" } -OnClick { } 
@@ -139,7 +140,7 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
 
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
-$Folder = Publish-UDFolder -Path $PSScriptRoot\UniversalDashboard.Antd\Docs -RequestPath "/AntdDocs"
+$Folder = Publish-UDFolder -Path $PSScriptRoot\Data -RequestPath "/data"
 Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
 # Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1004
 

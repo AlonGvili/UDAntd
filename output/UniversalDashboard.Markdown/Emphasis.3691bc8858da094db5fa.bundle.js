@@ -1,0 +1,1 @@
+(window.webpackJsonpUDMarkdown=window.webpackJsonpUDMarkdown||[]).push([[4],{253:function(n,e,t){"use strict";t.r(e),t.d(e,"default",(function(){return s}));var o=t(0),a=t.n(o),r=t(185);class s extends a.a.Component{render(){const{styles:n,value:e}=this.props,t=r.a.em.withConfig({displayName:"em__Em",componentId:"iurbp8-0"})(["  "," "],n);return a.a.createElement(t,null,e)}}}}]);

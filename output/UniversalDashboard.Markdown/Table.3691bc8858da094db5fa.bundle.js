@@ -1,0 +1,1 @@
+(window.webpackJsonpUDMarkdown=window.webpackJsonpUDMarkdown||[]).push([[19],{247:function(e,n,t){"use strict";t.r(n),t.d(n,"default",(function(){return r}));var a=t(0),s=t.n(a);class r extends s.a.Component{render(){const{styles:e,value:n}=this.props;return s.a.createElement("table",{className:"ud-markdown-table",style:e.hasOwnProperty("table")?{...e.table}:null},n)}}}}]);

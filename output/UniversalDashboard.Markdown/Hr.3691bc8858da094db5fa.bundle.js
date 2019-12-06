@@ -1,0 +1,1 @@
+(window.webpackJsonpUDMarkdown=window.webpackJsonpUDMarkdown||[]).push([[11],{252:function(e,n,r){"use strict";r.r(n),r.d(n,"default",(function(){return a}));var s=r(0),t=r.n(s);class a extends t.a.Component{render(){const{styles:e,value:n}=this.props;let r;return e.hasOwnProperty("hr")&&(r=e.hr),t.a.createElement("hr",{className:"ud-markdown-hr",style:{...r}},n)}}}}]);

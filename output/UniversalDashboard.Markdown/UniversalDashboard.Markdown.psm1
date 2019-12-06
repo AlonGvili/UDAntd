@@ -1,4 +1,11 @@
-$JsFile = Get-ChildItem "$PSScriptRoot\UniversalDashboard.Markdown.*.bundle.js"
+$JsFile = Get-ChildItem "$PSScriptRoot\main.*.bundle.js"
+
+# Any other JS files in the bundle
+$JsFiles = Get-ChildItem "$PSScriptRoot\*.js"
+# Register all the other scripts. We don't care about the asset ID. They will be loaded by the main JS file.
+foreach ($item in $JsFiles) {
+    [UniversalDashboard.Services.AssetService]::Instance.RegisterAsset($item.FullName) | Out-Null
+}
 # Source maps to make it easier to debug in the browser 
 $Maps = Get-ChildItem "$PSScriptRoot\*.map"
 

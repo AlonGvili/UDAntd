@@ -1,0 +1,439 @@
+{
+	"Comment": [
+		{
+			"Title": "API",
+			"Description": "Command Parameters",
+			"Code": [
+				{
+					"Title": "New-UDAntdComment",
+					"Description": "Command for creating ant-design comment component",
+					"Source": "(Get-Command New-UDAntdComment).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}"
+				}
+			]
+		},
+		{
+			"Title": "BASIC",
+			"Description": "Ant-Design comment",
+			"Code": [
+				{
+					"Title": "An empty comment",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \u0027flex\u0027\r\n                        alignItems = \u0027center\u0027\r\n                        justifyContent = \u0027center\u0027\r\n                    } -Content {\r\n                    New-UDAntdComment\r\n                    }"
+				},
+				{
+					"Title": "Comment with text",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \u0027flex\u0027\r\n                        alignItems = \u0027center\u0027\r\n                        justifyContent = \u0027center\u0027\r\n                    } -Content {\r\n                    New-UDAntdComment -Message { \u0027Just a demo message for udantd comment component\u0027 }\r\n                    }"
+				},
+				{
+					"Title": "Add nested comment using Add-UDElement",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \u0027flex\u0027\r\n                        alignItems = \u0027center\u0027\r\n                        justifyContent = \u0027center\u0027\r\n                    } -Content {\r\n                    New-UDAntdComment -Id \u0027nested-comment\u0027 -Message { \u0027Just a demo message for udantd comment component\u0027 } -Author ( \u0027alon gvili\u0027 ) -DateTime (get-date).ToShortTimeString() -Avatar (\r\n                        New-UDAntdAvatar -Src \u0027https://avatars1.githubusercontent.com/u/34351424?s=400\u0026u=1af0f32562a8f68850c736e3fca838c5ed022203\u0026v=4\u0027 -Shape square\r\n                    ) -Actions @(\r\n                    New-UDAntdButton -Label \u0027Add Comment\u0027  -ButtonType primary -OnClick {\r\n                        Add-UDElement -ParentId \u0027nested-comment\u0027 -Content {\r\n                            \r\n                            New-UDAntdComment -Message { \r\n                                \u0027Here is a live statistics for the active users...\u0027\r\n                                \r\n                                New-UDAntdStatistic -Value { 100..450 | Get-Random } -Prefix ( New-UDAntdIcon -Icon GitlabOutline -Size sm ) -Title ( \u0027Active Users\u0027 ) -IsEndpoint -AutoRefresh -RefreshInterval 2000\r\n                            } -Author ( \u0027ud bot\u0027 ) -DateTime (get-date).ToShortTimeString()\r\n                        }\r\n                    }\r\n                    )\r\n                    }"
+				}
+			]
+		}
+	],
+	"AutoComplete": [
+		{
+			"Title": "API",
+			"Description": "Command Parameters",
+			"Code": [
+				{
+					"Title": "New-UDAntdAutoComplete",
+					"Description": "Command for creating ant-design auto complete input",
+					"Source": "(Get-Command New-UDAntdAutoComplete).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}"
+				}
+			]
+		},
+		{
+			"Title": "BASIC",
+			"Description": "Just a basic auto complete input",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \"flex\"\r\n                        alignItems = \"center\"\r\n                        justifyContent = \"center\"\r\n                    } -Content {\r\n                        New-UDAntdAutoComplete -DataSource {\r\n                            Get-Process | \r\n                            Foreach-Object {\r\n                                $Prc = $_\r\n                                @{\r\n                                    text = $Prc.ProcessName\r\n                                    value = \"{0}\" -f $Prc.Id\r\n                                    id = (New-Guid).guid\r\n                                }\r\n                            }\r\n                        } -OnSelect { Show-UDToast -Message $EventData} -InputStyle @{height = 64} -placeholder \"Start searching for process\"\r\n                    }"
+				}
+			]
+		},
+		{
+			"Title": "Custom Input",
+			"Description": "You can change the default auto complete input with a custom one.",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \"flex\"\r\n                        alignItems = \"center\"\r\n                        justifyContent = \"center\"\r\n                    } -Content {\r\n                        New-UDAntdAutoComplete -DataSource {\r\n                            Get-Process | \r\n                            Foreach-Object {\r\n                                $Prc = $_\r\n                                @{\r\n                                    text = $Prc.ProcessName\r\n                                    value = \"{0}\" -f $Prc.Id\r\n                                    id = (New-Guid).guid\r\n                                }\r\n                            }\r\n                        } -OnSelect { Show-UDToast -Message $EventData} -CustomInput (\r\n                            New-UDAntdInput -size large -Suffix ( New-UDAntdIcon -Icon GithubFill -Size 2x ) -PlaceHolder \"Search for repo\" -Style @{ height = 80; border = \"2px solid lime\"}\r\n                        )\r\n                    }"
+				}
+			]
+		}
+	],
+	"Notification": [
+		{
+			"Title": "API",
+			"Description": "Command Parameters",
+			"Code": [
+				{
+					"Title": "New-UDAntdNotification",
+					"Description": "Command for creating ant-design notification message",
+					"Source": "(Get-Command New-UDAntdNotification).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}"
+				}
+			]
+		},
+		{
+			"Title": "PRESETS",
+			"Description": "Basic notification message with buildin icon",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \"flex\"\r\n                        alignItems = \"center\"\r\n                        justifyContent = \"center\"\r\n                    } -Content {\r\n                    \r\n                    New-UDAntdNotification -Id \"success\" -Title \"Universal Dashboard\" -Description \"Notification Description Content\" -Preset \"success\"\r\n                    New-UDAntdNotification -Id \"error\" -Title \"Universal Dashboard\" -Description \"Notification Description Content\" -Preset \"error\"\r\n                    New-UDAntdNotification -Id \"warnning\" -Title \"Universal Dashboard\" -Description \"Notification Description Content\" -Preset \"warning\"\r\n                    New-UDAntdNotification -Id \"info\" -Title \"Universal Dashboard\" -Description \"Notification Description Content\" -Preset \"info\"\r\n\r\n                    New-UDAntdButton -ButtonType primary -Label Success -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"success\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label Error -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"error\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label Warnning -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"warnning\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label Info -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"info\" -Attributes @{visible = $true}\r\n                    }\r\n                    }\r\n                    "
+				}
+			]
+		},
+		{
+			"Title": "CUSTOM NOTIFICATION",
+			"Description": "Custom notification content with OnClose event",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "After the first notification close it will open new notification message.",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \"flex\"\r\n                        alignItems = \"center\"\r\n                        justifyContent = \"center\"\r\n                    } -Content {\r\n                        New-UDAntdNotification -Id \"noti2\" -Title \"Universal Dashboard\" -Description (\r\n                        New-UDAntdIcon -Icon GitlabFill -Size 4x \r\n                    ) -Style @{textAlign = \"center\"} \r\n                    New-UDAntdNotification -Id \"noti1\" -Title \"Universal Dashboard\" -Description (\r\n                        New-UDAntdIcon -Icon GithubFill -Size 4x \r\n                    ) -Style @{textAlign = \"center\"} -OnClose {\r\n                        Set-UDElement -Id \"noti2\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label demo -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"noti1\" -Attributes @{visible = $true}\r\n                    }\r\n                    }\r\n                    "
+				}
+			]
+		},
+		{
+			"Title": "Placement",
+			"Description": "Set the notification placement on the screen.",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "They are 4 positions: topLeft, topRight, bottomLeft, bottomRight",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \"flex\"\r\n                        alignItems = \"center\"\r\n                        justifyContent = \"center\"\r\n                    } -Content {\r\n                        New-UDAntdNotification -Id \"success-topLeft\" -Title \"Universal Dashboard\" -Description \"Notification Description Content\" -Preset \"success\" -Placement topLeft\r\n                        New-UDAntdNotification -Id \"success-topRight\" -Title \"Universal Dashboard\" -Description \"Notification Description Content\" -Preset \"success\" -Placement topRight\r\n                        New-UDAntdNotification -Id \"success-bottomRight\" -Title \"Universal Dashboard\" -Description \"Notification Description Content\" -Preset \"success\" -Placement bottomRight\r\n                        New-UDAntdNotification -Id \"success-bottomLeft\" -Title \"Universal Dashboard\" -Description \"Notification Description Content\" -Preset \"success\" -Placement bottomLeft\r\n                    New-UDAntdButton -ButtonType primary -Label topLeft -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"success-topLeft\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label topRight -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"success-topRight\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label bottomRight -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"success-bottomRight\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label bottomLeft -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"success-bottomLeft\" -Attributes @{visible = $true}\r\n                    }\r\n                    }\r\n                    "
+				}
+			]
+		},
+		{
+			"Title": "Style",
+			"Description": "Set the notification style like backgroundColor.",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \"flex\"\r\n                        alignItems = \"center\"\r\n                        justifyContent = \"center\"\r\n                    } -Content {\r\n                        New-UDAntdNotification -Id \"style-topLeft\" -Title \"Universal Dashboard\" -Description \"Notification Description Content\" -Placement topLeft -Style @{\r\n                            backgroundColor = \"#1d4175\"\r\n                            color = \"#fff\"\r\n                        } -TitleStyle @{ color = \"#fff\"}\r\n                    New-UDAntdButton -ButtonType primary -Label topLeft -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"style-topLeft\" -Attributes @{visible = $true}\r\n                    }\r\n                    }\r\n                    "
+				}
+			]
+		}
+	],
+	"Icon": [
+		{
+			"Title": "API",
+			"Description": "Command Parameters",
+			"Code": [
+				{
+					"Title": "New-UDAntdIcon",
+					"Description": "Command for creating ant-design icon",
+					"Source": "\r\n                    (Get-Command New-UDAntdIcon).Parameters.Values | ForEach-Object {\r\n                    if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}"
+				}
+			]
+		},
+		{
+			"Title": "TYPES",
+			"Description": "They are 3 types of icon style Fill, Outline, TwoTone",
+			"Code": [
+				{
+					"Title": "OUTLINE",
+					"Description": "Icon with outline style",
+					"Source": "\r\n                    (Get-Command New-UDAntdIcon).Parameters[\"icon\"].Attributes.ValidValues -match \"OUTLINE\" | ForEach-Object {\r\n                    New-UDAntdIcon -Icon $_ -Size 2x -Style @{ margin = 16 } -Color \"#1890ff\"}"
+				},
+				{
+					"Title": "FILLED",
+					"Description": "Icon with filled style",
+					"Source": "\r\n                    (Get-Command New-UDAntdIcon).Parameters[\"icon\"].Attributes.ValidValues -match \"FILL\" | ForEach-Object {\r\n                    New-UDAntdIcon -Icon $_ -Size 2x -Style @{ margin = 16 } -Color \"#1890ff\"}"
+				},
+				{
+					"Title": "TWOTONE",
+					"Description": "Icon with twotone style",
+					"Source": "\r\n                    (Get-Command New-UDAntdIcon).Parameters[\"icon\"].Attributes.ValidValues -match \"TwoTone\" | ForEach-Object {\r\n                    New-UDAntdIcon -Icon $_ -Size 2x -Style @{ margin = 16 } -IsTwoTone -PrimaryColor \"#1890ff\"}",
+					"Notes": ["NOT! all the icons are TwoTone"]
+				}
+			]
+		}
+	],
+	"Button": [
+		{
+			"Title": "API",
+			"Description": "Command Parameters",
+			"Code": [
+				{
+					"Title": "New-UDAntdButton",
+					"Description": "Command for creating ant-design button",
+					"Source": "(Get-Command New-UDAntdButton).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}"
+				}
+			]
+		},
+		{
+			"Title": "VARIANT",
+			"Description": "Ant-Design buttons comes in a numbers of variants",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \u0027flex\u0027\r\n                        alignItems = \u0027center\u0027\r\n                        justifyContent = \u0027center\u0027\r\n                    } -Content {\r\n                    New-UDAntdButton -ButtonType primary -Label demo -Style @{margin = \u00270px 24px\u0027 }\r\n                    New-UDAntdButton -ButtonType ghost -Label \u0027SUBMIT\u0027 -Style @{margin = \u00270px 24px\u0027 }\r\n                    New-UDAntdButton -ButtonType dashed -Label \u0027SUBMIT\u0027 -Style @{margin = \u00270px 24px\u0027 }\r\n                    New-UDAntdButton -ButtonType danger -Label \u0027SUBMIT\u0027 -Style @{margin = \u00270px 24px\u0027 }\r\n                    New-UDAntdButton -ButtonType link -Label \u0027SUBMIT\u0027 -Style @{margin = \u00270px 24px\u0027 }\r\n                    }"
+				}
+			]
+		}
+	],
+	"Card": [
+		{
+			"Title": "API",
+			"Description": "Command Parameters",
+			"Code": [
+				{
+					"Title": "New-UDAntdCard",
+					"Description": "Command for creating ant-design card",
+					"Source": "(Get-Command New-UDAntdCard).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}"
+				}
+			]
+		},
+		{
+			"Title": "CARD",
+			"Description": "xxxx",
+			"Code": [
+				{
+					"Title": "BASIC",
+					"Description": "Card title as text",
+					"Source": "\r\n                    New-UDAntdCard -Bordered -Content {\r\n                        \u0027Just a basic card\u0027\r\n                    } -BodyStyle @{padding = 24} -Style @{boxShadow = \u00270 2px 8px rgba(0,0,0,0.15)\u0027}"
+				}
+			]
+		},
+		{
+			"Title": "CARD HEADER",
+			"Description": "Card can have a top toolbar that can accept title and an array of extra buttons",
+			"Code": [
+				{
+					"Title": "Title",
+					"Description": "Card title as text",
+					"Source": "\r\n                    New-UDAntdCard -Bordered -Title \u0027UniversalDashboard\u0027 -Content {\r\n                        \u0027UniversalDashboard Antd Card\u0027\r\n                    } -BodyStyle @{padding = 24} -HeadStyle @{textAlign = \u0027left\u0027 } -Style @{boxShadow = \u00270 2px 8px rgba(0,0,0,0.15)\u0027}"
+				},
+				{
+					"Title": "Extra Buttons",
+					"Description": "Card header can accepts extra buttons on the right",
+					"Source": "\r\n                    New-UDAntdCard -Bordered -Title \u0027universal dashboard\u0027 -Content {\r\n                        \u0027UniversalDashboard Antd Card\u0027\r\n                    } -Extra @(\r\n                        New-UDAntdButtonGroup -Content {\r\n                            New-UDAntdButton -Icon \u0027frown\u0027 -ButtonType primary -Size small -OnClick {}\r\n                            New-UDAntdButton -Icon \u0027smile\u0027 -ButtonType primary -Size small -OnClick {}\r\n                        } \r\n                    ) -HeadStyle @{textAlign = \u0027left\u0027} -BodyStyle @{padding = 24} -Style @{boxShadow = \u00270 2px 8px rgba(0,0,0,0.15)\u0027}"
+				},
+				{
+					"Title": "Style",
+					"Description": "Using HeadStyle parameter you can apply custom style to the header.         \r\n                    The value must be an HashTable and can accepts any css attributes",
+					"Source": "\r\n                    New-UDAntdCard -Bordered -Title \u0027universal dashboard\u0027 -Content {\r\n                        \u0027UniversalDashboard Antd Card\u0027\r\n                    } -HeadStyle @{\r\n                        textAlign = \u0027left\u0027\r\n                        backgroundColor = \u0027#293742\u0027\r\n                        color = \u0027#fff\u0027\r\n                        border = \u0027unset\u0027\r\n                        fontVariant = \u0027small-caps\u0027\r\n                        fontWeight = 800\r\n                        letterSpacing = \u00270.2rem\u0027\r\n                    } -BodyStyle @{padding = 24} -Style @{boxShadow = \u00270 2px 8px rgba(0,0,0,0.15)\u0027}"
+				}
+			]
+		},
+		{
+			"Title": "STATE",
+			"Description": "Card with loading state",
+			"Code": [
+				{
+					"Title": "Loading",
+					"Description": "The loading state can be set using ```Set-UDElement``` command",
+					"Source": "\r\n                    New-UDAntdCard -Id \"reloaded-card\" -IsEndpoint -Bordered -Title \"UniversalDashboard\" -Content {\r\n                        250..2500 | Get-Random\r\n                    } -Extra @(\r\n                        New-UDAntdSwitch -onChange {\r\n                            if($EventData){\r\n                                Set-UDElement -Id \"reloaded-card\" -Attributes @{ loading = $true }\r\n                            }else{\r\n                                Set-UDElement -Id \"reloaded-card\" -Attributes @{ loading = $false }\r\n                            }\r\n                        }\r\n                    ) -HeadStyle @{textAlign = \"left\"} -BodyStyle @{fontSize = 24} -Style @{boxShadow = \"0 2px 8px rgba(0,0,0,0.15)\"}"
+				}
+			]
+		}
+	],
+	"Slider": [
+		{
+			"Title": "API",
+			"Description": "Command Parameters",
+			"Code": [
+				{
+					"Title": "New-UDAntdSlider",
+					"Description": "Command for creating ant-design slider",
+					"Source": "(Get-Command New-UDAntdSlider).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}"
+				}
+			]
+		},
+		{
+			"Title": "BASIC",
+			"Description": "Just a basic slider",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {Show-UDToast -Message $EventData} -RailStyle @{backgroundColor = \"#e4e4e4\"} \r\n                    }"
+				}
+			]
+		},
+		{
+			"Title": "ICONS",
+			"Description": "Basic slider with icons",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                            if([int]$EventData -gt 25){\r\n                                Set-UDElement -Id \"slider_icon_before\" -Attributes @{color = \"#d4d4d4\"}\r\n                                Set-UDElement -Id \"slider_icon_after\" -Attributes @{color = \"#333\"}\r\n                            }\r\n                            else {\r\n                                Set-UDElement -Id \"slider_icon_after\" -Attributes @{color = \"#d4d4d4\"}\r\n                                Set-UDElement -Id \"slider_icon_before\" -Attributes @{color = \"#333\"}\r\n                            }\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -BeforeIcon (\r\n                            New-UDAntdIcon -Icon GithubFill -Size 2x -Id \"slider_icon_before\" -Color \"#333\"\r\n                        ) -AfterIcon (\r\n                            New-UDAntdIcon -Icon GitlabFill -Size 2x -Id \"slider_icon_after\" -Color \"#d4d4d4\"\r\n                        )\r\n                    }"
+				}
+			]
+		},
+		{
+			"Title": "RANGE",
+			"Description": "Slider with range",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -Range -Step 5 -DefaultValue @(0,5)\r\n                    }"
+				}
+			]
+		},
+		{
+			"Title": "MARKS",
+			"Description": "Slider with marks",
+			"Code": [
+				{
+					"Title": "Marks Icons",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -Step 25 -Marks @{\r\n                            0 = New-UDAntdIcon -Icon CloudOutline -Size lg\r\n                            25 = New-UDAntdIcon -Icon CloudSyncOutline -Size lg\r\n                            50 = New-UDAntdIcon -Icon CloudServerOutline -Size lg\r\n                            75 = New-UDAntdIcon -Icon CloudDownloadOutline -Size lg\r\n                            100 = New-UDAntdIcon -Icon CloudUploadOutline -Size lg\r\n                        }\r\n                    }"
+				},
+				{
+					"Title": "Marks labels",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -Step 25 -Marks @{\r\n                            0 = \"0ֲ°C\"\r\n                            25 = \"25ֲ°C\"\r\n                            50 = \"50ֲ°C\"\r\n                            75 = \"75ֲ°C\"\r\n                            100 = \"100ֲ°C\"\r\n                        }\r\n                    }"
+				}
+			]
+		},
+		{
+			"Title": "DEFAULT VALUE",
+			"Description": "Slider that have default value.",
+			"Code": [
+				{
+					"Title": "Array",
+					"Description": "default value in a range slider",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -Id \"slider-demo\" -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -Range -Step 5 -DefaultValue @(15,35) \r\n                    }"
+				},
+				{
+					"Title": "Single",
+					"Description": "default value in a basic slider",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -Id \"slider-demo\" -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -Step 5 -DefaultValue @(15) \r\n                    }"
+				}
+			]
+		},
+		{
+			"Title": "DOTS",
+			"Description": "Slider with dots for display steps",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -Step 5 -Dots -DefaultValue @(35)\r\n                    }"
+				}
+			]
+		},
+		{
+			"Title": "VERTICAL",
+			"Description": "Vertical slider",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -Step 5 -Dots -DefaultValue @(35) -Vertical\r\n                    } -Style @{height = 300}"
+				}
+			]
+		},
+		{
+			"Title": "TOOLTIP",
+			"Description": "Slider tooltip properties",
+			"Code": [
+				{
+					"Title": "Always display the tooltip",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -Step 5 -Dots -DefaultValue @(35) -TooltipVisible\r\n                    }"
+				},
+				{
+					"Title": "Tooltip position",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -Step 5 -Dots -DefaultValue @(35) -TooltipVisible -TooltipPlacement bottom\r\n                    }"
+				}
+			]
+		},
+		{
+			"Title": "STYLES",
+			"Description": "Styling the slider",
+			"Code": [
+				{
+					"Title": "Rail style",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#096dd9\"} -Step 5 -Dots -DefaultValue @(35) -TooltipVisible\r\n                    }"
+				},
+				{
+					"Title": "Track style",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -TrackStyle @{backgroundColor = \"#096dd9\"} -Step 5 -Dots -DefaultValue @(35) -TooltipVisible -TooltipPlacement bottom\r\n                    }"
+				},
+				{
+					"Title": "Handle style",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Content {\r\n                        New-UDAntdSlider -OnChange {\r\n                           Show-UDToast -Message $EventData\r\n                        } -RailStyle @{backgroundColor = \"#e4e4e4\"} -HandleStyle @{borderColor = \"#096dd9\"; backgroundColor = \"#096dd9\"} -Step 5 -Dots -DefaultValue @(35) -TooltipVisible -TooltipPlacement bottom\r\n                    }"
+				}
+			]
+		}
+	],
+	"Statistic": [
+		{
+			"Title": "API",
+			"Description": "Command Parameters",
+			"Code": [
+				{
+					"Title": "New-UDAntdStatistic",
+					"Description": "Command for creating ant-design statistic component",
+					"Source": "(Get-Command New-UDAntdStatistic).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}"
+				}
+			]
+		},
+		{
+			"Title": "BASIC",
+			"Description": "Ant-Design buttons statistic",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \u0027flex\u0027\r\n                        alignItems = \u0027center\u0027\r\n                        justifyContent = \u0027center\u0027\r\n                    } -Content {\r\n                    New-UDAntdStatistic -Value { 100 } -Prefix ( New-UDAntdIcon -Icon GitlabOutline -Size sm ) -Title ( \u0027Active Users\u0027 )\r\n                    }"
+				}
+			]
+		}
+	],
+	"Message": [
+		{
+			"Title": "API",
+			"Description": "Command Parameters",
+			"Code": [
+				{
+					"Title": "New-UDAntdMessage",
+					"Description": "Command for creating ant-design message",
+					"Source": "(Get-Command New-UDAntdMessage).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}"
+				}
+			]
+		},
+		{
+			"Title": "PRESETS",
+			"Description": "Basic message with buildin icon",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \"flex\"\r\n                        alignItems = \"center\"\r\n                        justifyContent = \"center\"\r\n                    } -Content {\r\n                    \r\n                    New-UDAntdMessage -Id \"success\" -Content {\"Universal Dashboard\"} -Preset \"success\"\r\n                    New-UDAntdMessage -Id \"error\" -Content {\"Universal Dashboard\" } -Preset \"error\"\r\n                    New-UDAntdMessage -Id \"warnning\" -Content {\"Universal Dashboard\"} -Preset \"warning\"\r\n                    New-UDAntdMessage -Id \"info\" -Content {\"Universal Dashboard\"} -Preset \"info\"\r\n                    New-UDAntdMessage -Id \"loading\" -Content {\"Universal Dashboard\"} -Preset \"loading\"\r\n\r\n                    New-UDAntdButton -ButtonType primary -Label Success -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"success\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label Error -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"error\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label Warnning -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"warnning\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label Info -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"info\" -Attributes @{visible = $true}\r\n                    }\r\n                    New-UDAntdButton -ButtonType primary -Label Loading -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"loading\" -Attributes @{visible = $true}\r\n                    }\r\n                    }\r\n                    "
+				}
+			]
+		},
+		{
+			"Title": "Custom Icon",
+			"Description": "Basic message with custom icon",
+			"Code": [
+				{
+					"Title": "",
+					"Description": "",
+					"Source": "\r\n                    New-UDAntdRow -Style @{\r\n                        display = \"flex\"\r\n                        alignItems = \"center\"\r\n                        justifyContent = \"center\"\r\n                    } -Content {\r\n                    \r\n                    New-UDAntdMessage -Id \"custom-icon\" -Key \"mdemo\" -Content {\"Antd message with custom icon\"} -Icon ( New-UDAntdIcon -Icon QuestionCircleOutline -Size lg -Color \"#faad14\")  \r\n\r\n                    New-UDAntdButton -ButtonType primary -Label \"Custom Icon\" -Style @{margin = \"0px 24px\" } -OnClick {\r\n                        Set-UDElement -Id \"custom-icon\" -Attributes @{visible = $true}\r\n                    }\r\n                    }\r\n                    "
+				}
+			]
+		}
+	]
+}
