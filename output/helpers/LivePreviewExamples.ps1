@@ -256,7 +256,7 @@ $LivePreviewExamplesDB = @{
                         alignItems = 'center'
                         justifyContent = 'center'
                     } -Content {
-                    New-UDAntdComment -Message ( 'Just a demo message for udantd comment component' )
+                    New-UDAntdComment -Message { 'Just a demo message for udantd comment component' }
                     }" 
                 }
                 @{
@@ -268,14 +268,20 @@ $LivePreviewExamplesDB = @{
                         alignItems = 'center'
                         justifyContent = 'center'
                     } -Content {
-                    New-UDAntdComment -Id 'nested-comment' -Message ( 'Just a demo message for udantd comment component' ) -Author ( 'alon gvili' ) -Avatar (
+                    New-UDAntdComment -Id 'nested-comment' -Message { 'Just a demo message for udantd comment component' } -Author ( 'alon gvili' ) -DateTime (get-date).ToShortTimeString() -Avatar (
                         New-UDAntdAvatar -Src 'https://avatars1.githubusercontent.com/u/34351424?s=400&u=1af0f32562a8f68850c736e3fca838c5ed022203&v=4' -Shape square
                     ) -Actions @(
                     New-UDAntdButton -Label 'Add Comment'  -ButtonType primary -OnClick {
                         Add-UDElement -ParentId 'nested-comment' -Content {
-                            New-UDAntdComment -Id 'bot-comment' -Message ( 'Hello from ud bot :)' ) -Author ( 'ud bot' )
+                            
+                            New-UDAntdComment -Message { 
+                                'Here is a live statistics for the active users...'
+                                
+                                New-UDAntdStatistic -Value { 100..450 | Get-Random } -Prefix ( New-UDAntdIcon -Icon GitlabOutline -Size sm ) -Title ( 'Active Users' ) -IsEndpoint -AutoRefresh -RefreshInterval 2000
+                            } -Author ( 'ud bot' ) -DateTime (get-date).ToShortTimeString()
                         }
-                    })
+                    }
+                    )
                     }" 
                 }
             )

@@ -1,6 +1,6 @@
 Import-Module "$PSScriptRoot\UniversalDashboard.Antd\UniversalDashboard.Antd.psd1" -Force -ErrorAction Stop
 Import-Module "$PSScriptRoot\UniversalDashboard.Markdown\UniversalDashboard.Markdown.psd1" -Force -ErrorAction Stop
-Import-Module "$PSScriptRoot\UniversalDashboard.Chroma\UniversalDashboard.Chroma.psd1" -Force -ErrorAction Stop
+# Import-Module "$PSScriptRoot\UniversalDashboard.Chroma\UniversalDashboard.Chroma.psd1" -Force -ErrorAction Stop
 Import-Module "$PSScriptRoot\PSDocs\0.6.3\PSDocs.psd1" -Force -ErrorAction Stop
 
 # import webapp styles variables

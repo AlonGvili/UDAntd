@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <base href="/"/>
+    <base href="/" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PowerShell Universal Dashboard</title>
     <style>
-        .v-wrap{
+        .v-wrap {
             height: 100% !important;
             white-space: nowrap !important;
             text-align: center !important;
@@ -14,7 +15,8 @@
             min-height: auto !important;
             flex-direction: row !important;
         }
-        .v-wrap:before{
+
+        .v-wrap:before {
             content: "";
             display: inline-block;
             vertical-align: middle;
@@ -22,16 +24,28 @@
             /* adjust for white space between pseudo element and next sibling */
             margin-right: -.25em;
             /* stretch line height */
-            height: 100vh; 
+            height: 100vh;
         }
-        .v-box{
+
+        .v-box {
             display: inline-block;
             vertical-align: middle;
             white-space: normal;
         }
     </style>
 <link rel="shortcut icon" href="favicon.ico"></head>
+
 <body>
-    <div id="app" class="app"/>
-<script type="text/javascript" src="main.c0e05d70ce3cd19f11d9.bundle.js"></script><script type="text/javascript" src="vendor.c0e05d70ce3cd19f11d9.bundle.js"></script></body>
+    <link rel="stylesheet/less" type="text/css" href="color.less" />
+    <script>
+        window.less = {
+                async: false,
+                env: 'production',
+                javascriptEnabled: true
+        };
+    </script>
+    <script type="text/javascript" src="less.js"></script>
+    <div id="app" class="app" />
+<script type="text/javascript" src="main.71c74fd5797f94b34673.bundle.js"></script><script type="text/javascript" src="vendor.71c74fd5797f94b34673.bundle.js"></script></body>
+
 </html>
