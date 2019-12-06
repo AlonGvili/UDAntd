@@ -18,7 +18,8 @@ $Root = $PSScriptRoot
 
 $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
 
-    $LivePreviewExamplesDB = Get-Content -Path $PSScriptRoot\data\d.json -Raw | ConvertFrom-Json
+    # $LivePreviewExamplesDB = Get-Content -Path $PSScriptRoot\data\d.json -Raw | ConvertFrom-Json
+    $LivePreviewExamplesDB = Invoke-RestMethod  https://udantd.site/data/d.json
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $WebAppStyles['Webapp'] -Content {
 
