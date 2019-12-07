@@ -89,6 +89,10 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
                         $LivePreviewExamplesDB.Notification | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage
                     }
+                    New-UDAntdMenuItem -Content { "Steps" } -OnClick {
+                        $LivePreviewExamplesDB.Steps | New-UDAntdComponent | Add-LivePreview
+                        Set-LivePreviewPage
+                    }
                     New-UDAntdMenuItem -Title 'Message'  -Content { "Message" } -OnClick {
                         $LivePreviewExamplesDB.Message | New-UDAntdComponent | Add-LivePreview
                         Set-LivePreviewPage

@@ -218,6 +218,63 @@ $LivePreviewExamplesDB = @{
             )
         }
     )
+    Steps       = @(
+        [PSCustomObject]@{
+            Title       = 'API'
+            Description = 'Command Parameters'
+            Code        = @(
+                @{
+                    Title       = 'New-UDAntdSteps'
+                    Description = 'Command for creating ant-design steps component'
+                    Source      = '(Get-Command New-UDAntdSteps).Parameters.Values | ForEach-Object { if($_.name -notin [System.Management.Automation.Internal.CommonParameters].DeclaredProperties.name){$_}}'
+                }
+            )
+        }
+
+        [PSCustomObject]@{
+            Title       = "BASIC"
+            Description = 'Ant-Design steps component'
+            Code        = @(
+                @{
+                    Title       = ''
+                    Description = ''
+                    Source      = "
+                    New-UDAntdRow -Style @{
+                        display = 'flex'
+                        alignItems = 'center'
+                        justifyContent = 'center'
+                    } -Content {
+                    New-UDAntdSteps -Id 'demo-steps' -Content {
+                        New-UDAntdStepsItem -Title ( 'Build the module' ) -Description ( 'Building the UDAntd module in progress' )
+                        Set-Item -Path 'Cache:DemoTest' -Value 'Pass' -Force
+                        New-UDAntdStepsItem -Title ( 'Run Tests' ) -Description ( 'Using pester to test the module' )
+                        Set-Item -Path 'Cache:DemoTest' -Value 'Faild' -Force
+                        New-UDAntdStepsItem -Title ( 'Publish module' ) -Description ( 'Publish module to PowerShell gallery' )
+                    } -OnChange {
+                        $testResult = Get-Item 'Cache:DemoTest'
+                        if($testResult -match 'Faild'){
+                            Set-UDElement -Id 'demo-steps' -Attributes @{status = 'error'}
+                        }
+                    }
+                    }" 
+                }
+                # @{
+                #     Title       = ''
+                #     Description = ''
+                #     Source      = "
+                #     New-UDAntdRow -Style @{
+                #         display = 'flex'
+                #         alignItems = 'center'
+                #         justifyContent = 'center'
+                #     } -Content {
+                #     New-UDAntdStatistic -Value { (Get-Date).Hour } -Prefix ( New-UDAntdIcon -Icon GitlabOutline -Size sm ) -Title ( 'Active Users' ) -OnFinish {
+                #         New-UDAntdNotification -Id 'success' -Title 'Universal Dashboard' -Description $EventData -Preset 'success' -Visible
+                #     } -IsEndpoint
+                #     }" 
+                # }
+            )
+        }
+    )
     Comment       = @(
         [PSCustomObject]@{
             Title       = 'API'
