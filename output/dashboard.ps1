@@ -19,7 +19,7 @@ $Root = $PSScriptRoot
 $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
 
     # $LivePreviewExamplesDB = Get-Content -Path $PSScriptRoot\data\d.json -Raw | ConvertFrom-Json
-    $LivePreviewExamplesDB = Invoke-RestMethod  https://udantd.site/data/d.json
+    # $LivePreviewExamplesDB = Invoke-RestMethod  https://udantd.site/data/d.json
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $WebAppStyles['Webapp'] -Content {
 
@@ -141,7 +141,7 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
 
 $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instance.Frameworks["Antd"]
 
-$Folder = Publish-UDFolder -Path $PSScriptRoot\Data -RequestPath "/data"
+$Folder = Publish-UDFolder -Path $PSScriptRoot\data -RequestPath "/data"
 Start-UDDashboard -Wait -Dashboard $Dashboard -Force -PublishedFolder $Folder 
 # Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1004
 
