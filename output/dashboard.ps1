@@ -143,5 +143,5 @@ $Dashboard.FrameworkAssetId = [UniversalDashboard.Services.AssetService]::Instan
 
 # $Folder = Publish-UDFolder -Path D:\local\VirtualDirectory0\site\wwwroot\data\ -RequestPath "/data"
 Start-UDDashboard -Wait -Dashboard $Dashboard -Force 
-# Start-UDDashboard -Dashboard $Dashboard -Force -PublishedFolder $Folder -Port 1004
+# Start-UDDashboard -Dashboard $Dashboard -Force  -Port 1004
 
