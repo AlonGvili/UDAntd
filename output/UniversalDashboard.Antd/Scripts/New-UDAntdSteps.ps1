@@ -94,7 +94,8 @@ function New-UDAntdSteps {
             size            = $Size
             labelPlacement  = $LabelPlacement
             direction       = $Direction
-            current         = $Current
+            # current         = $Current
+            variant         = $Variant
             progressDot     = $ProgressDot.IsPresent
             autorefresh     = $AutoRefresh.IsPresent
             refreshInterval = $RefreshInterval

@@ -9,7 +9,9 @@ Import-Module -Variable * $PSScriptRoot\helpers\ReusedComponent.ps1 -Force
 Import-Module -Function * $PSScriptRoot\helpers\UDAntdComponentTemp.ps1 -Force
 Import-Module -Function * $PSScriptRoot\helpers\LivePreview.ps1 -Force
 # Import-Module -Variable * $PSScriptRoot\helpers\LivePreviewExamples.ps1 -Force
-$LivePreviewExamplesDB = Invoke-RestMethod  https://raw.githubusercontent.com/AlonGvili/UDAntd/master/output/data/data.json
+# $LivePreviewExamplesDB = Invoke-RestMethod  https://raw.githubusercontent.com/AlonGvili/UDAntd/master/output/data/data.json
+    $LivePreviewExamplesDB = Get-Content -Path $PSScriptRoot\data\data.json -Raw | ConvertFrom-Json
+
 
 # clear ud theme definition and add new ones.
 $Theme = Get-UDTheme -Name Default
@@ -19,7 +21,6 @@ $Root = $PSScriptRoot
 
 $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
 
-    # $Global:LivePreviewExamplesDB = Get-Content -Path D:\local\VirtualDirectory0\site\wwwroot\data\d.json -Raw | ConvertFrom-Json
     # web app main layout
     New-UDAntdLayout -Id 'mainLayout' -Style $WebAppStyles['Webapp'] -Content {
 
@@ -139,7 +140,18 @@ $Dashboard = New-UDDashboard -Title "Universal Dashboard Ant-Design" -Content {
                 }
             } 
         } 
-
+        New-UDAntdFooter -BackgroundColor '#083864' -Columns {
+            New-UDAntdFooterColumn -Title Modules -Items {
+                New-UDAntdFooterColumnItem -Title 'UDAntd' -Description 'Ant-Design module' -Url 'https://github.com/AlonGvili/UniversalDashboard.Antd' -OpenExternal
+                New-UDAntdFooterColumnItem -Title 'UDMarkdown' -Description 'Markdown in ud' -Url 'https://github.com/AlonGvili/UniversalDashboard.Markdown' -OpenExternal
+                New-UDAntdFooterColumnItem -Title 'UDMaterialUICarousel' -Description 'material style carousel' -Url 'https://github.com/AlonGvili/UniversalDashboard.MaterialUICarousel' -OpenExternal
+            }
+            New-UDAntdFooterColumn -Title UDInfo -Items {
+                New-UDAntdFooterColumnItem -Title 'Docs' -Description 'Ant-Design module' -Url 'https://github.com/AlonGvili/UniversalDashboard.Antd' -OpenExternal
+                New-UDAntdFooterColumnItem -Title 'Demo' -Description 'Markdown in ud' -Url 'https://github.com/AlonGvili/UniversalDashboard.Markdown' -OpenExternal
+                New-UDAntdFooterColumnItem -Title 'Forums' -Description 'material style carousel' -Url 'https://github.com/AlonGvili/UniversalDashboard.MaterialUICarousel' -OpenExternal
+            }
+        }
     }        
 } -Theme $Theme 
 

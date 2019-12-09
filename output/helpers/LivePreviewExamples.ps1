@@ -245,17 +245,17 @@ $LivePreviewExamplesDB = @{
                         justifyContent = 'center'
                     } -Content {
                     New-UDAntdSteps -Id 'demo-steps' -Content {
-                        New-UDAntdStepsItem -Title ( 'Build the module' ) -Description ( 'Building the UDAntd module in progress' )
-                        Set-Item -Path 'Cache:DemoTest' -Value 'Pass' -Force
-                        New-UDAntdStepsItem -Title ( 'Run Tests' ) -Description ( 'Using pester to test the module' )
-                        Set-Item -Path 'Cache:DemoTest' -Value 'Faild' -Force
-                        New-UDAntdStepsItem -Title ( 'Publish module' ) -Description ( 'Publish module to PowerShell gallery' )
-                    } -OnChange {
-                        $testResult = Get-Item 'Cache:DemoTest'
-                        if($testResult -match 'Faild'){
-                            Set-UDElement -Id 'demo-steps' -Attributes @{status = 'error'}
+                        New-UDAntdStep -Title 'Build' -Description 'Building the UDAntd module in progress' -Content {
+                            New-UDAntdIcon -Icon CodeOutline -Size 4x 
                         }
-                    }
+                        New-UDAntdStep -Title 'Tests' -Description 'Using pester to test the module' -Content {
+                            New-UDAntdIcon -Icon GithubOutline -Size 4x 
+                        } -ErrorMessage 'Pester Tests Faild'
+                        # Set-UDElement -Id 'demo-steps' -Attributes @{status = 'error'}
+                        New-UDAntdStep -Title 'Publish' -Description 'Publish module to PowerShell gallery' -Content {
+                            New-UDAntdIcon -Icon GitlabOutline -Size 4x 
+                        }
+                    } 
                     }" 
                 }
                 # @{
